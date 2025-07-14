@@ -1,0 +1,16 @@
+// Variables, Functions and Mixins
+@import "../tools/tools";
+@import "../../../../../../../media/vendor/bootstrap/scss/functions";
+
+:root {
+  --hwcity-color-primary: #{$standard-color-primary};
+  // @deprecated --hwcity-color-link is deprecated in favour of --link-color
+  --hwcity-color-link: #{$standard-color-link};
+  --link-color: #{$standard-color-link};
+  --link-color-rgb: #{to-rgb($standard-color-link)};
+  --hwcity-color-hover: #{$standard-color-hover};
+  --link-hover-color: #{$standard-color-hover};
+  --link-hover-color-rgb: #{to-rgb($standard-color-hover)};
+  --header-first-color: #{$header-first-color};
+  --header-second-color: #{$header-second-color};
+}

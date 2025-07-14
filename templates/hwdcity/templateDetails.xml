@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="template" client="site">
+	<name>hwdcity</name>
+	<version>1.0.0</version>
+	<creationDate>2025-07</creationDate>
+	<author>F.Yousefi</author>
+	<authorEmail>asiasunnet@gmail.com</authorEmail>
+	<authorEmail>http://www.asiasun.ir</authorEmail>
+	<copyright>(C) 2025 AsiaSun.ir, Pvt. Ltd.</copyright>
+	<description>TPL_HWDCITY_XML_DESCRIPTION</description>
+	<inheritable>1</inheritable>
+	<files>
+		<filename>component.php</filename>
+		<filename>error.php</filename>
+		<filename>index.php</filename>
+		<filename>joomla.asset.json</filename>
+		<filename>offline.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>html</folder>
+	</files>
+	<media destination="templates/site/hwdcity" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>scss</folder>
+		<folder>images</folder>
+		<folder>fonts</folder>
+	</media>
+	<positions>
+		<position>topbar-right</position>
+		<position>logo</position>
+		<position>logo-ads</position>
+		<position>menu</position>
+		<position>showcase</position>
+		<position>top0</position>
+		<position>top1</position>
+		<position>top2</position>
+		<position>top3</position>
+		<position>top4</position>
+		<position>top5</position>
+		<position>right</position>
+		<position>right-fixed</position>
+		<position>breadcrumbs</position>
+		<position>content-top</position>
+		<position>content-bottom</position>
+		<position>left</position>
+		<position>left-fixed</position>
+		<position>bottomover</position>
+		<position>black1</position>
+		<position>bottom0</position>
+		<position>bottom1</position>
+		<position>bottom2</position>
+		<position>bottom3</position>
+		<position>bottom4</position>
+		<position>bottom5</position>
+		<position>footer1</position>
+		<position>footer2</position>
+		<position>footer3</position>
+		<position>footer4</position>
+		<position>footer0</position>
+		<position>mobile-menu</position>
+		<position>offcanvas</position>
+		<position>search</position>
+		<position>footer</position>
+		<position>debug</position>
+		<!-- used directly in the error.php and included here so the position will appear in the list of available positions -->
+		<position>error-403</position>
+		<position>error-404</position>
+	</positions>
+	<languages folder="languages">
+		<language tag="en-GB">en-GB/tpl_hwdcity.sys.ini</language>
+		<language tag="en-GB">en-GB/tpl_hwdcity.ini</language>
+		<language tag="fa-IR">fa-IR/tpl_hwdcity.sys.ini</language>
+		<language tag="fa-IR">fa-IR/tpl_hwdcity.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field
+					name="brand"
+					type="radio"
+					label="TPL_HWDCITY_BRAND_LABEL"
+					default="1"
+					layout="joomla.form.field.radio.switcher"
+					filter="options"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field
+					name="logoFile"
+					type="media"
+					schemes="http,https,ftp,ftps,data,file"
+					validate="url"
+					relative="true"
+					default=""
+					label="TPL_HWDCITY_LOGO_LABEL"
+					showon="brand:1"
+				/>
+
+				<field
+					name="siteTitle"
+					type="text"
+					default=""
+					label="TPL_HWDCITY_TITLE"
+					filter="string"
+					showon="brand:1"
+				/>
+
+				<field
+					name="siteDescription"
+					type="text"
+					default=""
+					label="TPL_HWDCITY_TAGLINE_LABEL"
+					description="TPL_HWDCITY_TAGLINE_DESC"
+					filter="string"
+					showon="brand:1"
+				/>
+
+				<field
+					name="useFontScheme"
+					type="groupedlist"
+					label="TPL_HWDCITY_FONT_LABEL"
+					default="0"
+					>
+					<option value="0">JNONE</option>
+					<group label="TPL_HWDCITY_FONT_SYSTEM">
+						<option value="system">TPL_HWDCITY_FONT_SYSTEM_SELECT</option>
+					</group>
+					<group label="TPL_HWDCITY_FONT_GROUP_LOCAL">
+						<option value="media/templates/site/hwdcity/css/global/fonts-local_roboto.css">Roboto (local)</option>
+					</group>
+					<group label="TPL_HWDCITY_FONT_GROUP_WEB">
+						<option value="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;300;400;700&amp;display=swap">Fira Sans (web)</option>
+						<option value="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400;700&amp;family=Roboto:wght@100;300;400;700&amp;display=swap">Roboto + Noto Sans (web)</option>
+					</group>
+				</field>
+
+				<field
+					name="systemFontBody"
+					type="list"
+					label="TPL_HWDCITY_FONT_SYSTEM_BODY"
+					default=""
+					validate="options"
+					showon="useFontScheme:system"
+					>
+					<option value="">JSELECT</option>
+					<option value="Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_TRANSITIONAL</option>
+					<option value="'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_OLDSTYLE</option>
+					<option value="Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_HUMANIST</option>
+					<option value="Avenir, 'Avenir Next LT Pro', Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_GEOMETRIC</option>
+					<option value="Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_CLASSICAL</option>
+					<option value="Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_GROTESQUE</option>
+					<option value="'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_MONOSPACE</option>
+					<option value="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_CODE</option>
+					<option value="Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_INDUSTRIAL</option>
+					<option value="ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_ROUNDED</option>
+					<option value="Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_SLAB</option>
+					<option value="Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_ANTIQUE</option>
+					<option value="Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_DIDONE</option>
+					<option value="'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_HANDWRITTEN</option>
+				</field>
+
+				<field
+					name="systemFontHeading"
+					type="list"
+					label="TPL_HWDCITY_FONT_SYSTEM_HEADING"
+					default=""
+					validate="options"
+					showon="useFontScheme:system"
+					>
+					<option value="">JSELECT</option>
+					<option value="Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_TRANSITIONAL</option>
+					<option value="'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_OLDSTYLE</option>
+					<option value="Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_HUMANIST</option>
+					<option value="Avenir, 'Avenir Next LT Pro', Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_GEOMETRIC</option>
+					<option value="Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_CLASSICAL</option>
+					<option value="Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_GROTESQUE</option>
+					<option value="'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_MONOSPACE</option>
+					<option value="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_CODE</option>
+					<option value="Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_INDUSTRIAL</option>
+					<option value="ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_ROUNDED</option>
+					<option value="Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_SLAB</option>
+					<option value="Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_ANTIQUE</option>
+					<option value="Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_DIDONE</option>
+					<option value="'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive">TPL_HWDCITY_FONT_SYSTEM_STACK_SYSTEM_HANDWRITTEN</option>
+				</field>
+
+				<field
+					name="noteFontScheme"
+					type="note"
+					description="TPL_HWDCITY_FONT_NOTE_TEXT"
+					class="alert alert-warning"
+				/>
+
+				<field
+					name="colorName"
+					type="filelist"
+					label="TPL_HWDCITY_COLOR_NAME_LABEL"
+					default="colors_standard"
+					fileFilter="^custom.+[^min]\.css$"
+					exclude="^colors.+"
+					stripext="true"
+					hide_none="true"
+					hide_default="true"
+					directory="media/templates/site/hwdcity/css/global/"
+					validate="options"
+					>
+					<option value="colors_standard">TPL_HWDCITY_COLOR_NAME_STANDARD</option>
+					<option value="colors_alternative">TPL_HWDCITY_COLOR_NAME_ALTERNATIVE</option>
+				</field>
+
+				<field
+					name="fluidContainer"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					label="TPL_HWDCITY_FLUID_LABEL"
+					>
+					<option value="0">TPL_HWDCITY_STATIC</option>
+					<option value="1">TPL_HWDCITY_FLUID</option>
+				</field>
+
+				<field
+					name="stickyHeader"
+					type="radio"
+					label="TPL_HWDCITY_STICKY_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					filter="integer"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field
+					name="backTop"
+					type="radio"
+					label="TPL_HWDCITY_BACKTOTOP_LABEL"
+					layout="joomla.form.field.radio.switcher"
+					default="0"
+					filter="integer"
+					>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

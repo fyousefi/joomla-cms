@@ -1,0 +1,7 @@
+@import 'mixins';
+
+// Static IranSansX Regular
+@include iransansx-font('iransansx', '../fonts/IRANSansX-Regular.woff', 400);
+
+// Static IranSansX Bold
+@include iransansx-font('iransansx', '../fonts/IRANSansX-Bold.woff', 700);

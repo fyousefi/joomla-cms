@@ -1,0 +1,37 @@
+// Fonts
+$iransansx-font-path: "../fonts" !default;
+
+@use 'vendor/iransansx/iransansx-static';
+@use 'vendor/iransansx/iransansx-variable';
+
+// Font variables and fallbacks
+:root {
+  --hwcity-font-family-body: 'iransansx', Tahoma, Roboto, sans-serif;
+  --hwcity-font-family-headings: 'iransansx', Tahoma, Roboto, sans-serif;
+  --hwcity-font-weight-headings: 700;
+  --hwcity-font-weight-normal: 300;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    --hwcity-font-family-body: 'iransansxv', Tahoma, Roboto, sans-serif;
+    --hwcity-font-family-headings: 'iransansxv', Tahoma, Roboto, sans-serif;
+  }
+}
+
+// Font Utility Classes
+.vf-w700 { font-variation-settings: "wght" 700; }
+.vf-sharp { font-variation-settings: "wght" 900, "DOTS" 4; }
+
+.ss02 {
+  font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss02";
+}
+
+// Modules
+.card-header {
+  color: $standard-color-hover;
+  font-size: 1.05rem;
+}
+

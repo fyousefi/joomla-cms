@@ -1,0 +1,10 @@
+// Font-face mixin
+@mixin iransansx-font($font-name, $file-path, $font-weight: normal, $style: normal, $format: 'woff') {
+  @font-face {
+    font-family: #{$font-name};
+    src: url('#{$file-path}') format(#{$format});
+    font-weight: #{$font-weight};
+    font-style: #{$style};
+    font-display: fallback;
+  }
+}
