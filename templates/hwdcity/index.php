@@ -20,6 +20,7 @@ use Joomla\CMS\Uri\Uri;
 $app   = Factory::getApplication();
 $input = $app->getInput();
 $wa    = $this->getWebAssetManager();
+$scrollSidebars = (bool) $this->params->get('sidebarScroll', 0);
 
 // Browsers support SVG favicons
 $this->addHeadLink(HTMLHelper::_('image', 'joomla-favicon.svg', '', [], true, 1), 'icon', 'rel', ['type' => 'image/svg+xml']);
@@ -183,7 +184,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         </div>
     <?php endif; ?>
 
-    <div class="site-grid min-vh-100">
+    <div class="site-grid">
         <?php if ($this->countModules('banner', true)) : ?>
             <div class="container-banner full-width">
                 <jdoc:include type="modules" name="banner" style="none" />
@@ -203,7 +204,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('sidebar-left', true)) : ?>
-            <div class="grid-child container-sidebar-left sticky-lg-top pt-lg-5 z-3 overflow-y-auto vh-100">
+            <div class="grid-child container-sidebar-left sticky-lg-top pt-lg-5 z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
                 <jdoc:include type="modules" name="sidebar-left" style="card" />
             </div>
         <?php endif; ?>
@@ -214,15 +215,12 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
             <jdoc:include type="message" />
             <main>
                 <jdoc:include type="component" />
-                <jdoc:include type="component" />
-                <jdoc:include type="component" />
-                <jdoc:include type="component" />
             </main>
             <jdoc:include type="modules" name="main-bottom" style="card" />
         </div>
 
         <?php if ($this->countModules('sidebar-right', true)) : ?>
-            <div class="grid-child container-sidebar-right sticky-lg-top pt-lg-5 z-3 overflow-y-auto vh-100">
+            <div class="grid-child container-sidebar-right sticky-lg-top pt-lg-5 z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
                 <jdoc:include type="modules" name="sidebar-right" style="card" />
             </div>
         <?php endif; ?>

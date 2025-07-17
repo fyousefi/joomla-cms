@@ -76,6 +76,17 @@
 		<fields name="params">
 			<fieldset name="advanced">
 				<field
+					name="sidebarScroll"
+					type="radio"
+					default="0"
+					label="Enable vertical scroll in sidebars"
+					description="Adds overflow scroll bars when sidebar content exceeds viewport height."
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
 					name="brand"
 					type="radio"
 					label="TPL_HWDCITY_BRAND_LABEL"
