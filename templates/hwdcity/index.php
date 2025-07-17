@@ -203,19 +203,16 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('sidebar-left', true)) : ?>
-            <div class="grid-child container-sidebar-left sticky-md-top pt-5 z-3">
+            <div class="grid-child container-sidebar-left sticky-lg-top pt-lg-5 z-3 overflow-y-auto vh-100">
                 <jdoc:include type="modules" name="sidebar-left" style="card" />
             </div>
         <?php endif; ?>
 
-        <div class="grid-child container-component overflow-auto pt-5">
+        <div class="grid-child container-component pt-lg-5 mb-lg-5">
             <jdoc:include type="modules" name="breadcrumbs" style="none" />
             <jdoc:include type="modules" name="main-top" style="card" />
             <jdoc:include type="message" />
             <main>
-                <jdoc:include type="component" />
-                <jdoc:include type="component" />
-                <jdoc:include type="component" />
                 <jdoc:include type="component" />
                 <jdoc:include type="component" />
                 <jdoc:include type="component" />
@@ -225,11 +222,13 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         </div>
 
         <?php if ($this->countModules('sidebar-right', true)) : ?>
-            <div class="grid-child container-sidebar-right sticky-md-top pt-5 z-3">
+            <div class="grid-child container-sidebar-right sticky-lg-top pt-lg-5 z-3 overflow-y-auto vh-100">
                 <jdoc:include type="modules" name="sidebar-right" style="card" />
             </div>
         <?php endif; ?>
+    </div>
 
+    <div class="site-grid">
         <?php if ($this->countModules('bottom-a', true)) : ?>
             <div class="grid-child container-bottom-a">
                 <jdoc:include type="modules" name="bottom-a" style="card" />

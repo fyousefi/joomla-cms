@@ -60,6 +60,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  align-self: flex-start; /* برای جلوگیری از مشکلات flexbox */
 
   > * {
     margin-bottom: 0;
