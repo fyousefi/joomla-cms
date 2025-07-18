@@ -17,6 +17,11 @@
 		<folder>language</folder>
 	</files>
 	<scriptfile>script.php</scriptfile>
+	<media destination="mod_showcase" folder="media">
+		<filename>joomla.asset.json</filename>
+		<folder>js</folder>
+		<folder>css</folder>
+	</media>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">

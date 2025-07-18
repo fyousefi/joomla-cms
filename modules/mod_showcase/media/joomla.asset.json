@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_showcase",
+  "version": "1.0.0",
+  "description": "AsiaSun Showcase Module",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "mod_showcase.add-suffix",
+      "type": "script",
+      "uri": "mod_showcase/add-suffix.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "type": "module"
+      },
+      "version": "1.0.0"
+    },
+    {
+      "name": "mod_showcase.example",
+      "type": "style",
+      "uri": "mod_showcase/example.css",
+      "version": "1.0.0"
+    }
+  ]
+}
