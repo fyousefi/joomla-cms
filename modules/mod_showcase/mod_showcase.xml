@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>MOD_SHOWCASE_NAME</name>
+	<author>F.Yousefi</author>
+	<creationDate>2025-07</creationDate>
+	<copyright>(C) 2025 AsiaSun.ir, Pvt. Ltd.</copyright>
+	<license>Reserved for AsiaSun.ir</license>
+	<authorEmail>asiasunnet@gmail.com</authorEmail>
+	<authorUrl>www.asiasun.ir</authorUrl>
+	<version>1.0.0</version>
+	<description>MOD_SHOWCASE_DESCRIPTION</description>
+	<namespace path="src">AsiaSun\Module\Showcase</namespace>
+	<files>
+		<folder module="mod_showcase">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+	<scriptfile>script.php</scriptfile>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="header"
+					type="list"
+					label="MOD_SHOWCASE_HEADER_LEVEL"
+				>
+					<option value="h3">MOD_SHOWCASE_HEADER_LEVEL_3</option>
+					<option value="h4">MOD_SHOWCASE_HEADER_LEVEL_4</option>
+					<option value="h5">MOD_SHOWCASE_HEADER_LEVEL_5</option>
+					<option value="h6">MOD_SHOWCASE_HEADER_LEVEL_6</option>
+				</field>
+				<field
+					name="mode"
+					type="radio"
+					default="auto_feature"
+					label="Select feed mode" description="How the four items are chosen">
+					<option value="auto_feature">Auto – Latest featured articles</option>
+					<option value="auto_cats">Auto – Latest from selected categories</option>
+					<option value="manual">Manual – Pick 4 specific articles</option>
+				</field>
+				<field
+					name="cats"
+					type="category"
+					multiple="true"
+					label="Categories"
+					description="Shown when mode = auto_cats"
+					filter="com_content"
+				/>
+				<field
+					name="ids"
+					type="ModalSelect"
+					select="true"
+					iconSelect="fa fa-file"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+					label="Article IDs (comma separated)"
+					description="Shown when mode = manual. First ID = big tile."
+				/>
+				<field name="modulecache" type="list" default="1">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="owncache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
