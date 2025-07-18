@@ -5,15 +5,17 @@ namespace AsiaSun\Module\Showcase\Site\Dispatcher;
 
 use Joomla\CMS\Dispatcher\DispatcherInterface;
 use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\Input\Input;
 use Joomla\Registry\Registry;
-use AsiaSun\Module\Showcase\Site\Helper\ShowcaseHelper;
+use Joomla\CMS\Helper\HelperFactoryAwareInterface;
+use Joomla\CMS\Helper\HelperFactoryAwareTrait;
 
-class Dispatcher implements DispatcherInterface
+class Dispatcher implements DispatcherInterface, HelperFactoryAwareInterface
 {
+    use HelperFactoryAwareTrait;
+
     protected $module;
 
     protected $app;
@@ -29,7 +31,7 @@ class Dispatcher implements DispatcherInterface
         $language = $this->app->getLanguage();
         $language->load('mod_showcase', JPATH_BASE . '/modules/mod_showcase');
 
-        $username = ShowcaseHelper::getLoggedonUsername('Guest');
+        $username = $this->getHelperFactory()->getHelper('ShowcaseHelper')->getLoggedonUsername('Guest');
 
         $hello = Text::_('MOD_SHOWCASE_GREETING') . $username;
 
