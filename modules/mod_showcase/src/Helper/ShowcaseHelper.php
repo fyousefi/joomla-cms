@@ -5,41 +5,62 @@ namespace AsiaSun\Module\Showcase\Site\Helper;
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Database\DatabaseAwareInterface;
+use Joomla\Database\DatabaseAwareTrait;
 use Joomla\Database\DatabaseInterface;
-use Joomla\CMS\Language\Text;
+use Joomla\Registry\Registry;
 
-class ShowcaseHelper
+class ShowcaseHelper implements DatabaseAwareInterface
 {
-    public function getLoggedonUsername(string $default)
+    use DatabaseAwareTrait;
+
+    /**
+     * Return up to 4 articles according to the mode.
+     * Relies on Joomla's module cache (Advanced → Caching) – no manual cache here.
+     */
+    public function getItems(Registry $params): array
     {
-        $user = Factory::getApplication()->getIdentity();
-        if ($user->id !== 0)  // found a logged-on user
-        {
-            return $user->username;
-        }
-        else
-        {
-            return $default;
-        }
-    }
-
-    public function countAjax()
-    {
-        $user = Factory::getApplication()->getIdentity();
-
-        if ($user->id == 0) {
-            // not logged on
-            throw new \Exception(Text::_('JERROR_ALERTNOAUTHOR'));
-        }
-
         $db    = Factory::getContainer()->get(DatabaseInterface::class);
-        $query = $db->getQuery(true)
-            ->select('COUNT(*)')
-            ->from('#__session AS s')
-            ->where('s.guest = 0');
+        $q     = $db->getQuery(true)
+            ->select('a.id, a.title, a.images, c.title AS cat')
+            ->from('#__content AS a')
+            ->join('LEFT', '#__categories AS c ON c.id = a.catid')
+            ->where('a.state = 1')
+            ->where('a.access IN (' . implode(',', Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()) . ')')
+            ->order('a.publish_up DESC')
+            ->setLimit(4);
 
-        $db->setQuery($query);
+        // Prep for Normal or Dynamic Modes
+        $mode = $params->get('mode', 'auto_feature');
 
-        return (string) $db->loadResult();
+        switch ($mode) {
+            case 'auto_feature':
+                $q->where('a.featured = 1');
+                break;
+
+            case 'auto_cats':
+                $cats = array_map('intval', (array) $params->get('cats', []));
+                if ($cats) {
+                    $q->where('a.catid IN (' . implode(',', $cats) . ')');
+                }
+                break;
+
+            case 'manual':
+                $ids = array_slice(array_filter(array_map('intval', explode(',', $params->get('ids', '')))),0,4);
+                if (!$ids) {
+                    return [];
+                }
+                $q->where('a.id IN (' . implode(',', $ids) . ')')
+                    ->clear('order')
+                    ->order('FIELD(a.id,' . implode(',', $ids) . ')');
+                break;
+        }
+
+        $db->setQuery($q);
+        Factory::getApplication()->enqueueMessage(
+            'Showcase SQL → ' . $q->dump(), 'info'
+        );
+
+        return $db->loadObjectList();
     }
 }

@@ -19,55 +19,37 @@
 	<scriptfile>script.php</scriptfile>
 	<media destination="mod_showcase" folder="media">
 		<filename>joomla.asset.json</filename>
-		<folder>js</folder>
 		<folder>css</folder>
 	</media>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
 				<field
-					name="header"
-					type="list"
-					label="MOD_SHOWCASE_HEADER_LEVEL"
-				>
-					<option value="h3">MOD_SHOWCASE_HEADER_LEVEL_3</option>
-					<option value="h4">MOD_SHOWCASE_HEADER_LEVEL_4</option>
-					<option value="h5">MOD_SHOWCASE_HEADER_LEVEL_5</option>
-					<option value="h6">MOD_SHOWCASE_HEADER_LEVEL_6</option>
-				</field>
-				<field
 					name="mode"
 					type="radio"
 					default="auto_feature"
-					label="Select feed mode" description="How the four items are chosen">
-					<option value="auto_feature">Auto – Latest featured articles</option>
-					<option value="auto_cats">Auto – Latest from selected categories</option>
-					<option value="manual">Manual – Pick 4 specific articles</option>
+					label="MOD_SHOWCASE_MODE_LABEL" description="MOD_SHOWCASE_MODE_DESC">
+					<option value="auto_feature">MOD_SHOWCASE_MODE_FEATURE</option>
+					<option value="auto_cats">MOD_SHOWCASE_MODE_CATS</option>
+					<option value="manual">MOD_SHOWCASE_MODE_MANUAL</option>
 				</field>
+
 				<field
 					name="cats"
 					type="category"
 					multiple="true"
-					label="Categories"
-					description="Shown when mode = auto_cats"
-					filter="com_content"
-				/>
+					extension="com_content"
+					label="MOD_SHOWCASE_CATS_LABEL"
+					description="MOD_SHOWCASE_CATS_DESC">
+					<depends mode="auto_cats" />
+				</field>
+
 				<field
 					name="ids"
-					type="ModalSelect"
-					select="true"
-					iconSelect="fa fa-file"
-					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
-					clear="true"
-					sql_title_table="#__content"
-					sql_title_column="title"
-					sql_title_key="id"
-					label="Article IDs (comma separated)"
-					description="Shown when mode = manual. First ID = big tile."
-				/>
-				<field name="modulecache" type="list" default="1">
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
+					type="text"
+					label="MOD_SHOWCASE_IDS_LABEL"
+					description="MOD_SHOWCASE_IDS_DESC">
+					<depends mode="manual" />
 				</field>
 			</fieldset>
 			<fieldset name="advanced">

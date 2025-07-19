@@ -1,26 +1,52 @@
 <?php
-defined('_JEXEC') or die;
+/**
+ * @package     Joomla.Site
+ * @subpackage  mod_showcase
+ *
+ * @copyright   ...
+ * @license     GNU General Public License version 2 or later
+ */
 
-use Joomla\CMS\Language\Text;
+\defined('_JEXEC') or die;
 
-$document = $this->app->getDocument();
-$wa = $document->getWebAssetManager();
-$wa->getRegistry()->addExtensionRegistryFile('mod_showcase');
-$wa->useScript('mod_showcase.add-suffix');
-$wa->useStyle('mod_showcase.example');
+use Joomla\CMS\Router\Route;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
 
-// Pass the suffix to add down to js
-$document->addScriptOptions('mod_showcase.vars', ['suffix' => '!']);
-
-$h  = $params->get('header', 'h4');
-$greeting = "<{$h} class='mod_showcase'>{$hello}</{$h}>";
-
-Text::script('MOD_SHOWCASE_AJAX_OK');
-Text::script('JLIB_JS_AJAX_ERROR_OTHER');
 ?>
 
-<?php echo $greeting; ?>
-<div>
-    <p><?php echo Text::_('MOD_SHOWCASE_NUSERS'); ?><span class="mod_showcase_nusers"></span></p>
-    <button class="mod_showcase_updateusers"><?php echo Text::_('MOD_SHOWCASE_UPDATE_NUSERS'); ?></button>
+<?php if (empty($items)) : ?>
+    <p><?php echo JText::_('MOD_SHOWCASE_NO_ITEMS'); ?></p>
+    <?php return; ?>
+<?php endif; ?>
+
+<div class="showcase-grid d-grid">
+    <?php foreach ($items as $i => $item) :
+        $isBig = $i === 0;
+        $img   = '';
+        if (!empty($item->images)) {
+            $images = json_decode($item->images);
+            $img = $images->image_intro ?? '';
+        }
+        $link  = Route::_(RouteHelper::getArticleRoute($item->id));
+        $cls   = $isBig ? 'showcase-item showcase-big' : 'showcase-item';
+        ?>
+        <article class="<?php echo $cls; ?>">
+            <figure class="ratio ratio-16x9">
+                <?php if ($img) : ?>
+                    <img src="<?php echo htmlspecialchars($img, ENT_QUOTES); ?>"
+                         alt="<?php echo htmlspecialchars($item->title, ENT_QUOTES); ?>"
+                         loading="lazy"
+                         width="640"
+                         height="360">
+                <?php endif; ?>
+            </figure>
+            <header class="showcase-caption">
+                <span class="badge bg-danger"><?php echo htmlspecialchars($item->cat, ENT_QUOTES); ?></span>
+                <<?php echo $heading; ?> class="h6 m-0 fw-bold lh-base text-white">
+                <?php echo htmlspecialchars($item->title, ENT_QUOTES); ?>
+            </<?php echo $heading; ?>>
+            </header>
+            <a href="<?php echo $link; ?>" class="stretched-link"></a>
+        </article>
+    <?php endforeach; ?>
 </div>

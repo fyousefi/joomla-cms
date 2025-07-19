@@ -1,42 +1,33 @@
 <?php
+
 namespace AsiaSun\Module\Showcase\Site\Dispatcher;
 
 \defined('_JEXEC') or die;
 
-use Joomla\CMS\Dispatcher\DispatcherInterface;
-use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Application\CMSApplicationInterface;
-use Joomla\Input\Input;
-use Joomla\Registry\Registry;
+use Joomla\CMS\Dispatcher\AbstractModuleDispatcher;
 use Joomla\CMS\Helper\HelperFactoryAwareInterface;
 use Joomla\CMS\Helper\HelperFactoryAwareTrait;
+use Joomla\CMS\Helper\ModuleHelper;
 
-class Dispatcher implements DispatcherInterface, HelperFactoryAwareInterface
+class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareInterface
 {
     use HelperFactoryAwareTrait;
 
-    protected $module;
-
-    protected $app;
-
-    public function __construct(\stdClass $module, CMSApplicationInterface $app, Input $input)
+    protected function getLayoutData(): array
     {
-        $this->module = $module;
-        $this->app = $app;
-    }
+        $data   = parent::getLayoutData();
+        $params = $data['params'];
 
-    public function dispatch()
-    {
-        $language = $this->app->getLanguage();
-        $language->load('mod_showcase', JPATH_BASE . '/modules/mod_showcase');
+        $cacheParams               = new \stdClass();
+        $cacheParams->cachemode    = 'safeuri';
+        $cacheParams->class        = $this->getHelperFactory()->getHelper('ShowcaseHelper');
+        $cacheParams->method       = 'getItems';
+        $cacheParams->methodparams = [$params];
+        $cacheParams->modeparams   = [];
 
-        $username = $this->getHelperFactory()->getHelper('ShowcaseHelper')->getLoggedonUsername('Guest');
+        $data['items'] = ModuleHelper::moduleCache($this->module, $params, $cacheParams);
+        $data['heading'] = $params->get('heading', 'h4');
 
-        $hello = Text::_('MOD_SHOWCASE_GREETING') . $username;
-
-        $params = new Registry($this->module->params);
-
-        require ModuleHelper::getLayoutPath('mod_showcase');
+        return $data;
     }
 }
