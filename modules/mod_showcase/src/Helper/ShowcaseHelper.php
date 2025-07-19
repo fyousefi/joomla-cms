@@ -28,7 +28,7 @@ class ShowcaseHelper implements DatabaseAwareInterface
             ->where('a.state = 1')
             ->where('a.access IN (' . implode(',', Factory::getApplication()->getIdentity()->getAuthorisedViewLevels()) . ')')
             ->order('a.publish_up DESC')
-            ->setLimit(4);
+            ->setLimit(5);
 
         // Prep for Normal or Dynamic Modes
         $mode = $params->get('mode', 'auto_feature');
@@ -46,7 +46,7 @@ class ShowcaseHelper implements DatabaseAwareInterface
                 break;
 
             case 'manual':
-                $ids = array_slice(array_filter(array_map('intval', explode(',', $params->get('ids', '')))),0,4);
+                $ids = array_slice(array_filter(array_map('intval', explode(',', $params->get('ids', '')))),0,5);
                 if (!$ids) {
                     return [];
                 }
@@ -57,9 +57,11 @@ class ShowcaseHelper implements DatabaseAwareInterface
         }
 
         $db->setQuery($q);
-        Factory::getApplication()->enqueueMessage(
+
+        // Debug
+        /*Factory::getApplication()->enqueueMessage(
             'Showcase SQL → ' . $q->dump(), 'info'
-        );
+        );*/
 
         return $db->loadObjectList();
     }

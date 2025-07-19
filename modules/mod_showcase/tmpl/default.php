@@ -1,52 +1,74 @@
 <?php
-/**
- * @package     Joomla.Site
- * @subpackage  mod_showcase
- *
- * @copyright   ...
- * @license     GNU General Public License version 2 or later
- */
-
-\defined('_JEXEC') or die;
+defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
-
 ?>
 
-<?php if (empty($items)) : ?>
-    <p><?php echo JText::_('MOD_SHOWCASE_NO_ITEMS'); ?></p>
-    <?php return; ?>
-<?php endif; ?>
+<?php if (empty($items)) return; ?>
 
-<div class="showcase-grid d-grid">
-    <?php foreach ($items as $i => $item) :
-        $isBig = $i === 0;
-        $img   = '';
+<div class="container">
+    <div class="row g-3">
+
+        <!-- Right: Big Item -->
+        <?php
+        $item = $items[0];
+        $img = '';
         if (!empty($item->images)) {
             $images = json_decode($item->images);
             $img = $images->image_intro ?? '';
         }
-        $link  = Route::_(RouteHelper::getArticleRoute($item->id));
-        $cls   = $isBig ? 'showcase-item showcase-big' : 'showcase-item';
+        $link = Route::_(RouteHelper::getArticleRoute($item->id));
         ?>
-        <article class="<?php echo $cls; ?>">
-            <figure class="ratio ratio-16x9">
-                <?php if ($img) : ?>
-                    <img src="<?php echo htmlspecialchars($img, ENT_QUOTES); ?>"
-                         alt="<?php echo htmlspecialchars($item->title, ENT_QUOTES); ?>"
-                         loading="lazy"
-                         width="640"
-                         height="360">
-                <?php endif; ?>
-            </figure>
-            <header class="showcase-caption">
-                <span class="badge bg-danger"><?php echo htmlspecialchars($item->cat, ENT_QUOTES); ?></span>
-                <<?php echo $heading; ?> class="h6 m-0 fw-bold lh-base text-white">
-                <?php echo htmlspecialchars($item->title, ENT_QUOTES); ?>
-            </<?php echo $heading; ?>>
-            </header>
-            <a href="<?php echo $link; ?>" class="stretched-link"></a>
-        </article>
-    <?php endforeach; ?>
+        <div class="col-lg-6">
+            <div class="position-relative overflow-hidden rounded">
+                <div class="ratio ratio-16x9">
+                    <?php if ($img): ?>
+                        <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
+                    <?php endif; ?>
+                </div>
+                <div class="position-absolute top-0 end-0 m-2">
+                    <span class="badge bg-danger"><?= htmlspecialchars($item->cat) ?></span>
+                </div>
+                <div class="position-absolute bottom-0 start-0 p-3 text-white bg-dark bg-opacity-50 w-100">
+                    <h5 class="fw-bold lh-base m-0"><?= htmlspecialchars($item->title) ?></h5>
+                </div>
+                <a href="<?= $link ?>" class="stretched-link"></a>
+            </div>
+        </div>
+
+        <!-- Left: Small Items Grid (4 items) -->
+        <div class="col-lg-6 d-flex flex-column gap-3">
+            <div class="row g-3">
+                <?php foreach (array_slice($items, 1, 5) as $i => $item): ?>
+                    <?php
+                    $img = '';
+                    if (!empty($item->images)) {
+                        $images = json_decode($item->images);
+                        $img = $images->image_intro ?? '';
+                    }
+                    $link = Route::_(RouteHelper::getArticleRoute($item->id));
+                    ?>
+                    <div class="col-6">
+                        <div class="position-relative overflow-hidden rounded">
+                            <div class="ratio ratio-16x9">
+                                <?php if ($img): ?>
+                                    <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
+                                <?php endif; ?>
+                            </div>
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-danger"><?= htmlspecialchars($item->cat) ?></span>
+                            </div>
+                            <div class="position-absolute bottom-0 start-0 p-2 text-white bg-dark bg-opacity-50 w-100">
+                                <h6 class="m-0 fw-bold lh-sm"><?= htmlspecialchars($item->title) ?></h6>
+                            </div>
+                            <a href="<?= $link ?>" class="stretched-link"></a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+
+    </div>
 </div>
