@@ -36,6 +36,7 @@
 					multiple="true"
 					extension="com_content"
 					label="MOD_SHOWCASE_CATS_LABEL"
+					showon="mode:auto_cats"
 					description="MOD_SHOWCASE_CATS_DESC">
 					<depends mode="auto_cats" />
 				</field>
@@ -44,6 +45,7 @@
 					name="ids"
 					type="text"
 					label="MOD_SHOWCASE_IDS_LABEL"
+					showon="mode:manual"
 					description="MOD_SHOWCASE_IDS_DESC">
 					<depends mode="manual" />
 				</field>
