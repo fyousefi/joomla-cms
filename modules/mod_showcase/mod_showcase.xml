@@ -7,7 +7,7 @@
 	<license>Reserved for AsiaSun.ir</license>
 	<authorEmail>asiasunnet@gmail.com</authorEmail>
 	<authorUrl>www.asiasun.ir</authorUrl>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>MOD_SHOWCASE_DESCRIPTION</description>
 	<namespace path="src">AsiaSun\Module\Showcase</namespace>
 	<files>
@@ -28,6 +28,7 @@
 					<option value="auto_feature">MOD_SHOWCASE_MODE_FEATURE</option>
 					<option value="auto_cats">MOD_SHOWCASE_MODE_CATS</option>
 					<option value="manual">MOD_SHOWCASE_MODE_MANUAL</option>
+					<option value="select_article">MOD_SHOWCASE_MODE_SELECT_LABEL</option>
 				</field>
 
 				<field
@@ -49,6 +50,86 @@
 					description="MOD_SHOWCASE_IDS_DESC">
 					<depends mode="manual" />
 				</field>
+
+				<field
+					type="ModalSelect"
+					name="article1"
+					label="MOD_SHOWCASE_ARTICLE1_LABEL"
+					select="true"
+					showon="mode:select_article"
+					iconSelect="fa fa-file"
+					description="MOD_SHOWCASE_ARTICLE1_DESC"
+					titleSelect="MOD_SHOWCASE_ARTICLE1_DESC"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+				/>
+
+				<field
+					type="ModalSelect"
+					name="article2"
+					label="MOD_SHOWCASE_ARTICLE2_LABEL"
+					select="true"
+					showon="mode:select_article"
+					iconSelect="fa fa-file"
+					description="MOD_SHOWCASE_ARTICLE2_DESC"
+					titleSelect="MOD_SHOWCASE_ARTICLE2_DESC"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+				/>
+
+				<field
+					type="ModalSelect"
+					name="article3"
+					label="MOD_SHOWCASE_ARTICLE3_LABEL"
+					select="true"
+					iconSelect="fa fa-file"
+					showon="mode:select_article"
+					description="MOD_SHOWCASE_ARTICLE3_LABEL"
+					titleSelect="MOD_SHOWCASE_ARTICLE3_LABEL"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+				/>
+
+				<field
+					type="ModalSelect"
+					name="article4"
+					label="MOD_SHOWCASE_ARTICLE4_LABEL"
+					select="true"
+					showon="mode:select_article"
+					iconSelect="fa fa-file"
+					description="MOD_SHOWCASE_ARTICLE4_DESC"
+					titleSelect="MOD_SHOWCASE_ARTICLE4_DESC"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+				/>
+
+				<field
+					type="ModalSelect"
+					name="article5"
+					label="MOD_SHOWCASE_ARTICLE5_LABEL"
+					select="true"
+					showon="mode:select_article"
+					iconSelect="fa fa-file"
+					description="MOD_SHOWCASE_ARTICLE5_DESC"
+					titleSelect="MOD_SHOWCASE_ARTICLE5_DESC"
+					urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+					clear="true"
+					sql_title_table="#__content"
+					sql_title_column="title"
+					sql_title_key="id"
+				/>
 			</fieldset>
 			<fieldset name="advanced">
 				<field
