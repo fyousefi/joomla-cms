@@ -54,6 +54,22 @@ class ShowcaseHelper implements DatabaseAwareInterface
                     ->clear('order')
                     ->order('FIELD(a.id,' . implode(',', $ids) . ')');
                 break;
+
+            case 'select_article':
+                $ids = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $id = (int) $params->get('article' . $i);
+                    if ($id) {
+                        $ids[] = $id;
+                    }
+                }
+                if (!$ids) {
+                    return [];
+                }
+                $q->where('a.id IN (' . implode(',', $ids) . ')')
+                    ->clear('order')
+                    ->order('FIELD(a.id,' . implode(',', $ids) . ')');
+                break;
         }
 
         $db->setQuery($q);
