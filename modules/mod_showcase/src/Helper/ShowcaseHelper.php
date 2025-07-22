@@ -22,7 +22,7 @@ class ShowcaseHelper implements DatabaseAwareInterface
     {
         $db    = Factory::getContainer()->get(DatabaseInterface::class);
         $q     = $db->getQuery(true)
-            ->select('a.id, a.title, a.images, c.title AS cat')
+            ->select('a.id, a.title, a.images, a.catid, c.title AS cat')
             ->from('#__content AS a')
             ->join('LEFT', '#__categories AS c ON c.id = a.catid')
             ->where('a.state = 1')

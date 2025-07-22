@@ -3,6 +3,7 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
+
 ?>
 
 <?php if (empty($items)) return; ?>
@@ -19,6 +20,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
             $img = $images->image_intro ?? '';
         }
         $link = Route::_(RouteHelper::getArticleRoute($item->id));
+        $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
         ?>
         <div class="col-lg-6">
             <div class="position-relative overflow-hidden rounded">
@@ -27,9 +29,10 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                         <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                     <?php endif; ?>
                 </div>
-                <div class="position-absolute top-0 end-0 m-2">
-                    <span class="badge bg-danger"><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
-                </div>
+                <div class="position-absolute top-0 end-0 m-2 z-2">
+                    <a href="<?= $catLink ?>" class="badge bg-danger text-decoration-none">
+                        <?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?>
+                    </a>                </div>
                 <div class="position-absolute bottom-0 start-0 p-3 text-white bg-dark bg-opacity-50 w-100">
                     <h5 class="fw-bold lh-base m-0"><?= htmlspecialchars($item->title) ?></h5>
                 </div>
@@ -48,6 +51,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                         $img = $images->image_intro ?? '';
                     }
                     $link = Route::_(RouteHelper::getArticleRoute($item->id));
+                    $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
                     ?>
                     <div class="col-6">
                         <div class="position-relative overflow-hidden rounded">
@@ -56,8 +60,10 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                                     <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                                 <?php endif; ?>
                             </div>
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <span class="badge bg-danger"><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
+                            <div class="position-absolute top-0 end-0 m-2 z-2">
+                                <a href="<?= $catLink ?>" class="badge bg-danger text-decoration-none">
+                                    <?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?>
+                                </a>
                             </div>
                             <div class="position-absolute bottom-0 start-0 p-2 text-white bg-dark bg-opacity-50 w-100">
                                 <h6 class="m-0 fw-bold lh-sm"><?= htmlspecialchars($item->title) ?></h6>
