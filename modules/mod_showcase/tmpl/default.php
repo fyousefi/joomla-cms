@@ -28,7 +28,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                     <?php endif; ?>
                 </div>
                 <div class="position-absolute top-0 end-0 m-2">
-                    <span class="badge bg-danger"><?= htmlspecialchars($item->cat) ?></span>
+                    <span class="badge bg-danger"><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                 </div>
                 <div class="position-absolute bottom-0 start-0 p-3 text-white bg-dark bg-opacity-50 w-100">
                     <h5 class="fw-bold lh-base m-0"><?= htmlspecialchars($item->title) ?></h5>
@@ -57,7 +57,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                                 <?php endif; ?>
                             </div>
                             <div class="position-absolute top-0 end-0 m-2">
-                                <span class="badge bg-danger"><?= htmlspecialchars($item->cat) ?></span>
+                                <span class="badge bg-danger"><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                             </div>
                             <div class="position-absolute bottom-0 start-0 p-2 text-white bg-dark bg-opacity-50 w-100">
                                 <h6 class="m-0 fw-bold lh-sm"><?= htmlspecialchars($item->title) ?></h6>
