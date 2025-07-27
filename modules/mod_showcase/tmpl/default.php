@@ -22,7 +22,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
     $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
     ?>
     <div class="col-lg-6">
-        <div class="position-relative overflow-hidden img-hover-blur-dark">
+        <div class="position-relative overflow-hidden bg-dark img-hover-blur-dark">
             <div class="ratio ratio-3x2">
                 <?php if ($img): ?>
                     <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
@@ -54,7 +54,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                 $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="position-relative overflow-hidden img-hover-blur-dark">
+                    <div class="position-relative overflow-hidden bg-dark img-hover-blur-dark">
                         <div class="ratio ratio-3x2">
                             <?php if ($img): ?>
                                 <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
