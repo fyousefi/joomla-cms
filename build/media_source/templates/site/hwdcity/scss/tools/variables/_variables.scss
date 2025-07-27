@@ -305,3 +305,19 @@ $spacers: (
   9: $spacer * 5,
   10: $spacer * 5.5,
 );
+
+// Aspect ratios
+$aspect-ratios: (
+  "1x1": 100%,
+  "3x2": calc(2 / 3 * 100%),
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%),
+  "667x444": calc(444 / 667 * 100%), // Custom ratio
+);
+
+// Custom parallelogram badges
+$badge-border-radius:   0;          // Remove default rounded corners
+$badge-padding-x:       .65em;      // Horizontal padding
+$badge-padding-y:       .35em;      // Vertical padding
+$badge-skew-x:          15deg;     // Skew angle (Positive = right-leaning (use -15deg for left))

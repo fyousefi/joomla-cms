@@ -106,11 +106,28 @@ $iransansx-font-path: "../fonts" !default;
   overflow: hidden;
 
   img {
-    transition: all 0.4ms ease;
+    transition: all 0.3s ease;
   }
 
   &:hover img {
     filter: blur(4px) brightness(0.6);
   }
+}
+
+// Mixin for parallelogram transform
+@mixin badge-parallelogram {
+  transform: skewX($badge-skew-x);
+  display: inline-block;
+  // Fix text alignment (counter-skew)
+  span {
+    display: inline-block;
+    transform: skewX(-$badge-skew-x);
+  }
+}
+
+.badge {
+  @include badge-parallelogram;
+  // Optional: Add a subtle border for better visibility
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 

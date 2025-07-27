@@ -22,16 +22,17 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
     $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
     ?>
     <div class="col-lg-6">
-        <div class="position-relative overflow-hidden rounded img-hover-blur-dark">
-            <div class="ratio ratio-16x9">
+        <div class="position-relative overflow-hidden img-hover-blur-dark">
+            <div class="ratio ratio-3x2">
                 <?php if ($img): ?>
                     <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                 <?php endif; ?>
             </div>
             <div class="position-absolute top-0 end-0 m-2 z-2">
-                <a href="<?= $catLink ?>" class="badge bg-danger text-decoration-none">
-                    <?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?>
-                </a>                </div>
+                <a href="<?= $catLink ?>" class="badge text-bg-danger text-decoration-none fw-normal">
+                    <span><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
+                </a>
+            </div>
             <div class="position-absolute bottom-0 start-0 p-3 text-white bg-dark bg-opacity-50 w-100">
                 <h5 class="fw-bold lh-base m-0"><?= htmlspecialchars($item->title) ?></h5>
             </div>
@@ -53,15 +54,15 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                 $catLink = Route::_(RouteHelper::getCategoryRoute($item->catid));
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="position-relative overflow-hidden rounded img-hover-blur-dark">
-                        <div class="ratio ratio-16x9">
+                    <div class="position-relative overflow-hidden img-hover-blur-dark">
+                        <div class="ratio ratio-3x2">
                             <?php if ($img): ?>
                                 <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                             <?php endif; ?>
                         </div>
                         <div class="position-absolute top-0 end-0 m-2 z-2">
-                            <a href="<?= $catLink ?>" class="badge bg-danger text-decoration-none">
-                                <?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?>
+                            <a href="<?= $catLink ?>" class="badge text-bg-danger text-decoration-none fw-normal">
+                                <span><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                             </a>
                         </div>
                         <div class="position-absolute bottom-0 start-0 p-2 text-white bg-dark bg-opacity-50 w-100">
