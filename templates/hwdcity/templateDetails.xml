@@ -26,7 +26,6 @@
 		<folder>fonts</folder>
 	</media>
 	<positions>
-		<position>topbar-right</position>
 		<position>logo</position>
 		<position>logo-ads</position>
 		<position>menu</position>

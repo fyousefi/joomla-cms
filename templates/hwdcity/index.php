@@ -159,13 +159,25 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
         <?php if ($this->params->get('brand', 1)) : ?>
             <div class="grid-child">
-                <div class="navbar-brand">
-                    <a class="brand-logo" href="<?php echo $this->baseurl; ?>/">
-                        <?php echo $logo; ?>
-                    </a>
-                    <?php if ($this->params->get('siteDescription')) : ?>
-                        <div class="site-description"><?php echo htmlspecialchars($this->params->get('siteDescription')); ?></div>
+                <div class="d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center align-items-lg-start gap-3 w-100">
+                    <!-- Banner: below logo on mobile, left side on desktop -->
+                    <?php if ($this->countModules('logo-ads', true)) : ?>
+                        <div class="order-1 order-lg-2 text-center text-lg-end w-lg-auto">
+                            <jdoc:include type="modules" name="logo-ads" style="none" />
+                        </div>
                     <?php endif; ?>
+
+                    <!-- Logo (fixed position, right-aligned on desktop) -->
+                    <div class="order-2 order-lg-1">
+                        <div class="navbar-brand">
+                            <a class="brand-logo" href="<?php echo $this->baseurl; ?>/">
+                                <?php echo $logo; ?>
+                            </a>
+                            <?php if ($this->params->get('siteDescription')) : ?>
+                                <div class="site-description"><?php echo htmlspecialchars($this->params->get('siteDescription')); ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php endif; ?>
