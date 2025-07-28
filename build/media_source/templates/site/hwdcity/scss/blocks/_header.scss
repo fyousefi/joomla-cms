@@ -192,7 +192,7 @@
     }
 
     @include media-breakpoint-up(lg) {
-      .metismenu > li.level-1 {
+      .metismenu > li.level-1, li.level-2 {
         &.active,
         &:hover,
         &:focus-within {
