@@ -30,8 +30,13 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        padding: ($hwcity-grid-gutter * .5) $hwcity-grid-gutter;
-        font-size: 1.1rem;
+        @include media-breakpoint-up(lg){
+          padding: ($hwcity-grid-gutter * .9) $hwcity-grid-gutter;
+        }
+        @include media-breakpoint-down(md){
+          padding: ($hwcity-grid-gutter * .5) $hwcity-grid-gutter;
+        }
+        font-size: 1rem;
         line-height: 1.5;
 
         &.parent {
