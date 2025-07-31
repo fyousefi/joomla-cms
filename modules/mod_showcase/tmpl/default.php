@@ -23,7 +23,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
     ?>
     <div class="col-lg-6">
         <div class="position-relative overflow-hidden bg-dark img-hover-blur-dark">
-            <div class="ratio ratio-3x2">
+            <div class="ratio ratio-16x9">
                 <?php if ($img): ?>
                     <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                 <?php endif; ?>
@@ -33,8 +33,8 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                     <span><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                 </a>
             </div>
-            <div class="position-absolute bottom-0 start-0 p-4 text-white w-100 caption-overlay pt-10">
-                <h5 class="fw-bold lh-base m-0"><?= htmlspecialchars($item->title) ?></h5>
+            <div class="position-absolute bottom-0 start-0 p-4 text-white w-100 caption-overlay pt-22">
+                <h1 class="fw-bold lh-base m-0 fs-5"><?= htmlspecialchars($item->title) ?></h1>
             </div>
             <a href="<?= $link ?>" class="stretched-link"></a>
         </div>
@@ -55,7 +55,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                 ?>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="position-relative overflow-hidden bg-dark img-hover-blur-dark">
-                        <div class="ratio ratio-3x2">
+                        <div class="ratio ratio-16x9">
                             <?php if ($img): ?>
                                 <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
                             <?php endif; ?>
@@ -65,8 +65,8 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                                 <span><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                             </a>
                         </div>
-                        <div class="position-absolute bottom-0 start-0 p-3 text-white w-100 caption-overlay pt-10">
-                            <h6 class="m-0 fw-bold lh-sm"><?= htmlspecialchars($item->title) ?></h6>
+                        <div class="position-absolute bottom-0 start-0 p-3 text-white w-100 caption-overlay pt-22">
+                            <h4 class="m-0 fw-bold lh-base fs-5"><?= htmlspecialchars($item->title) ?></h4>
                         </div>
                         <a href="<?= $link ?>" class="stretched-link"></a>
                     </div>

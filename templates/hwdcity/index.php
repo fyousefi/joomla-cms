@@ -197,15 +197,59 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     <?php endif; ?>
 
     <div class="site-grid">
-        <?php if ($this->countModules('banner', true)) : ?>
-            <div class="container-banner pt-3">
-                <jdoc:include type="modules" name="banner" style="none" />
+        <?php if ($this->countModules('banner1', true) || $this->countModules('banner2') || $this->countModules('banner3') || $this->countModules('banner4')) : ?>
+            <div class="container-banners-row row g-3 pt-3">
+                <?php if ($this->countModules('banner1', true)) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner1" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner2')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner2" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner3')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner3" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner4')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner4" style="none" />
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($this->countModules('top-a', true)) : ?>
             <div class="grid-child container-top-a">
                 <jdoc:include type="modules" name="top-a" style="card" />
+            </div>
+        <?php endif; ?>
+
+        <?php if ($this->countModules('banner5') || $this->countModules('banner6') || $this->countModules('banner7') || $this->countModules('banner8')) : ?>
+            <div class="container-banners-row-bottom row g-3 pt-3">
+                <?php if ($this->countModules('banner5')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner5" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner6')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner6" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner7')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner7" style="none" />
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->countModules('banner8')) : ?>
+                    <div class="col-12 col-md-6">
+                        <jdoc:include type="modules" name="banner8" style="none" />
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
