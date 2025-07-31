@@ -34,7 +34,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                 </a>
             </div>
             <div class="position-absolute bottom-0 start-0 p-4 text-white w-100 caption-overlay pt-22">
-                <h1 class="fw-bold lh-base m-0 fs-5"><?= htmlspecialchars($item->title) ?></h1>
+                <h1 class="fw-bold lh-base m-0 fs-5 ss02"><?= htmlspecialchars($item->title) ?></h1>
             </div>
             <a href="<?= $link ?>" class="stretched-link"></a>
         </div>
@@ -66,7 +66,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                             </a>
                         </div>
                         <div class="position-absolute bottom-0 start-0 p-3 text-white w-100 caption-overlay pt-22">
-                            <h4 class="m-0 fw-bold lh-base fs-5"><?= htmlspecialchars($item->title) ?></h4>
+                            <h4 class="m-0 fw-bold lh-base fs-5 ss02"><?= htmlspecialchars($item->title) ?></h4>
                         </div>
                         <a href="<?= $link ?>" class="stretched-link"></a>
                     </div>
