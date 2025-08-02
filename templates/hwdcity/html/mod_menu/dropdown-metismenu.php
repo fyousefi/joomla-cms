@@ -15,10 +15,10 @@ use Joomla\Utilities\ArrayHelper;
 
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $app->getDocument()->getWebAssetManager();
-$wa->registerAndUseScript('metismenu', 'media/templates/site/cassiopeia/js/mod_menu/menu-metismenu.min.js', [], ['defer' => true], ['metismenujs']);
+$wa->disableScript('mod_menu');
 
 $attributes          = [];
-$attributes['class'] = 'mod-menu mod-menu_dropdown-metismenu metismenu mod-list ' . $class_sfx;
+$attributes['class'] = 'mod-menu mod-menu_dropdown mod-list hwdcity-menu ' . $class_sfx;
 
 if ($tagId = $params->get('tag_id', '')) {
     $attributes['id'] = $tagId;
@@ -36,7 +36,7 @@ $start = (int) $params->get('startLevel', 1);
 
     $itemParams = $item->getParams();
     $class      = [];
-    $class[]    = 'metismenu-item item-' . $item->id . ' level-' . ($item->level - $start + 1);
+    $class[]    = 'item-' . $item->id . ' level-' . ($item->level - $start + 1);
 
     if ($item->id == $default_id) {
         $class[] = 'default';
@@ -89,7 +89,7 @@ $start = (int) $params->get('startLevel', 1);
     switch (true) :
         // The next item is deeper.
         case $showAll && $item->deeper:
-            echo '<ul class="mm-collapse">';
+            echo '<ul>';
             break;
 
         // The next item is shallower.

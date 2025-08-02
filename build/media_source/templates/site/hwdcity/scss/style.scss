@@ -70,3 +70,181 @@ $iransansx-font-path: "../fonts" !default;
 .caption-overlay {
   background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
 }
+
+// HWD Menu
+.hwdcity-menu {
+  margin: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.938rem;
+    font-weight: 500;
+    line-height: normal;
+
+    @include media-breakpoint-up(lg) {
+      padding: ($hwcity-grid-gutter * 0.9) $hwcity-grid-gutter;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: ($hwcity-grid-gutter * 0.5) $hwcity-grid-gutter;
+    }
+
+    &.divider:not(.parent) {
+      width: 1px;
+      padding: 0;
+      margin: 0.25em;
+      overflow: hidden;
+      border-right: 1px solid $gray-400;
+
+      @include media-breakpoint-down(lg) {
+        width: auto;
+        height: 1px;
+        border-bottom: 1px solid $gray-400;
+      }
+    }
+
+    &.parent {
+      position: relative;
+
+      > ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 12rem;
+        z-index: 1001;
+        list-style: none;
+        padding: 0;
+        background: $white;
+        color: $gray-900;
+        box-shadow: 0 0 0.5em hsla(0, 0%, 0%, 0.1);
+      }
+
+      &.open > ul {
+        display: block;
+      }
+
+      @include media-breakpoint-up(lg) {
+        &:hover > ul {
+          display: block;
+        }
+
+        &:hover > a i::before {
+          content: '\f00d'; // fa-xmark
+        }
+      }
+
+      @include media-breakpoint-down(lg) {
+        &.open > a i::before {
+          content: '\f00d';
+        }
+      }
+    }
+
+    > a,
+    > button,
+    > span {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+
+      &:focus {
+        outline: 1px dotted $gray-400;
+        outline-offset: 2px;
+      }
+
+      i {
+        margin-inline-start: 0.5rem;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &.active > a,
+    &.active > button {
+      text-decoration: underline;
+    }
+
+    &:not(.level-1) > ul,
+    &:not(.level-2) > ul {
+      margin-inline-end: -1em;
+    }
+
+    // Combined button styles here
+    > button {
+      all: unset; // remove all default browser styles
+      display: inline-flex;
+      align-items: center;
+      margin-inline-start: 0.25rem;
+      cursor: pointer;
+      color: inherit;
+      font: inherit;
+      background: none;
+
+      i {
+        font-size: 1rem;
+        transition: transform 0.3s ease;
+        font-weight: bold;
+        opacity: 0.5;
+      }
+
+      /* &:hover i,
+      &:focus i {
+        transform: rotate(180deg);
+      } */
+
+      &:focus {
+        outline: 1px dotted $gray-400;
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  // Optional: nested submenu inside sidebar (if used)
+  .sidebar-right &,
+  .sidebar-left & {
+    li.parent {
+      > ul {
+        position: relative;
+        top: 0;
+        background-color: hsla(0, 0%, 0%, 0.03);
+
+        @include media-breakpoint-down(xl) {
+          width: 100%;
+        }
+      }
+    }
+
+    li {
+      > a,
+      > span {
+        white-space: inherit;
+      }
+
+      &.divider:not(.parent) {
+        width: auto;
+        height: 1px;
+        border-bottom: 1px solid $gray-400;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+

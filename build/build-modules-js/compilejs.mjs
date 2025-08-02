@@ -42,7 +42,7 @@ export const scripts = async (options, path) => {
   } else {
     folders = [
       `${RootPath}/build/media_source`,
-      `${RootPath}/templates/cassiopeia`,
+      `${RootPath}/templates/hwdcity`,
     ];
   }
 

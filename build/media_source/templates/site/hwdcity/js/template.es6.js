@@ -58,6 +58,67 @@ Joomla = window.Joomla || {};
   });
 
   /**
+   * Initialize the HWD menu
+   */
+  document.addEventListener('DOMContentLoaded', () => {
+    const isMobile = () => window.innerWidth < 992;
+
+    // Mobile click toggle logic
+    document.querySelectorAll('.mod-menu .parent > a, .mod-menu .parent > button').forEach((toggler) => {
+      toggler.addEventListener('click', (e) => {
+        if (!isMobile()) return;
+
+        e.preventDefault();
+
+        const li = toggler.closest('li.parent');
+        const icon = toggler.querySelector('i');
+
+        if (li.classList.contains('open')) {
+          li.classList.remove('open');
+          if (icon) {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-angle-down');
+          }
+        } else {
+          document.querySelectorAll('.mod-menu li.parent.open').forEach((openLi) => {
+            openLi.classList.remove('open');
+            const openIcon = openLi.querySelector('i');
+            if (openIcon) {
+              openIcon.classList.remove('fa-xmark');
+              openIcon.classList.add('fa-angle-down');
+            }
+          });
+
+          li.classList.add('open');
+          if (icon) {
+            icon.classList.remove('fa-angle-down');
+            icon.classList.add('fa-xmark');
+          }
+        }
+      });
+    });
+
+    // Desktop hover icon swap
+    if (!isMobile()) {
+      document.querySelectorAll('.mod-menu li.parent').forEach((li) => {
+        const icon = li.querySelector('i');
+
+        li.addEventListener('mouseenter', () => {
+          if (icon && icon.classList.contains('fa-angle-down')) {
+            icon.classList.replace('fa-angle-down', 'fa-xmark');
+          }
+        });
+
+        li.addEventListener('mouseleave', () => {
+          if (icon && icon.classList.contains('fa-xmark')) {
+            icon.classList.replace('fa-xmark', 'fa-angle-down');
+          }
+        });
+      });
+    }
+  });
+
+  /**
    * Initialize when a part of the page was updated
    */
   document.addEventListener('joomla:updated', initTemplate);

@@ -52,7 +52,7 @@ if ($showAll && $item->deeper) {
     $attributes['class'] .= ' mm-collapsed mm-toggler mm-toggler-nolink';
     $attributes['aria-haspopup'] = 'true';
     $attributes['aria-expanded'] = 'false';
-    echo '<button ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</button>';
+    echo '<button ' . ArrayHelper::toString($attributes) . '>' . $linktype . '<i class="fa-solid fa-angle-down"></i></button>';
 } else {
     echo '<span ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</span>';
 }

@@ -149,50 +149,14 @@
   }
 
   @if $metismenu==true {
-    .metismenu > li {
+    .hwdcity-menu > li {
       + li {
         margin-left: 0;
       }
-
-      // underline effect
-      /*
-      > a::after,
-      > button::before {
-        @include media-breakpoint-up(lg) {
-          position: absolute;
-          right: 50%;
-          bottom: 0;
-          left: 50%;
-          display: block;
-          height: 2px;
-          margin: auto;
-          content: "";
-          background: transparent;
-          opacity: .2;
-          transition: all .2s ease, background-color .2s ease;
-        }
-      }
-
-      // underline activation styles
-      > a:hover::after,
-      > button:hover::before,
-      &.active > a::after,
-      &.active > button::before {
-        right: 0;
-        left: 0;
-        background: $white;
-      }
-
-      // toggler underline
-      > button.mm-toggler-link:hover::before,
-      &.active > button.mm-toggler-link::before {
-        right: 0;
-        left: .5em;
-      }*/
     }
 
     @include media-breakpoint-up(lg) {
-      .metismenu > li.level-1, li.level-2 {
+      .hwdcity-menu > li.level-1, li.level-2 {
         &.active,
         &:hover,
         &:focus-within {
