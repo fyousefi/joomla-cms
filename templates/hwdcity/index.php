@@ -2,7 +2,7 @@
 
 /**
  * @package     Joomla.Site
- * @subpackage  Templates.hwcity
+ * @subpackage  Templates.hwdcity
  *
  * @copyright   (C) 2025 AsiaSun.ir, Pvt. Ltd. <https://www.asiasun.ir>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -158,7 +158,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->params->get('brand', 1)) : ?>
-            <div class="grid-child">
+            <div class="grid-child d-none d-lg-block">
                 <div class="d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center align-items-lg-start gap-3 w-100">
                     <!-- Banner: below logo on mobile, left side on desktop -->
                     <?php if ($this->countModules('logo-ads', true)) : ?>
@@ -184,15 +184,26 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     </header>
 
     <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
-        <div class="container-nav bg-black d-flex px-lg-10 px-3 sticky-top">
+        <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 sticky-top">
             <?php if ($this->countModules('menu', true)) : ?>
                 <jdoc:include type="modules" name="menu" style="none" />
             <?php endif; ?>
+
+            <a class="mobile-logo d-lg-none" href="<?php echo $this->baseurl; ?>/">
+                <?php echo $logo; ?>
+            </a>
+
             <?php if ($this->countModules('search', true)) : ?>
                 <div class="container-search">
                     <jdoc:include type="modules" name="search" style="none" />
                 </div>
             <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->countModules('logo-ads', true)) : ?>
+        <div class="d-lg-none pt-1">
+            <jdoc:include type="modules" name="logo-ads" style="none" />
         </div>
     <?php endif; ?>
 
