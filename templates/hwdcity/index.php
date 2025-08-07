@@ -184,14 +184,17 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     </header>
 
     <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
-        <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 sticky-top">
+        <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 pb-md-2 pb-lg-0 sticky-top">
+
+            <div class="mobile-logo d-lg-none px-5 pt-1">
+                <a href="<?php echo $this->baseurl; ?>/">
+                    <?php echo $logo; ?>
+                </a>
+            </div>
+
             <?php if ($this->countModules('menu', true)) : ?>
                 <jdoc:include type="modules" name="menu" style="none" />
             <?php endif; ?>
-
-            <a class="mobile-logo d-lg-none" href="<?php echo $this->baseurl; ?>/">
-                <?php echo $logo; ?>
-            </a>
 
             <?php if ($this->countModules('search', true)) : ?>
                 <div class="container-search">
