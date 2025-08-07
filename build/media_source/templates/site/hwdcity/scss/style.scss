@@ -138,6 +138,12 @@ $iransansx-font-path: "../fonts" !default;
         }
       }
 
+      i::before {
+        display: inline-block;
+        width: 1em; // fixed width to avoid shifting
+        text-align: center;
+      }
+
       @include media-breakpoint-down(lg) {
         &.open > a i::before {
           content: '\f00d';
