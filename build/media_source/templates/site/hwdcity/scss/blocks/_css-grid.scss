@@ -38,8 +38,9 @@ body {
 @supports (display: grid) {
   .site-grid {
     display: grid;
-    grid-template-areas: ". banner banner banner banner ."
+    grid-template-areas: ". banner-top banner-top banner-top banner-top ."
       ". top-a top-a top-a top-a ."
+      ". banner-mid banner-mid banner-mid banner-mid ."
       ". top-b top-b top-b top-b ."
       ". comp comp comp comp ."
       ". side-r side-r side-r side-r ."
@@ -61,8 +62,9 @@ body {
     }
 
     @include media-breakpoint-up(lg) {
-      grid-template-areas: ". banner banner banner banner ."
+      grid-template-areas: ". banner-top banner-top banner-top banner-top ."
         ". top-a top-a top-a top-a ."
+        ". banner-mid banner-mid banner-mid banner-mid ."
         ". top-b top-b top-b top-b ."
         ". side-l comp comp side-r ."
         ". bot-a bot-a bot-a bot-a ."
@@ -71,12 +73,16 @@ body {
   }
 }
 
-.container-banner {
-  grid-area: banner;
+.container-banner-top {
+  grid-area: banner-top;
 }
 
 .container-top-a {
   grid-area: top-a;
+}
+
+.container-banner-mid {
+  grid-area: banner-mid;
 }
 
 .container-top-b {

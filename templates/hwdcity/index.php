@@ -206,15 +206,15 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
     <div class="site-grid">
 
-        <?php if ($this->countModules('logo-ads', true) || $this->countModules('banner2') || $this->countModules('banner3') || $this->countModules('banner4')) : ?>
-            <div class="container-banner">
+        <?php if ($this->countModules('logo-ads', true) || $this->countModules('banner-top')) : ?>
+            <div class="container-banner-top">
                 <?php if ($this->countModules('logo-ads', true)) : ?>
-                    <div class="d-lg-none pt-1 d-flex flex-column gap-2">
+                    <div class="d-lg-none pt-1 d-flex justify-content-center gap-2">
                         <jdoc:include type="modules" name="logo-ads" style="none" />
                     </div>
                 <?php endif; ?>
                 <?php if ($this->countModules('banner-top', true)) : ?>
-                    <div class="pt-1 d-flex flex-lg-row flex-md-column justify-content-center flex-wrap gap-2 ">
+                    <div class="pt-1 d-flex flex-lg-row flex-wrap justify-content-center gap-2 ">
                         <jdoc:include type="modules" name="banner-top" style="none" />
                     </div>
                 <?php endif; ?>
@@ -227,26 +227,11 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
             </div>
         <?php endif; ?>
 
-        <?php if ($this->countModules('banner5') || $this->countModules('banner6') || $this->countModules('banner7') || $this->countModules('banner8')) : ?>
-            <div class="container-banners-row-bottom row g-3 pt-3">
-                <?php if ($this->countModules('banner5')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner5" style="none" />
-                    </div>
-                <?php endif; ?>
-                <?php if ($this->countModules('banner6')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner6" style="none" />
-                    </div>
-                <?php endif; ?>
-                <?php if ($this->countModules('banner7')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner7" style="none" />
-                    </div>
-                <?php endif; ?>
-                <?php if ($this->countModules('banner8')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner8" style="none" />
+        <?php if ($this->countModules('banner-mid', true)) : ?>
+            <div class="container-banner-mid">
+                <?php if ($this->countModules('banner-mid', true)) : ?>
+                    <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
+                        <jdoc:include type="modules" name="banner-mid" style="none" />
                     </div>
                 <?php endif; ?>
             </div>
