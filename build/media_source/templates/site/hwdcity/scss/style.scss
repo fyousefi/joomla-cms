@@ -110,28 +110,46 @@ $iransansx-font-path: "../fonts" !default;
     &.parent {
       position: relative;
 
+      /* MOBILE FIRST: in-flow (no overlay) */
       > ul {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 12rem;
-        z-index: 1001;
+        display: none;        /* shown via .open */
+        position: static;     /* (stop overlay on mobile) */
+        top: auto;
+        left: auto;
+        min-width: 100%;
+        z-index: auto;
         list-style: none;
         padding: 0;
+        margin: 0;
         background: $white;
         color: $gray-900;
-        box-shadow: 0 0 0.5em hsla(0, 0%, 0%, 0.1);
+        box-shadow: none;
+        width: 100%;
       }
 
       &.open > ul {
-        display: block;
+        display: block; /* manged by JS toggles .open */
       }
 
       @include media-breakpoint-up(lg) {
-        &:hover > ul {
-          display: block;
+        /* DESKTOP: restore dropdown overlay + hover */
+        > ul {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          display: none;       /* hover shows it */
+          min-width: 12rem;
+          z-index: 1001;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          background: $white;
+          color: $gray-900;
+          box-shadow: 0 0 .5em hsla(0, 0%, 0%, 0.1);
+          width: auto;         /* reset from 100% */
         }
+
+        &:hover > ul { display: block; }
 
         &:hover > a i::before {
           content: '\f00d'; // fa-xmark
@@ -247,15 +265,11 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+// Logo
 .mobile-logo {
   position: absolute;
   img {
     width: 50%;
   }
 }
-
-
-
-
-
 
