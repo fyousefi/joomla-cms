@@ -204,33 +204,18 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         </div>
     <?php endif; ?>
 
-    <?php if ($this->countModules('logo-ads', true)) : ?>
-        <div class="d-lg-none pt-1">
-            <jdoc:include type="modules" name="logo-ads" style="none" />
-        </div>
-    <?php endif; ?>
-
     <div class="site-grid">
-        <?php if ($this->countModules('banner1', true) || $this->countModules('banner2') || $this->countModules('banner3') || $this->countModules('banner4')) : ?>
-            <div class="container-banners-row row g-3 pt-3">
-                <?php if ($this->countModules('banner1', true)) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner1" style="none" />
+
+        <?php if ($this->countModules('logo-ads', true) || $this->countModules('banner2') || $this->countModules('banner3') || $this->countModules('banner4')) : ?>
+            <div class="container-banner">
+                <?php if ($this->countModules('logo-ads', true)) : ?>
+                    <div class="d-lg-none pt-1 d-flex flex-column gap-2">
+                        <jdoc:include type="modules" name="logo-ads" style="none" />
                     </div>
                 <?php endif; ?>
-                <?php if ($this->countModules('banner2')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner2" style="none" />
-                    </div>
-                <?php endif; ?>
-                <?php if ($this->countModules('banner3')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner3" style="none" />
-                    </div>
-                <?php endif; ?>
-                <?php if ($this->countModules('banner4')) : ?>
-                    <div class="col-12 col-md-6">
-                        <jdoc:include type="modules" name="banner4" style="none" />
+                <?php if ($this->countModules('banner-top', true)) : ?>
+                    <div class="pt-1 d-flex flex-lg-row flex-md-column justify-content-center flex-wrap gap-2 ">
+                        <jdoc:include type="modules" name="banner-top" style="none" />
                     </div>
                 <?php endif; ?>
             </div>
