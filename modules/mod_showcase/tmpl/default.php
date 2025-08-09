@@ -33,7 +33,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
                     <span><?= htmlspecialchars(preg_replace('/^اخبار\s*/u', '', $item->cat)) ?></span>
                 </a>
             </div>
-            <div class="position-absolute bottom-0 start-0 p-4 text-white w-100 caption-overlay pt-22">
+            <div class="position-absolute bottom-0 start-0 p-3 text-white w-100 caption-overlay pt-22">
                 <p class="fw-bold lh-lg m-0 fs-4 ss02"><?= htmlspecialchars($item->title) ?></p>
             </div>
             <a href="<?= $link ?>" class="stretched-link"></a>
