@@ -325,6 +325,7 @@ $aspect-ratios: (
   "3x2": calc(2 / 3 * 100%),
   "4x3": calc(3 / 4 * 100%),
   "16x9": calc(9 / 16 * 100%),
+  "16x9-plus-g1": calc(9 / 16 * 100% + var(--bs-gutter-y, 0.15rem)), // 2× 16:9 + one vertical gap
   "21x9": calc(9 / 21 * 100%),
   "667x444": calc(444 / 667 * 100%), // Custom ratio
 );
@@ -334,3 +335,20 @@ $badge-border-radius:   0;          // Remove default rounded corners
 $badge-padding-x:       .65em;      // Horizontal padding
 $badge-padding-y:       .35em;      // Vertical padding
 $badge-skew-x:          15deg;     // Skew angle (Positive = right-leaning (use -15deg for left))
+
+
+// Custom Fonts
+$font-sizes: (
+  1: 2.25rem,
+  2: 1.75rem,
+  3: 1.5rem,
+  4: 1.4rem,
+  5: 1.25rem,
+  6: 1.1rem,
+  7: 1rem,
+  8: .875rem,
+  9: .8125rem,
+  10: .75rem,
+  11: .6875rem,
+  12: .625rem
+);
