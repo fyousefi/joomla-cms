@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>MOD_SPOTLIGHT_NAME</name>
+	<author>F.Yousefi</author>
+	<creationDate>2025-08</creationDate>
+	<copyright>(C) 2025 AsiaSun.ir, Pvt. Ltd.</copyright>
+	<license>Reserved for AsiaSun.ir</license>
+	<authorEmail>asiasunnet@gmail.com</authorEmail>
+	<authorUrl>www.asiasun.ir</authorUrl>
+	<version>1.0.0</version>
+	<description>MOD_SPOTLIGHT_DESCRIPTION</description>
+	<namespace path="src">AsiaSun\Module\Spotlight</namespace>
+	<files>
+		<folder module="mod_spotlight">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+		<folder>layouts</folder>
+	</files>
+	<scriptfile>script.php</scriptfile>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" label="JFIELD_PARAMS_BASIC">
+				<!--
+				  Repeatable Subform of article pickers
+				  - Adds "+" button to insert a new row (Modal Article selector)
+				  - Each row has Remove and Drag handles (move)
+				  - Max 20 items enforced in UI
+				-->
+				<field
+					name="items"
+					type="subform"
+					label="MOD_SPOTLIGHT_ITEMS_LABEL"
+					description="MOD_SPOTLIGHT_ITEMS_DESC"
+					multiple="true"
+					min="0"
+					max="20"
+					layout="mod_spotlight.subform.numbered-table"
+					buttons="add,remove,move"
+					sortable="true"
+				>
+					<form>
+						<fields name="item">
+							<!-- Core Joomla field type for picking an article in a modal -->
+							<field
+								type="ModalSelect"
+								name="article_id"
+								label="MOD_SPOTLIGHT_ITEM_ARTICLE_LABEL"
+								select="true"
+								iconSelect="fa fa-file"
+								description="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								titleSelect="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+								clear="true"
+								sql_title_table="#__content"
+								sql_title_column="title"
+								sql_title_key="id"
+							/>
+						</fields>
+					</form>
+				</field>
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="form-select"
+					validate="moduleLayout"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+					validate="CssIdentifier"
+				/>
+
+				<field
+					name="owncache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					default="1"
+					filter="integer"
+					validate="options"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
