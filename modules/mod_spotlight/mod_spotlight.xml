@@ -7,7 +7,7 @@
 	<license>Reserved for AsiaSun.ir</license>
 	<authorEmail>asiasunnet@gmail.com</authorEmail>
 	<authorUrl>www.asiasun.ir</authorUrl>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<description>MOD_SPOTLIGHT_DESCRIPTION</description>
 	<namespace path="src">AsiaSun\Module\Spotlight</namespace>
 	<files>
