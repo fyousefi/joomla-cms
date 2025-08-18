@@ -7,6 +7,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\Utilities\ArrayHelper;
+use Joomla\CMS\Language\Text;
 
 /** @var array $displayData */
 $module  = $displayData['module'];
@@ -29,14 +30,14 @@ $moduleAttribs['class'] = trim(
 );
 
 // Header classes (default + optional user classes)
-$headerAttribs = [];
+$headerAttribs          = [];
 $headerAttribs['class'] = 'mod-title editor-choice' . ($headerClass !== '' ? ' ' . $headerClass : '');
 
 // ARIA
 if ($moduleTag !== 'div') {
-    if ($module->showtitle) {
+    if (!empty($module->showtitle)) {
         $moduleAttribs['aria-labelledby'] = 'mod-' . (int) $module->id;
-        $headerAttribs['id'] = 'mod-' . (int) $module->id;
+        $headerAttribs['id']              = 'mod-' . (int) $module->id;
     } else {
         $moduleAttribs['aria-label'] = htmlspecialchars($module->title ?? '', ENT_QUOTES, 'UTF-8');
     }
@@ -46,10 +47,13 @@ $headerHtml = '<' . $headerTag . ' ' . ArrayHelper::toString($headerAttribs) . '
     htmlspecialchars($module->title ?? '', ENT_QUOTES, 'UTF-8') .
     '</' . $headerTag . '>';
 
-// Target the Spotlight carousel ID used by the module layout
-$carouselId = 'mod-spotlight-' . (int) $module->id;
+// Base IDs used by Slider.php (must exist there)
+$baseId   = 'mod-spotlight-' . (int) $module->id;
+$prevLbl  = Text::_('MOD_SPOTLIGHT_PREV');
+$nextLbl  = Text::_('MOD_SPOTLIGHT_NEXT');
 ?>
 <<?php echo $moduleTag; ?> <?php echo ArrayHelper::toString($moduleAttribs); ?>>
+
 <?php if (!empty($module->showtitle)) : ?>
     <header class="mod-head d-flex align-items-center justify-content-between mt-3">
         <?php echo $headerHtml; ?>
@@ -60,16 +64,41 @@ $carouselId = 'mod-spotlight-' . (int) $module->id;
     <?php echo $module->content; ?>
 </div>
 
-<!-- External controls (outside the module content), pure Bootstrap data-API -->
-<button class="spotlight-control spotlight-prev" type="button"
-        data-bs-target="#<?php echo $carouselId; ?>" data-bs-slide="prev" aria-label="Prev">
+<!-- External controls: one pair per breakpoint, targeting the visible carousel -->
+<!-- Phones (xs/sm) → #mod-spotlight-{id}-xs -->
+<button class="spotlight-control spotlight-prev d-inline-flex d-md-none" type="button"
+        data-bs-target="#<?php echo $baseId; ?>-xs" data-bs-slide="prev" aria-label="<?php echo $prevLbl; ?>">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Prev</span>
+    <span class="visually-hidden"><?php echo $prevLbl; ?></span>
+</button>
+<button class="spotlight-control spotlight-next d-inline-flex d-md-none" type="button"
+        data-bs-target="#<?php echo $baseId; ?>-xs" data-bs-slide="next" aria-label="<?php echo $nextLbl; ?>">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"><?php echo $nextLbl; ?></span>
 </button>
 
-<button class="spotlight-control spotlight-next" type="button"
-        data-bs-target="#<?php echo $carouselId; ?>" data-bs-slide="next" aria-label="Next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+<!-- Tablets (md only) → #mod-spotlight-{id}-md -->
+<button class="spotlight-control spotlight-prev d-none d-md-inline-flex d-lg-none" type="button"
+        data-bs-target="#<?php echo $baseId; ?>-md" data-bs-slide="prev" aria-label="<?php echo $prevLbl; ?>">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"><?php echo $prevLbl; ?></span>
 </button>
+<button class="spotlight-control spotlight-next d-none d-md-inline-flex d-lg-none" type="button"
+        data-bs-target="#<?php echo $baseId; ?>-md" data-bs-slide="next" aria-label="<?php echo $nextLbl; ?>">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"><?php echo $nextLbl; ?></span>
+</button>
+
+<!-- Desktop (lg+) → #mod-spotlight-{id} -->
+<button class="spotlight-control spotlight-prev d-none d-lg-inline-flex" type="button"
+        data-bs-target="#<?php echo $baseId; ?>" data-bs-slide="prev" aria-label="<?php echo $prevLbl; ?>">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"><?php echo $prevLbl; ?></span>
+</button>
+<button class="spotlight-control spotlight-next d-none d-lg-inline-flex" type="button"
+        data-bs-target="#<?php echo $baseId; ?>" data-bs-slide="next" aria-label="<?php echo $nextLbl; ?>">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"><?php echo $nextLbl; ?></span>
+</button>
+
 </<?php echo $moduleTag; ?>>
