@@ -14,27 +14,43 @@ final class SpotlightHelper implements DatabaseAwareInterface
 {
     use DatabaseAwareTrait;
 
-    /**
-     * Return articles in the exact Subform drag order.
-     * Payload: id, title, image_intro, image_intro_alt.
-     * Relies on module cache (Dispatcher → ModuleHelper::moduleCache).
-     */
     public function getItems(Registry $params): array
     {
-        // 1) Get ordered IDs from Subform (handles JSON string or array)
-        $ids = $this->extractIds($params, 20);
+        $type = (string) $params->get('type', 'editor');
+
+        // Pick the correct subform
+        $fieldName = $type === 'hot' ? 'items_hot' : 'items_editor';
+
+        // Extract ordered rows
+        $rows = $this->extractRows($params, $fieldName, 20);
+        if (!$rows) {
+            return [];
+        }
+
+        // Build id list and override labels (hot)
+        $labelById = [];
+        $ids = [];
+        foreach ($rows as $r) {
+            $id = (int) ($r['id'] ?? 0);
+            if ($id > 0) {
+                $ids[] = $id;
+                if ($type === 'hot' && !empty($r['override_title'])) {
+                    $labelById[$id] = (string) $r['override_title'];
+                }
+            }
+        }
+
         if (!$ids) {
             return [];
         }
 
-        // 2) Minimal query, fast filters, keep order via FIELD()
+        // Single query, access/publish filtered, keep drag order
         $db     = $this->getDatabase() ?: Factory::getContainer()->get(DatabaseInterface::class);
         $user   = Factory::getApplication()->getIdentity();
         $levels = $user ? $user->getAuthorisedViewLevels() : [1];
         $nowSql = Factory::getDate()->toSql();
 
         $q = $db->getQuery(true)
-            ->select(['a.id', 'a.title', 'a.images'])
             ->from('#__content AS a')
             ->where('a.state = 1')
             ->where('a.access IN (' . implode(',', array_map('intval', $levels)) . ')')
@@ -45,88 +61,88 @@ final class SpotlightHelper implements DatabaseAwareInterface
             ->order('FIELD(a.id,' . implode(',', $ids) . ')')
             ->setLimit(count($ids));
 
+        if ($type === 'hot') {
+            $q->select(['a.id']); // light
+        } else {
+            $q->select(['a.id', 'a.title', 'a.images']); // editor needs title+image
+        }
+
         $db->setQuery($q);
+        $rowsDb = (array) $db->loadObjectList();
 
-        // Debug
-        //Factory::getApplication()->enqueueMessage(print_r($params->get('items'), true), 'info');
+        $out = [];
 
-        $rows = (array) $db->loadObjectList();
+        if ($type === 'hot') {
+            foreach ($rowsDb as $r) {
+                $id = (int) $r->id;
+                $o = new \stdClass();
+                $o->id              = $id;
+                $o->title           = $labelById[$id] ?? ''; // admin-provided
+                $o->image_intro     = '';
+                $o->image_intro_alt = '';
+                $out[] = $o;
+            }
+            return $out;
+        }
 
-        // 3) Intro image only
-        foreach ($rows as $r) {
+        // Editor Choice: parse intro image once
+        foreach ($rowsDb as $r) {
             $img = json_decode($r->images ?: '{}', true) ?: [];
             $r->image_intro     = $img['image_intro']     ?? '';
             $r->image_intro_alt = $img['image_intro_alt'] ?? '';
             unset($r->images);
+            $out[] = $r;
         }
 
-        return $rows;
+        return $out;
     }
 
-    private function extractIds(Registry $params, int $cap): array
+    /**
+     * Extract ordered rows from the given subform field.
+     * Returns array of ['id'=>int, 'override_title'=>string?].
+     */
+    private function extractRows(Registry $params, string $fieldName, int $cap): array
     {
-        $raw = $params->get('items', []);
+        $raw = $params->get($fieldName, []);
+        $rows = is_string($raw) ? (json_decode($raw, true) ?: []) : (array) $raw;
 
-        // Normalize to PHP array
-        if (is_string($raw)) {
-            $rows = json_decode($raw, true) ?: [];
-        } else {
-            $rows = (array) $raw;
-        }
-
-        $ids  = [];
+        $out  = [];
         $seen = [];
 
         foreach ($rows as $row) {
-            // Some Subform serializers wrap fields under "item"
+            // Normalize
             if (is_array($row) && isset($row['item'])) {
                 $row = $row['item'];
             } elseif (is_object($row) && isset($row->item)) {
-                $row = $row->item;
+                $row = (array) $row->item;
+            } elseif (is_object($row)) {
+                $row = (array) $row;
+            } else {
+                $row = (array) $row;
             }
 
-            // Accept common shapes: number, "123: title", ['article_id'=>123], ['id'=>123], ['value'=>['id'=>123]], etc.
-            $id = $this->toId($row);
-
+            $id = $this->toId($row['article_id'] ?? ($row['id'] ?? ($row['value']['id'] ?? null)));
             if ($id > 0 && !isset($seen[$id])) {
                 $seen[$id] = true;
-                $ids[]     = $id;
-                if (count($ids) >= $cap) {
+                $out[] = [
+                    'id' => $id,
+                    'override_title' => isset($row['override_title']) ? (string) $row['override_title'] : '',
+                ];
+                if (count($out) >= $cap) {
                     break;
                 }
             }
         }
 
-        return $ids;
+        return $out;
     }
 
     private function toId($v): int
     {
-        if (is_int($v)) {
-            return $v;
-        }
-        if (is_string($v)) {
-            // Grab first integer in string (handles "123" or "123: Title")
-            if (preg_match('/\d+/', $v, $m)) {
-                return (int) $m[0];
-            }
-            return 0;
-        }
-        if (is_array($v)) {
-            foreach (['article_id', 'id', 'value', 'select'] as $k) {
-                if (array_key_exists($k, $v)) {
-                    return $this->toId($v[$k]);
-                }
-            }
-            return 0;
-        }
-        if (is_object($v)) {
-            foreach (['article_id', 'id', 'value', 'select'] as $k) {
-                if (isset($v->$k)) {
-                    return $this->toId($v->$k);
-                }
-            }
-        }
+        if (is_int($v)) return $v;
+        if (is_string($v)) { if (preg_match('/\d+/', $v, $m)) return (int) $m[0]; return 0; }
+        if (is_array($v))  { foreach (['article_id','id','value','select'] as $k) if (array_key_exists($k,$v)) return $this->toId($v[$k]); return 0; }
+        if (is_object($v)) { foreach (['article_id','id','value','select'] as $k) if (isset($v->$k)) return $this->toId($v->$k); }
         return 0;
     }
 }

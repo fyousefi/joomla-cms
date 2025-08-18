@@ -27,11 +27,26 @@
 				  - Each row has Remove and Drag handles (move)
 				  - Max 20 items enforced in UI
 				-->
+				<!-- TYPE SWITCH -->
 				<field
-					name="items"
+					name="type"
+					type="list"
+					label="MOD_SPOTLIGHT_TYPE_LABEL"
+					description="MOD_SPOTLIGHT_TYPE_DESC"
+					default="editor"
+					class="form-select"
+				>
+					<option value="editor">Editor Choice</option>
+					<option value="hot">Hot Topic</option>
+				</field>
+
+				<!-- EDITOR CHOICE SUBFORM -->
+				<field
+					name="items_editor"
 					type="subform"
 					label="MOD_SPOTLIGHT_ITEMS_LABEL"
 					description="MOD_SPOTLIGHT_ITEMS_DESC"
+					showon="type:editor"
 					multiple="true"
 					min="0"
 					max="20"
@@ -41,7 +56,6 @@
 				>
 					<form>
 						<fields name="item">
-							<!-- Core Joomla field type for picking an article in a modal -->
 							<field
 								type="ModalSelect"
 								name="article_id"
@@ -55,6 +69,48 @@
 								sql_title_table="#__content"
 								sql_title_column="title"
 								sql_title_key="id"
+							/>
+						</fields>
+					</form>
+				</field>
+
+				<!-- HOT TOPIC SUBFORM -->
+				<field
+					name="items_hot"
+					type="subform"
+					label="MOD_SPOTLIGHT_HOT_ITEMS_LABEL"
+					description="MOD_SPOTLIGHT_HOT_ITEMS_DESC"
+					showon="type:hot"
+					multiple="true"
+					min="0"
+					max="20"
+					layout="mod_spotlight.subform.numbered-table"
+					buttons="add,remove,move"
+					sortable="true"
+				>
+					<form>
+						<fields name="item">
+							<field
+								type="ModalSelect"
+								name="article_id"
+								label="MOD_SPOTLIGHT_ITEM_ARTICLE_LABEL"
+								select="true"
+								iconSelect="fa fa-file"
+								description="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								titleSelect="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+								clear="true"
+								sql_title_table="#__content"
+								sql_title_column="title"
+								sql_title_key="id"
+							/>
+							<field
+								name="override_title"
+								type="text"
+								label="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_LABEL"
+								description="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_DESC"
+								filter="string"
+								size="60"
 							/>
 						</fields>
 					</form>
