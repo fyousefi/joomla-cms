@@ -36,8 +36,8 @@
 					default="editor"
 					class="form-select"
 				>
-					<option value="editor">Editor Choice</option>
-					<option value="hot">Hot Topic</option>
+					<option value="editor">MOD_SPOTLIGHT_TYPE_OPTION_EDITOR</option>
+					<option value="hot">MOD_SPOTLIGHT_TYPE_OPTION_HOT</option>
 				</field>
 
 				<!-- EDITOR CHOICE SUBFORM -->
@@ -110,7 +110,7 @@
 								label="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_LABEL"
 								description="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_DESC"
 								filter="string"
-								size="60"
+								size="30"
 							/>
 						</fields>
 					</form>
