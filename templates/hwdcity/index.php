@@ -250,6 +250,9 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <div class="grid-child container-component pt-lg-5 mb-lg-5">
+            <?php if ($this->countModules('hot-topic', true)): ?>
+                <jdoc:include type="modules" name="hot-topic" style="none" />
+            <?php endif; ?>
             <jdoc:include type="modules" name="breadcrumbs" style="none" />
             <jdoc:include type="modules" name="main-top" style="card" />
             <jdoc:include type="message" />

@@ -55,9 +55,9 @@ $nextLbl  = Text::_('MOD_SPOTLIGHT_NEXT');
 <<?php echo $moduleTag; ?> <?php echo ArrayHelper::toString($moduleAttribs); ?>>
 
 <?php if (!empty($module->showtitle)) : ?>
-    <header class="mod-head d-flex align-items-center justify-content-between mt-3">
+    <div class="mod-head d-flex align-items-center justify-content-between mt-3">
         <?php echo $headerHtml; ?>
-    </header>
+    </div>
 <?php endif; ?>
 
 <div class="mod-body p-3 rounded-3">

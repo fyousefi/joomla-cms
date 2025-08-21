@@ -385,7 +385,7 @@ $iransansx-font-path: "../fonts" !default;
   inset-inline-end: 100%;
   top: .25rem;
   width: .25rem; height: 1.25rem;
-  background-color: #dc3545; border-radius: .125rem;
+  //background-color: #dc3545; border-radius: .125rem;
 }
 [dir="ltr"] .mod-style-editorchoice .mod-head .mod-title::before {
   content: '';
@@ -393,9 +393,28 @@ $iransansx-font-path: "../fonts" !default;
   inset-inline-start: -0.75rem;
   top: .25rem;
   width: .25rem; height: 1.25rem;
-  background-color: #dc3545; border-radius: .125rem;
+  //background-color: #dc3545; border-radius: .125rem;
 }
 
+/* Spotlight Module Hot Topic style */
+.mod-style-hottopic {
+  .hot-topic-icon { width: 2rem; height: 2rem; } // circle size
+
+  .ht-link {
+    background-color: #f0f0f0;
+    background-image: linear-gradient(to right, #C70101, #C70101);
+    background-size: 0% 100%;
+    background-position: left center;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-size: 100% 100%;
+      background-position: left center;
+      color: white; // Optional: change text color for better contrast
+    }
+  }
+}
 
 
 

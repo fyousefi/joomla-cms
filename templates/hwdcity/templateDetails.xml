@@ -32,12 +32,8 @@
 		<position>banner-top</position>
 		<position>top-a</position>
 		<position>banner-mid</position>
-		<position>top0</position>
-		<position>top1</position>
-		<position>top2</position>
-		<position>top3</position>
-		<position>top4</position>
-		<position>top5</position>
+		<position>top-b</position>
+		<position>hot-topic</position>
 		<position>right</position>
 		<position>right-fixed</position>
 		<position>breadcrumbs</position>
