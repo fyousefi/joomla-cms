@@ -30,7 +30,7 @@ $renderCard = static function ($item) {
     $alt  = $item->image_intro_alt ?? ($item->title ?? '');
     $score = isset($item->score) && $item->score !== null && $item->score !== '' ? number_format((float)$item->score, 1) : null;
     ?>
-    <article class="card h-100 border-0 position-relative">
+    <article class="card h-100 border-0 bg-transparent shadow-0 position-relative">
         <a class="text-decoration-none zoom-container" href="<?php echo $href; ?>">
             <div class="ratio ratio-16x9 position-relative">
                 <?php if ($img): ?>
@@ -52,7 +52,7 @@ $renderCard = static function ($item) {
         </a>
         <div class="card-body p-3">
             <h3 class="fs-7 ss02 m-0">
-                <a class="stretched-link lh-lg fw-bold text-decoration-none" href="<?php echo $href; ?>">
+                <a class="stretched-link lh-lg fw-bold text-decoration-none link-underline-opacity-0 link-underline-opacity-25-hover" href="<?php echo $href; ?>" style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);">
                     <?php echo htmlspecialchars($item->title ?? '', ENT_QUOTES, 'UTF-8'); ?>
                 </a>
             </h3>
