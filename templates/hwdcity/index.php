@@ -271,7 +271,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
     <div class="site-grid">
         <?php if ($this->countModules('bottom-a', true)) : ?>
-            <div class="grid-child container-bottom-a">
+            <div class="container-bottom-a full-width">
                 <jdoc:include type="modules" name="bottom-a" style="card" />
             </div>
         <?php endif; ?>

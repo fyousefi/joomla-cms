@@ -38,6 +38,7 @@
 				>
 					<option value="editor">MOD_SPOTLIGHT_TYPE_OPTION_EDITOR</option>
 					<option value="hot">MOD_SPOTLIGHT_TYPE_OPTION_HOT</option>
+					<option value="review">MOD_SPOTLIGHT_TYPE_OPTION_REVIEW</option>
 				</field>
 
 				<!-- EDITOR CHOICE SUBFORM -->
@@ -115,6 +116,63 @@
 						</fields>
 					</form>
 				</field>
+
+				<!-- REVIEW SUBFORM -->
+				<field
+					name="items_review"
+					type="subform"
+					label="MOD_SPOTLIGHT_REVIEW_ITEMS_LABEL"
+					description="MOD_SPOTLIGHT_REVIEW_ITEMS_DESC"
+					showon="type:review"
+					multiple="true"
+					min="0"
+					max="20"
+					layout="mod_spotlight.subform.numbered-table"
+					buttons="add,remove,move"
+					sortable="true"
+				>
+					<form>
+						<fields name="item">
+							<field
+								type="ModalSelect"
+								name="article_id"
+								label="MOD_SPOTLIGHT_ITEM_ARTICLE_LABEL"
+								select="true"
+								iconSelect="fa fa-file"
+								description="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								titleSelect="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+								clear="true"
+								sql_title_table="#__content"
+								sql_title_column="title"
+								sql_title_key="id"
+							/>
+							<field
+								name="score"
+								type="number"
+								label="MOD_SPOTLIGHT_REVIEW_SCORE_LABEL"
+								description="MOD_SPOTLIGHT_REVIEW_SCORE_DESC"
+								step="0.1"
+								min="0"
+								max="10"
+								filter="float"
+								size="6"
+							/>
+						</fields>
+					</form>
+				</field>
+
+				<!-- ‘View all’ link configuration for Review -->
+				<field name="review_link_source" type="list" label="MOD_SPOTLIGHT_LINK_SOURCE_LABEL" description="MOD_SPOTLIGHT_LINK_SOURCE_DESC" default="menu" class="form-select" showon="type:review">
+					<option value="menu">MOD_SPOTLIGHT_LINK_SOURCE_MENU</option>
+					<option value="category">MOD_SPOTLIGHT_LINK_SOURCE_CATEGORY</option>
+				</field>
+
+				<field name="review_link_menu" type="menuitem" label="MOD_SPOTLIGHT_LINK_MENU_LABEL" description="MOD_SPOTLIGHT_LINK_MENU_DESC" showon="type:review[AND]review_link_source:menu" />
+
+				<field name="review_link_cat" type="category" extension="com_content" label="MOD_SPOTLIGHT_LINK_CAT_LABEL" description="MOD_SPOTLIGHT_LINK_CAT_DESC" showon="type:review[AND]review_link_source:category" />
+
+				<field name="review_link_label" type="text" label="MOD_SPOTLIGHT_LINK_LABEL_LABEL" description="MOD_SPOTLIGHT_LINK_LABEL_DESC" showon="type:review" filter="string" />
 			</fieldset>
 
 			<fieldset name="advanced">

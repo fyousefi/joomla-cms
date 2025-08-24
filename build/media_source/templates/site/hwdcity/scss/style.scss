@@ -396,14 +396,14 @@ $iransansx-font-path: "../fonts" !default;
   //background-color: #dc3545; border-radius: .125rem;
 }
 
-/* Spotlight Module Hot Topic style */
+/* Spotlight Module: Hot Topic style */
 .mod-style-hottopic {
   .hot-topic-icon { width: 2rem; height: 2rem; } // circle size
 
   .ht-link {
     background-color: #f0f0f0;
     background-image: linear-gradient(to right, #C70101, #C70101);
-    background-size: 0% 100%;
+    background-size: 0 100%;
     background-position: left center;
     background-repeat: no-repeat;
     transition: background-size 0.3s ease, color 0.3s ease;
@@ -415,6 +415,96 @@ $iransansx-font-path: "../fonts" !default;
     }
   }
 }
+
+
+
+/* Spotlight Module: Review slider look & score */
+.mod-style-review {
+  background: #1f1f1f; // optional dark wrap if you want
+
+  .mod-body {
+    background: transparent;
+    .score-badge {
+      --badge-size: 2.25rem;
+      width: var(--badge-size);
+      height: var(--badge-size);
+      background: #e63946;      /* inner circle color */
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      box-shadow:
+        0 0 0 .25rem rgba(255,255,255,.25),  /* ring */
+        0 .25rem .75rem rgba(0,0,0,.3);      /* drop */
+    }
+  }
+
+  /* Review: bottom-centered arrows */
+  .spotlight-controls {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+  }
+  .spotlight-controls .spotlight-control {
+    /* kill the side-floating rules from generic chrome */
+    position: static;
+    inset: auto;
+    transform: none;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    border-radius: .25rem;
+    background-color: rgba(0,0,0,.85);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .2s ease, opacity .2s ease;
+    opacity: 1;
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover { background-color: rgba(0,0,0,1); }
+    &:focus { outline: 0; box-shadow: 0 0 0 .2rem rgba(108,117,125,.35); }
+  }
+}
+
+/* Container to image zoom */
+.zoom-container {
+  overflow: hidden; /* crop the scaled image */
+  display: block;
+  position: relative;
+
+  .ratio {
+    overflow: hidden !important; /* works for ratio-16x9, 4x3, ... */
+  }
+
+  .image-zoom {
+    transform: scale(1);
+    transition: transform 0.2s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+
+/* IMPORTANT: hover the card (or the container), not the <img> itself */
+.card:hover .zoom-container .image-zoom,
+.zoom-container:hover .image-zoom,
+.zoom-container:focus .image-zoom {
+  transform: scale(1.15);
+}
+
+
 
 
 

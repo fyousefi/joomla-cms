@@ -18,24 +18,37 @@ final class SpotlightHelper implements DatabaseAwareInterface
     {
         $type = (string) $params->get('type', 'editor');
 
-        // Pick the correct subform
-        $fieldName = $type === 'hot' ? 'items_hot' : 'items_editor';
+        // Pick the correct subform field
+        if ($type === 'hot') {
+            $fieldName = 'items_hot';
+        } elseif ($type === 'review') {
+            $fieldName = 'items_review';
+        } else {
+            $fieldName = 'items_editor';
+        }
 
-        // Extract ordered rows
+        // Extract ordered rows (id + optional override_title / score)
         $rows = $this->extractRows($params, $fieldName, 20);
         if (!$rows) {
             return [];
         }
 
         // Build id list and override labels (hot)
-        $labelById = [];
-        $ids = [];
+        $labelById = [];   // for hot
+        $scoreById = [];   // for review
+        $ids       = [];
         foreach ($rows as $r) {
             $id = (int) ($r['id'] ?? 0);
             if ($id > 0) {
                 $ids[] = $id;
+
                 if ($type === 'hot' && !empty($r['override_title'])) {
                     $labelById[$id] = (string) $r['override_title'];
+                }
+
+                if ($type === 'review' && isset($r['score']) && $r['score'] !== '') {
+                    // keep as float; formatting is done in layout
+                    $scoreById[$id] = (float) $r['score'];
                 }
             }
         }
@@ -59,12 +72,12 @@ final class SpotlightHelper implements DatabaseAwareInterface
             ->where('(a.publish_down IS NULL OR a.publish_down = ' . $db->quote($db->getNullDate()) . ' OR a.publish_down >= ' . $db->quote($nowSql) . ')')
             ->clear('order')
             ->order('FIELD(a.id,' . implode(',', $ids) . ')')
-            ->setLimit(count($ids));
+            ->setLimit(\count($ids));
 
         if ($type === 'hot') {
             $q->select(['a.id']); // light
         } else {
-            $q->select(['a.id', 'a.title', 'a.images']); // editor needs title+image
+            $q->select(['a.id', 'a.title', 'a.images']); // Editor & Review need title+image
         }
 
         $db->setQuery($q);
@@ -74,23 +87,28 @@ final class SpotlightHelper implements DatabaseAwareInterface
 
         if ($type === 'hot') {
             foreach ($rowsDb as $r) {
-                $id = (int) $r->id;
-                $o = new \stdClass();
+                $id                 = (int) $r->id;
+                $o                  = new \stdClass();
                 $o->id              = $id;
                 $o->title           = $labelById[$id] ?? ''; // admin-provided
                 $o->image_intro     = '';
                 $o->image_intro_alt = '';
-                $out[] = $o;
+                $out[]              = $o;
             }
             return $out;
         }
 
-        // Editor Choice: parse intro image once
+        // Editor & Review: parse intro image once; attach score for Review
         foreach ($rowsDb as $r) {
-            $img = json_decode($r->images ?: '{}', true) ?: [];
-            $r->image_intro     = $img['image_intro']     ?? '';
+            $img                = json_decode($r->images ?: '{}', true) ?: [];
+            $r->image_intro     = $img['image_intro'] ?? '';
             $r->image_intro_alt = $img['image_intro_alt'] ?? '';
             unset($r->images);
+
+            if ($type === 'review') {
+                $r->score = $scoreById[$r->id] ?? null; // null when not set
+            }
+
             $out[] = $r;
         }
 
@@ -99,23 +117,23 @@ final class SpotlightHelper implements DatabaseAwareInterface
 
     /**
      * Extract ordered rows from the given subform field.
-     * Returns array of ['id'=>int, 'override_title'=>string?].
+     * Returns array of ['id'=>int, 'override_title'=>string?], 'score'=>float?].
      */
     private function extractRows(Registry $params, string $fieldName, int $cap): array
     {
-        $raw = $params->get($fieldName, []);
-        $rows = is_string($raw) ? (json_decode($raw, true) ?: []) : (array) $raw;
+        $raw  = $params->get($fieldName, []);
+        $rows = \is_string($raw) ? (json_decode($raw, true) ?: []) : (array) $raw;
 
         $out  = [];
         $seen = [];
 
         foreach ($rows as $row) {
             // Normalize
-            if (is_array($row) && isset($row['item'])) {
+            if (\is_array($row) && isset($row['item'])) {
                 $row = $row['item'];
-            } elseif (is_object($row) && isset($row->item)) {
+            } elseif (\is_object($row) && isset($row->item)) {
                 $row = (array) $row->item;
-            } elseif (is_object($row)) {
+            } elseif (\is_object($row)) {
                 $row = (array) $row;
             } else {
                 $row = (array) $row;
@@ -124,11 +142,12 @@ final class SpotlightHelper implements DatabaseAwareInterface
             $id = $this->toId($row['article_id'] ?? ($row['id'] ?? ($row['value']['id'] ?? null)));
             if ($id > 0 && !isset($seen[$id])) {
                 $seen[$id] = true;
-                $out[] = [
-                    'id' => $id,
+                $out[]     = [
+                    'id'             => $id,
                     'override_title' => isset($row['override_title']) ? (string) $row['override_title'] : '',
+                    'score'          => isset($row['score']) ? (string) $row['score'] : '', // keep raw; cast later
                 ];
-                if (count($out) >= $cap) {
+                if (\count($out) >= $cap) {
                     break;
                 }
             }
@@ -139,10 +158,28 @@ final class SpotlightHelper implements DatabaseAwareInterface
 
     private function toId($v): int
     {
-        if (is_int($v)) return $v;
-        if (is_string($v)) { if (preg_match('/\d+/', $v, $m)) return (int) $m[0]; return 0; }
-        if (is_array($v))  { foreach (['article_id','id','value','select'] as $k) if (array_key_exists($k,$v)) return $this->toId($v[$k]); return 0; }
-        if (is_object($v)) { foreach (['article_id','id','value','select'] as $k) if (isset($v->$k)) return $this->toId($v->$k); }
+        if (\is_int($v)) {
+            return $v;
+        }
+        if (\is_string($v)) {
+            if (preg_match('/\d+/', $v, $m)) {
+                return (int) $m[0];
+            } return 0;
+        }
+        if (\is_array($v)) {
+            foreach (['article_id','id','value','select'] as $k) {
+                if (\array_key_exists($k, $v)) {
+                    return $this->toId($v[$k]);
+                }
+            } return 0;
+        }
+        if (\is_object($v)) {
+            foreach (['article_id','id','value','select'] as $k) {
+                if (isset($v->$k)) {
+                    return $this->toId($v->$k);
+                }
+            }
+        }
         return 0;
     }
 }
