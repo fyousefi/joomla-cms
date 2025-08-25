@@ -41,11 +41,9 @@
 		<position>content-bottom</position>
 		<position>left</position>
 		<position>left-fixed</position>
-		<position>bottomover</position>
-		<position>black1</position>
-		<position>bottom0</position>
-		<position>bottom1</position>
-		<position>bottom2</position>
+		<position>bottom-a</position>
+		<position>banner-bottom</position>
+		<position>bottom-b</position>
 		<position>bottom3</position>
 		<position>bottom4</position>
 		<position>bottom5</position>

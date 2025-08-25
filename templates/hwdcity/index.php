@@ -276,6 +276,16 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
             </div>
         <?php endif; ?>
 
+        <?php if ($this->countModules('banner-bottom', true)) : ?>
+            <div class="container-banner-bottom">
+                <?php if ($this->countModules('banner-bottom', true)) : ?>
+                    <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
+                        <jdoc:include type="modules" name="banner-bottom" style="none" />
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
         <?php if ($this->countModules('bottom-b', true)) : ?>
             <div class="grid-child container-bottom-b">
                 <jdoc:include type="modules" name="bottom-b" style="card" />

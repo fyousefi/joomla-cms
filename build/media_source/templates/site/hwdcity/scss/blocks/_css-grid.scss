@@ -46,6 +46,7 @@ body {
       ". side-r side-r side-r side-r ."
       ". side-l side-l side-l side-l ."
       ". bot-a bot-a bot-a bot-a ."
+      ". banner-bot banner-bot banner-bot banner-bot ."
       ". bot-b bot-b bot-b bot-b .";
     grid-template-columns: [full-start] minmax(0, 1fr) [main-start] repeat(4, minmax(0, 19.875rem)) [main-end] minmax(0, 1fr) [full-end];
     grid-gap: 0 $hwcity-grid-gutter;
@@ -68,6 +69,7 @@ body {
         ". top-b top-b top-b top-b ."
         ". side-l comp comp side-r ."
         ". bot-a bot-a bot-a bot-a ."
+        ". banner-bot banner-bot banner-bot banner-bot ."
         ". bot-b bot-b bot-b bot-b .";
     }
   }
@@ -115,6 +117,10 @@ body {
 
 .container-bottom-a {
   grid-area: bot-a;
+}
+
+.container-banner-bottom {
+  grid-area: banner-bot;
 }
 
 .container-bottom-b {
