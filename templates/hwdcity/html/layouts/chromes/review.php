@@ -15,7 +15,7 @@ $moduleAttribs['class'] = trim('mod-style-review mod-spotlight-wrap ' . htmlspec
 
 $headerTag   = htmlspecialchars($params->get('header_tag', 'h3'), ENT_QUOTES, 'UTF-8');
 $headerClass = trim((string) $params->get('header_class', ''));
-$headerAttribs['class'] = 'mod-title review-title' . ($headerClass ? ' ' . $headerClass : '');
+$headerAttribs['class'] = 'mod-title review-title text-white mt-2 ms-4 fs-5' . ($headerClass ? ' ' . $headerClass : '');
 
 if ($moduleTag !== 'div') {
     if (!empty($module->showtitle)) {
@@ -46,14 +46,20 @@ if ($src === 'menu' && (int) $params->get('review_link_menu')) {
 <<?php echo $moduleTag; ?> <?php echo ArrayHelper::toString($moduleAttribs); ?>>
 
 <?php if (!empty($module->showtitle)) : ?>
-    <header class="mod-head d-flex align-items-center justify-content-between mb-2">
+    <div class="mod-head py-2 pt-4">
+        <div class="d-flex align-items-center flex-nowrap gap-3">
         <?php echo $headerHtml; ?>
+
+            <!-- the line between title and button -->
+            <div class="flex-grow-1 border-top border-3 order-light-subtle opacity-75"></div>
+
         <?php if ($linkHref && $label): ?>
-            <a class="btn btn-danger btn-sm rounded-1 px-3" href="<?php echo $linkHref; ?>">
+            <a class="btn btn-danger btn-sm rounded-0 me-4" href="<?php echo $linkHref; ?>">
                 <?php echo htmlspecialchars($label, ENT_QUOTES, 'UTF-8'); ?>
             </a>
         <?php endif; ?>
-    </header>
+        </div>
+    </div>
 <?php endif; ?>
 
 <div class="mod-body p-3 rounded-3">
