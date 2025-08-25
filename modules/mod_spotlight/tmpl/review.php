@@ -52,7 +52,7 @@ $renderCard = static function ($item) {
         </a>
         <div class="card-body p-3">
             <h3 class="fs-7 ss02 m-0">
-                <a class="stretched-link lh-lg fw-bold text-decoration-none link-underline-opacity-0 link-underline-opacity-25-hover" href="<?php echo $href; ?>" style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);">
+                <a class="stretched-link lh-lg fw-bold text-decoration-none" href="<?php echo $href; ?>" style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);">
                     <?php echo htmlspecialchars($item->title ?? '', ENT_QUOTES, 'UTF-8'); ?>
                 </a>
             </h3>
