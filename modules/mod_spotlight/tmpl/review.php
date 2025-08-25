@@ -44,9 +44,14 @@ $renderCard = static function ($item) {
                 <?php endif; ?>
 
                 <?php if ($score !== null): ?>
-                    <span class="score-badge position-absolute top-0 end-0 translate-middle-y me-2 mt-2 rounded-circle d-inline-flex align-items-center justify-content-center">
-                        <?php echo htmlspecialchars($score, ENT_QUOTES, 'UTF-8'); ?>
-                    </span>
+                    <div class="score-circle score-circle-xs position-absolute mt-2 ms-2 top-0 end-0 " style="--score-percent: <?php echo htmlspecialchars($score, ENT_QUOTES, 'UTF-8') * 10; ?>%">
+                        <div class="score-bg"></div>
+                        <div class="score-progress"></div>
+                        <div class="score-center">
+                            <div class="score-value ss02"><?php echo htmlspecialchars($score, ENT_QUOTES, 'UTF-8'); ?></div>
+<!--                            <div class="score-label">SCORE</div>-->
+                        </div>
+                    </div>
                 <?php endif; ?>
             </div>
         </a>
