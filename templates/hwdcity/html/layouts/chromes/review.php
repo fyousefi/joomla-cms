@@ -67,38 +67,38 @@ if ($src === 'menu' && (int) $params->get('review_link_menu')) {
 </div>
 
 <!-- Bottom-centered controls (one pair per breakpoint) -->
-<div class="spotlight-controls d-flex justify-content-center gap-2 mt-3">
+<div class="spotlight-controls d-flex justify-content-center gap-2 pb-3">
     <!-- Phones -->
-    <button class="spotlight-control d-inline-flex d-md-none" type="button"
+    <button class="spotlight-control d-inline-flex d-md-none rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>-xs" data-bs-slide="prev" aria-label="Prev">
         <span class="fa fa-angle-right" aria-hidden="true"></span>
         <span class="visually-hidden">Prev</span>
     </button>
-    <button class="spotlight-control d-inline-flex d-md-none" type="button"
+    <button class="spotlight-control d-inline-flex d-md-none rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>-xs" data-bs-slide="next" aria-label="Next">
         <span class="fa fa-angle-left" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 
     <!-- Tablets -->
-    <button class="spotlight-control d-none d-md-inline-flex d-lg-none" type="button"
+    <button class="spotlight-control d-none d-md-inline-flex d-lg-none rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>-md" data-bs-slide="prev" aria-label="Prev">
         <span class="fa fa-angle-right" aria-hidden="true"></span>
         <span class="visually-hidden">Prev</span>
     </button>
-    <button class="spotlight-control d-none d-md-inline-flex d-lg-none" type="button"
+    <button class="spotlight-control d-none d-md-inline-flex d-lg-none rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>-md" data-bs-slide="next" aria-label="Next">
         <span class="fa fa-angle-left" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 
     <!-- Desktop -->
-    <button class="spotlight-control d-none d-lg-inline-flex" type="button"
+    <button class="spotlight-control d-none d-lg-inline-flex rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>" data-bs-slide="prev" aria-label="Prev">
         <span class="fa fa-angle-right" aria-hidden="true"></span>
         <span class="visually-hidden">Prev</span>
     </button>
-    <button class="spotlight-control d-none d-lg-inline-flex" type="button"
+    <button class="spotlight-control d-none d-lg-inline-flex rounded-0" type="button"
             data-bs-target="#<?php echo $baseId; ?>" data-bs-slide="next" aria-label="Next">
         <span class="fa fa-angle-left" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>

@@ -464,6 +464,9 @@ $iransansx-font-path: "../fonts" !default;
     gap: .5rem;
   }
   .spotlight-controls .spotlight-control {
+    // base
+    --spot-ctrl-bg: rgba(0, 0, 0, .85);
+    --spot-ctrl-hover-bg: #C70101; /* Bootstrap red */
     /* kill the side-floating rules from generic chrome */
     position: static;
     inset: auto;
@@ -473,12 +476,16 @@ $iransansx-font-path: "../fonts" !default;
     height: 2.5rem;
     border: 0;
     border-radius: .25rem;
-    background-color: rgba(0,0,0,.85);
+    background-color: var(--spot-ctrl-bg);
     color: #fff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color .2s ease, opacity .2s ease;
+    transition:
+      background-color .3s ease,
+      opacity .3s ease,
+      color .3s ease,
+      box-shadow .3s ease;
     opacity: 1;
 
     /*.carousel-control-prev-icon,
@@ -487,8 +494,18 @@ $iransansx-font-path: "../fonts" !default;
       height: 1.25rem;
     }*/
 
-    &:hover { background-color: rgba(0,0,0,1); }
-    &:focus { outline: 0; box-shadow: 0 0 0 .2rem rgba(108,117,125,.35); }
+    &:hover,
+    &:focus { background-color: var(--spot-ctrl-hover-bg); color: #fff; }
+    &:focus-visible {
+      outline: 0;
+      box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .35); /* matches --bs-danger */
+    }
+    // disabled look
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: .5;
+      pointer-events: none;
+    }
   }
 }
 
