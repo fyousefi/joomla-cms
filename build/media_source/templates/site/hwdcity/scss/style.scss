@@ -422,6 +422,33 @@ $iransansx-font-path: "../fonts" !default;
 .mod-style-review {
   background: #1f1f1f; // optional dark wrap if you want
 
+  .mod-head {
+    .btn-danger {
+      /* base (Bootstrap danger) */
+      --btn-bg:            #C70101;
+      --btn-border-color:  none;
+      --btn-color:         #fff;
+
+      /* hover/active -> white button, red text */
+      --btn-hover-bg:            #fff;
+      --btn-hover-border-color:  none;
+      --btn-hover-color:         #C70101;
+
+      --btn-active-bg:           #fff;
+      --btn-active-border-color: #fff;
+      --btn-active-color:        #C70101;
+
+      /* focus ring color stays on theme */
+      --btn-focus-shadow-rgb: 199, 1, 1;
+
+      transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .2s ease;
+    }
+  }
+
   .mod-body {
     background: transparent;
 
@@ -476,6 +503,13 @@ $iransansx-font-path: "../fonts" !default;
 
     &:hover { background-color: rgba(0,0,0,1); }
     &:focus { outline: 0; box-shadow: 0 0 0 .2rem rgba(108,117,125,.35); }
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mod-style-review .mod-head .btn-danger {
+    transition: none;
   }
 }
 

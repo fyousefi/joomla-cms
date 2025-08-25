@@ -54,7 +54,7 @@ if ($src === 'menu' && (int) $params->get('review_link_menu')) {
             <div class="flex-grow-1 border-top border-3 order-light-subtle opacity-75"></div>
 
         <?php if ($linkHref && $label): ?>
-            <a class="btn btn-danger btn-sm rounded-0 me-4" href="<?php echo $linkHref; ?>">
+            <a class="btn btn-danger btn-sm rounded-0 me-4 fs-9" href="<?php echo $linkHref; ?>">
                 <?php echo htmlspecialchars($label, ENT_QUOTES, 'UTF-8'); ?>
             </a>
         <?php endif; ?>
