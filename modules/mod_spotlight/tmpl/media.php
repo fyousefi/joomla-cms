@@ -43,8 +43,12 @@ $renderCard = static function ($item) {
                 </a>
             </div>
         <?php endif; ?>
-        <a class="text-decoration-none zoom-container" href="<?php echo $href; ?>">
+        <a class="text-decoration-none zoom-container zoom-dark" href="<?php echo $href; ?>">
             <div class="ratio ratio-16x9 position-relative">
+                <!-- centered play mark -->
+                <span class="spot-media-play fa-3x position-absolute top-50 start-50 translate-middle d-inline-flex align-items-center justify-content-center">
+                    <i class="fa-regular fa-circle-play"></i>
+            </span>
                 <?php if ($img): ?>
                     <img loading="lazy" decoding="async" class="image-zoom"
                          src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>"

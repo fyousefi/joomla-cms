@@ -488,12 +488,6 @@ $iransansx-font-path: "../fonts" !default;
       box-shadow .3s ease;
     opacity: 1;
 
-    /*.carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      width: 1.25rem;
-      height: 1.25rem;
-    }*/
-
     &:hover,
     &:focus { background-color: var(--spot-ctrl-hover-bg); color: #fff; }
     &:focus-visible {
@@ -539,6 +533,31 @@ $iransansx-font-path: "../fonts" !default;
     }
   }
 }
+
+/* Opt-in overlay: add class="zoom-container zoom-dark" */
+.zoom-dark {
+  --spotlight-anim: 300ms cubic-bezier(.22,.61,.36,1);
+  --spotlight-zoom: 1.045;
+  --spotlight-dim: .72; /* 0..1; lower = darker */
+
+  position: relative;
+
+  &::before{
+    content:"";
+    position:absolute; inset:0;
+    background: rgba(0,0,0,.45);
+    opacity: 1;
+    pointer-events:none;
+    transition: opacity var(--spotlight-anim);
+    z-index: 1; /* above image, below play/badges */
+  }
+
+  &:hover::before {
+    opacity: 0;
+  }
+}
+// Fixed Z-index for play icon
+.spot-media-play{ z-index: 2; }
 
 /* IMPORTANT: hover the card (or the container), not the <img> itself */
 .card:hover .zoom-container .image-zoom,
