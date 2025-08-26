@@ -1,27 +1,28 @@
 <?php
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
-use Joomla\CMS\Router\Route;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text; // J4+
+use Joomla\CMS\Router\Route;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
 
 /** @var array $items */
 /** @var \Joomla\Registry\Registry $params */
 /** @var \stdClass $module */
 
+$app      = Factory::getApplication();
+$emptyMsg = Text::_('MOD_SPOTLIGHT_EMPTY');
+
 if (empty($items)) {
-    echo '<div class="text-muted small py-3">' . Text::_('MOD_SPOTLIGHT_EMPTY') . '</div>';
+    echo '<div class="text-muted small py-3">' . $emptyMsg . '</div>';
     return;
 }
 
-$fmt = 'd F Y'; // e.g., 05 September 2025 (use locale)
-$first = $items[0];
-$rest  = array_slice($items, 1, 4);
-
-$href = static function ($id) {
-    return Route::_('index.php?option=com_content&view=article&id=' . (int) $id);
-};
+/* Fixed 5 items: 1 hero + 4 small (if fewer exist, we render what we have) */
+$items = array_values($items);
+$items = \array_slice($items, 0, 5);
+$count = \count($items);
 
 $imgTag = static function ($src, $alt) {
     if ($src) {
@@ -31,70 +32,75 @@ $imgTag = static function ($src, $alt) {
     }
     return '<img loading="lazy" decoding="async" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 9\'%3E%3Crect width=\'16\' height=\'9\' fill=\'%23e9ecef\'/%3E%3C/svg%3E" alt="">';
 };
-?>
 
-<div class="media-spotlight">
-    <!-- Big lead item -->
-    <div class="mb-3">
-        <a class="text-decoration-none zoom-container d-block position-relative" href="<?php echo $href($first->id); ?>">
+$card = static function ($item, bool $isHero = false) use ($imgTag) {
+    $href     = Route::_('index.php?option=com_content&view=article&id=' . (int) $item->id);
+    $img      = $item->image_intro ?? '';
+    $alt      = $item->image_intro_alt ?? ($item->title ?? '');
+    $catTitle = ($item->category_title ?? '');
+    $catId    = ($item->catid ?? 0);
+    $catLink  = (Route::_(RouteHelper::getCategoryRoute($item->catid)) ?? 0);
+    $date     = $item->created ?? '';
+    ?>
+    <article class="<?php echo $isHero ? 'media-hero' : 'media-small'; ?> position-relative">
+        <a class="text-decoration-none zoom-container d-block position-relative" href="<?php echo $href; ?>">
             <div class="ratio ratio-16x9">
-                <?php echo $imgTag($first->image_intro ?? '', $first->image_intro_alt ?? ($first->title ?? '')); ?>
+                <?php echo $imgTag($img, $alt); ?>
 
-                <!-- category badge -->
-                <?php if (!empty($first->cat_title)) : ?>
-                    <span class="badge bg-danger position-absolute top-0 start-0 m-2 rounded-1 small">
-                        <?php echo htmlspecialchars($first->cat_title, ENT_QUOTES, 'UTF-8'); ?>
-                    </span>
+                <?php
+                if ($catTitle !== '' && $catId > 0): ?>
+                <div class="position-absolute top-0 end-0 m-2 z-2">
+                    <a href="<?php echo $catLink; ?>"
+                       class="badge text-bg-danger text-decoration-none fw-normal">
+                        <?php echo htmlspecialchars($catTitle, ENT_QUOTES, 'UTF-8'); ?>
+                    </a>
+                </div>
                 <?php endif; ?>
 
-                <!-- play circle -->
+                <!-- centered play mark -->
                 <span class="media-play position-absolute top-50 start-50 translate-middle d-inline-flex align-items-center justify-content-center">
                     <i class="fa fa-play"></i>
                 </span>
             </div>
         </a>
-        <h3 class="fs-5 mt-2 mb-1">
-            <a class="text-decoration-none fw-semibold" style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);" href="<?php echo $href($first->id); ?>">
-                <?php echo htmlspecialchars($first->title ?? '', ENT_QUOTES, 'UTF-8'); ?>
-            </a>
-        </h3>
-        <div class="text-body-secondary small">
-            <i class="fa-regular fa-calendar ms-1"></i>
-            <?php echo HTMLHelper::_('date', $first->created ?? '', $fmt); ?>
-        </div>
-    </div>
 
-    <!-- Four small items -->
-    <?php if ($rest): ?>
-        <div class="row g-3">
-            <?php foreach ($rest as $it): ?>
-                <div class="col-6 col-lg-3">
-                    <a class="text-decoration-none zoom-container d-block position-relative" href="<?php echo $href($it->id); ?>">
-                        <div class="ratio ratio-16x9">
-                            <?php echo $imgTag($it->image_intro ?? '', $it->image_intro_alt ?? ($it->title ?? '')); ?>
-
-                            <?php if (!empty($it->cat_title)) : ?>
-                                <span class="badge bg-danger position-absolute top-0 start-0 m-2 rounded-1 small">
-                                    <?php echo htmlspecialchars($it->cat_title, ENT_QUOTES, 'UTF-8'); ?>
-                                </span>
-                            <?php endif; ?>
-
-                            <span class="media-play position-absolute top-50 start-50 translate-middle d-inline-flex align-items-center justify-content-center">
-                                <i class="fa fa-play"></i>
-                            </span>
-                        </div>
-                    </a>
-                    <h4 class="fs-7 mt-2 mb-1">
-                        <a class="text-decoration-none fw-semibold" style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);" href="<?php echo $href($it->id); ?>">
-                            <?php echo htmlspecialchars($it->title ?? '', ENT_QUOTES, 'UTF-8'); ?>
-                        </a>
-                    </h4>
-                    <div class="text-body-secondary small mb-1">
-                        <i class="fa-regular fa-calendar ms-1"></i>
-                        <?php echo HTMLHelper::_('date', $it->created ?? '', $fmt); ?>
-                    </div>
+        <div class="pt-2">
+            <h3 class="fs-7 ss02 m-0<?php echo $isHero ? ' fw-bold' : ''; ?>">
+                <a class="stretched-link lh-lg fw-bold text-decoration-none"
+                   style="--bs-link-color:#fff; --bs-link-hover-color:var(--bs-danger);"
+                   href="<?php echo $href; ?>">
+                    <?php echo htmlspecialchars($item->title ?? '', ENT_QUOTES, 'UTF-8'); ?>
+                </a>
+            </h3>
+            <?php if ($date): ?>
+                <div class="text-body-secondary small mt-1">
+                    <i class="fa-regular fa-calendar ms-1"></i>
+                    <?php echo HTMLHelper::_('date', $date, 'd F Y'); ?>
                 </div>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
+    </article>
+    <?php
+};
+?>
+
+<div class="container-fluid">
+    <!-- vertical stack: hero then strip -->
+    <div class="media-grid d-flex flex-column gap-3 gap-md-4">
+
+        <!-- HERO (first item) -->
+        <?php $card($items[0], true); ?>
+
+        <!-- STRIP: up to 4 items in ONE row on lg+ -->
+        <?php if ($count > 1): ?>
+            <div class="media-strip d-flex flex-wrap gap-3 gap-md-4">
+                <?php for ($i = 1; $i < $count; $i++): ?>
+                    <div class="media-col">
+                        <?php $card($items[$i], false); ?>
+                    </div>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
+
+    </div>
 </div>

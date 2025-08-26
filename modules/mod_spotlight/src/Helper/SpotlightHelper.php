@@ -122,7 +122,7 @@ final class SpotlightHelper implements DatabaseAwareInterface
 
     /**
      * MEDIA: latest N articles that have ANY of the selected tags.
-     * Returns objects with: id, title, image_intro(+alt), created, cat_title.
+     * Returns objects with: id, title, image_intro(+alt), created, category_title.
      * Single query, access/publish filtered, ordered by created DESC.
      */
     private function getMediaItems(Registry $params): array
@@ -143,7 +143,7 @@ final class SpotlightHelper implements DatabaseAwareInterface
         $q = $db->getQuery(true)
             ->select([
                 'a.id', 'a.title', 'a.images', 'a.created',
-                'c.title AS cat_title'
+                'a.catid', 'c.title AS category_title'
             ])
             ->from('#__content AS a')
             ->innerJoin('#__contentitem_tag_map AS m ON m.content_item_id = a.id AND m.type_alias = ' . $db->quote('com_content.article'))

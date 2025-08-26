@@ -287,7 +287,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('bottom-b', true)) : ?>
-            <div class="container-bottom-b">
+            <div class="container-bottom-b full-width">
                 <jdoc:include type="modules" name="bottom-b" style="media" />
             </div>
         <?php endif; ?>
