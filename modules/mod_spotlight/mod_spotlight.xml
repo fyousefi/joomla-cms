@@ -39,6 +39,8 @@
 					<option value="editor">MOD_SPOTLIGHT_TYPE_OPTION_EDITOR</option>
 					<option value="hot">MOD_SPOTLIGHT_TYPE_OPTION_HOT</option>
 					<option value="review">MOD_SPOTLIGHT_TYPE_OPTION_REVIEW</option>
+					<option value="media">MOD_SPOTLIGHT_TYPE_OPTION_MEDIA</option>
+
 				</field>
 
 				<!-- EDITOR CHOICE SUBFORM -->
@@ -173,6 +175,40 @@
 				<field name="review_link_cat" type="category" extension="com_content" label="MOD_SPOTLIGHT_LINK_CAT_LABEL" description="MOD_SPOTLIGHT_LINK_CAT_DESC" showon="type:review[AND]review_link_source:category" />
 
 				<field name="review_link_label" type="text" label="MOD_SPOTLIGHT_LINK_LABEL_LABEL" description="MOD_SPOTLIGHT_LINK_LABEL_DESC" showon="type:review" filter="string" />
+
+				<!-- MEDIA: query by Tags (no ModalSelect) -->
+				<field
+					name="media_tags"
+					type="tag"
+					label="MOD_SPOTLIGHT_MEDIA_TAGS_LABEL"
+					description="MOD_SPOTLIGHT_MEDIA_TAGS_DESC"
+					showon="type:media"
+					multiple="true"
+				/>
+
+				<field
+					name="media_limit"
+					type="number"
+					label="MOD_SPOTLIGHT_MEDIA_LIMIT_LABEL"
+					description="MOD_SPOTLIGHT_MEDIA_LIMIT_DESC"
+					default="5"
+					showon="type:media"
+					min="1"
+					max="5"
+				/>
+
+				<!-- ‘View all’ link configuration for Media -->
+				<field name="media_link_source" type="list" label="MOD_SPOTLIGHT_LINK_SOURCE_LABEL" description="MOD_SPOTLIGHT_LINK_SOURCE_DESC" default="menu" class="form-select" showon="type:media">
+					<option value="menu">MOD_SPOTLIGHT_LINK_SOURCE_MENU</option>
+					<option value="category">MOD_SPOTLIGHT_LINK_SOURCE_CATEGORY</option>
+				</field>
+
+				<field name="media_link_menu" type="menuitem" label="MOD_SPOTLIGHT_LINK_MENU_LABEL" description="MOD_SPOTLIGHT_LINK_MENU_DESC" showon="type:media[AND]media_link_source:menu" />
+
+				<field name="media_link_cat" type="category" extension="com_content" label="MOD_SPOTLIGHT_LINK_CAT_LABEL" description="MOD_SPOTLIGHT_LINK_CAT_DESC" showon="type:media[AND]media_link_source:category" />
+
+				<field name="media_link_label" type="text" label="MOD_SPOTLIGHT_LINK_LABEL_LABEL" description="MOD_SPOTLIGHT_LINK_LABEL_DESC" showon="type:media" filter="string" />
+
 			</fieldset>
 
 			<fieldset name="advanced">

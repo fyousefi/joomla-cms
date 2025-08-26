@@ -18,6 +18,11 @@ final class SpotlightHelper implements DatabaseAwareInterface
     {
         $type = (string) $params->get('type', 'editor');
 
+        // Media branch (query by tags; newest first)
+        if ($type === 'media') {
+            return $this->getMediaItems($params);
+        }
+
         // Pick the correct subform field
         if ($type === 'hot') {
             $fieldName = 'items_hot';
@@ -113,6 +118,56 @@ final class SpotlightHelper implements DatabaseAwareInterface
         }
 
         return $out;
+    }
+
+    /**
+     * MEDIA: latest N articles that have ANY of the selected tags.
+     * Returns objects with: id, title, image_intro(+alt), created, cat_title.
+     * Single query, access/publish filtered, ordered by created DESC.
+     */
+    private function getMediaItems(Registry $params): array
+    {
+        $tagIds = (array) $params->get('media_tags', []);
+        $tagIds = array_values(array_unique(array_map('intval', $tagIds)));
+        $limit  = max(1, (int) $params->get('media_limit', 5));
+
+        if (!$tagIds) {
+            return [];
+        }
+
+        $db     = $this->getDatabase() ?: Factory::getContainer()->get(DatabaseInterface::class);
+        $user   = Factory::getApplication()->getIdentity();
+        $levels = $user ? $user->getAuthorisedViewLevels() : [1];
+        $nowSql = Factory::getDate()->toSql();
+
+        $q = $db->getQuery(true)
+            ->select([
+                'a.id', 'a.title', 'a.images', 'a.created',
+                'c.title AS cat_title'
+            ])
+            ->from('#__content AS a')
+            ->innerJoin('#__contentitem_tag_map AS m ON m.content_item_id = a.id AND m.type_alias = ' . $db->quote('com_content.article'))
+            ->leftJoin('#__categories AS c ON c.id = a.catid')
+            ->where('m.tag_id IN (' . implode(',', $tagIds) . ')')
+            ->where('a.state = 1')
+            ->where('a.access IN (' . implode(',', array_map('intval', $levels)) . ')')
+            ->where('(a.publish_up IS NULL OR a.publish_up = ' . $db->quote($db->getNullDate()) . ' OR a.publish_up <= ' . $db->quote($nowSql) . ')')
+            ->where('(a.publish_down IS NULL OR a.publish_down = ' . $db->quote($db->getNullDate()) . ' OR a.publish_down >= ' . $db->quote($nowSql) . ')')
+            ->group('a.id')                  // de-dupe when multiple selected tags match the same article
+            ->order('a.created DESC')
+            ->setLimit($limit);
+
+        $db->setQuery($q);
+        $rows = (array) $db->loadObjectList();
+
+        foreach ($rows as $r) {
+            $img                = json_decode($r->images ?: '{}', true) ?: [];
+            $r->image_intro     = $img['image_intro']     ?? '';
+            $r->image_intro_alt = $img['image_intro_alt'] ?? ($r->title ?? '');
+            unset($r->images);
+        }
+
+        return $rows;
     }
 
     /**

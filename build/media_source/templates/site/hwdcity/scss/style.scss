@@ -671,6 +671,29 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+/* Spotlight: Media format tweaks */
+.mod-style-media {
+  .media-play {
+    width: 3rem;
+    height: 3rem;
+    border: .2rem solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    background: rgba(0,0,0,.35);
+    color: #fff;
+    transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+
+    i { font-size: 1.1rem; margin-inline-start: .1rem; } /* nudge play triangle */
+  }
+
+  .zoom-container:hover .media-play {
+    transform: scale(1.06);
+    background: rgba(0,0,0,.55);
+    border-color: #fff;
+  }
+
+  /* Optional: white headings on dark section */
+  .media-title { color: #fff; }
+}
 
 
 

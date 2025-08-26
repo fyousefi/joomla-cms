@@ -287,8 +287,8 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('bottom-b', true)) : ?>
-            <div class="grid-child container-bottom-b">
-                <jdoc:include type="modules" name="bottom-b" style="card" />
+            <div class="container-bottom-b">
+                <jdoc:include type="modules" name="bottom-b" style="media" />
             </div>
         <?php endif; ?>
     </div>
