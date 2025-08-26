@@ -15,9 +15,6 @@ $app      = Factory::getApplication();
 $uid      = 'mod-spotlight-' . (int) $module->id; // desktop id for external controls
 $emptyMsg = Text::_('MOD_SPOTLIGHT_EMPTY');
 
-$wa = $app->getDocument()->getWebAssetManager();
-$wa->useScript('bootstrap.carousel');
-
 if (empty($items)) : ?>
     <div class="text-muted small py-3"><?php echo $emptyMsg; ?></div>
     <?php return;
@@ -33,7 +30,8 @@ $renderCard = static function ($item) {
     $catTitle = ($item->category_title ?? '');
     $catId    = ($item->catid ?? 0);
     $catLink  = (Route::_(RouteHelper::getCategoryRoute($item->catid)) ?? 0);
-    $date     = $item->created ?? '';    ?>
+    $date     = $item->created ?? '';
+    ?>
     <article class="card h-100 border-0 bg-transparent shadow-0 position-relative">
         <?php if ($catTitle !== '' && $catId > 0): ?>
             <div class="position-absolute top-0 end-0 m-2 z-2">
@@ -76,55 +74,20 @@ $renderCard = static function ($item) {
     </article>
     <?php
 };
-
-// Generic carousel renderer (no internal controls; chrome owns them)
-$renderCarousel = static function (string $id, string $displayCls, int $perSlide, string $colCls, bool $wrapFill)
-use ($items, $count, $renderCard) {
-    // Wrap only when we actually have enough items
-    $doWrap = $wrapFill && $count >= $perSlide;
-
-    $totalSlides = (int) ceil($count / max(1, $perSlide));
-    ?>
-    <div id="<?php echo $id; ?>" class="mod-spotlight carousel slide <?php echo $displayCls; ?>"
-         data-bs-ride="false" data-bs-interval="false" data-bs-touch="true" data-bs-wrap="true">
-
-        <div class="carousel-inner">
-            <?php for ($s = 0; $s < $totalSlides; $s++): ?>
-                <div class="carousel-item<?php echo $s === 0 ? ' active' : ''; ?>">
-                    <div class="container-fluid">
-                        <div class="row g-3 g-md-4">
-                            <?php
-                            $start = $s * $perSlide;
-                            // If not wrapping, only render the remaining real items on this slide
-                            $iterMax = $doWrap ? $perSlide : min($perSlide, max(0, $count - $start));
-
-                            for ($j = 0; $j < $iterMax; $j++) {
-                                $idx = $start + $j;
-                                if ($idx >= $count) {
-                                    if (!$doWrap) break;
-                                    $idx = $idx % $count; // wrap-fill only when allowed
-                                }
-                                ?>
-                                <div class="<?php echo $colCls; ?>">
-                                    <?php $renderCard($items[$idx]); ?>
-                                </div>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endfor; ?>
-        </div>
-    </div>
-    <?php
-};
 ?>
 
-<?php
-// Phones: 1 per slide
-$renderCarousel($uid . '-xs', 'd-block d-md-none', 1, 'col-12', false);
-// Tablets: 3 per slide
-$renderCarousel($uid . '-md', 'd-none d-md-block d-lg-none', 3, 'col-md-4', true);
-// Desktop: 4 per slide
-$renderCarousel($uid, 'd-none d-lg-block', 4, 'col-lg-3', true);
+<!-- HERO ROW (first item full width) -->
+<div class="row g-3 g-md-4">
+    <div class="col-12 col-lg-12">
+        <?php $renderCard($items[0]); ?>
+    </div>
+</div>
+
+<!-- GRID ROW (rest of items: 1-col xs, 3-col md, 4-col lg) -->
+<div class="row g-3 g-md-4">
+    <?php foreach (array_slice($items, 1) as $item): ?>
+        <div class="col-12 col-md-4 col-lg-3">
+            <?php $renderCard($item); ?>
+        </div>
+    <?php endforeach; ?>
+</div>
