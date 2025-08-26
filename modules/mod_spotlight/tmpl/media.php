@@ -63,6 +63,12 @@ $renderCard = static function ($item) {
                 </a>
             </h3>
         </div>
+        <?php if (!empty($date)): ?>
+            <div class="text-white-50 pb-2 fs-10 ss02">
+                <i class="fa-regular fa-calendar ms-1"></i>
+                <?= HTMLHelper::_('date', $date, 'd F Y'); ?>
+            </div>
+        <?php endif; ?>
     </article>
     <?php
 };
