@@ -48,7 +48,7 @@ $renderCard = static function ($item) {
                 <!-- centered play mark -->
                 <span class="spot-media-play fa-3x position-absolute top-50 start-50 translate-middle d-inline-flex align-items-center justify-content-center">
                     <i class="fa-regular fa-circle-play"></i>
-            </span>
+                </span>
                 <?php if ($img): ?>
                     <img loading="lazy" decoding="async" class="image-zoom"
                          src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>"

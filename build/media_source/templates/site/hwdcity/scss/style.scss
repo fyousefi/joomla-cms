@@ -534,6 +534,13 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+/* IMPORTANT: hover the card (or the container), not the <img> itself */
+.card:hover .zoom-container .image-zoom,
+.zoom-container:hover .image-zoom,
+.zoom-container:focus .image-zoom {
+  transform: scale(1.15);
+}
+
 /* Opt-in overlay: add class="zoom-container zoom-dark" */
 .zoom-dark {
   --spotlight-anim: 300ms cubic-bezier(.22,.61,.36,1);
@@ -557,14 +564,29 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 // Fixed Z-index for play icon
-.spot-media-play{ z-index: 2; }
+.spot-media-play{ z-index: 1; }
 
-/* IMPORTANT: hover the card (or the container), not the <img> itself */
-.card:hover .zoom-container .image-zoom,
-.zoom-container:hover .image-zoom,
-.zoom-container:focus .image-zoom {
+/* Fade the dark overlay not only on image hover, but also when:
+   - the whole card is hovered
+   - any focusable element inside the card (e.g., the title link) is focused */
+.card:hover .zoom-dark::before,
+.card:focus-within .zoom-dark::before,
+.zoom-container:hover::before,
+.zoom-container:focus::before {
+  opacity: 0;
+}
+
+/* scale the image when the card is focused via keyboard (title focused) */
+.card:focus-within .zoom-container .image-zoom {
   transform: scale(1.15);
 }
+
+/* (optional) respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .zoom-dark::before,
+  .image-zoom { transition: none; }
+}
+
 
 // Score circle base styles
 .score-circle {
