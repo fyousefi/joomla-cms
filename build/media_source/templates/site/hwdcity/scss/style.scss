@@ -545,26 +545,30 @@ $iransansx-font-path: "../fonts" !default;
 .zoom-dark {
   --spotlight-anim: 300ms cubic-bezier(.22,.61,.36,1);
   --spotlight-zoom: 1.045;
-  --spotlight-dim: .72; /* 0..1; lower = darker */
+  --spotlight-dim: .55; /* initial darkness: 0..1; lower = darker */
+  --spotlight-dim-hover:  .22; /* darkness while hovered/focused */
 
   position: relative;
 
   &::before{
     content:"";
     position:absolute; inset:0;
-    background: rgba(0,0,0,.45);
-    opacity: 1;
+    background: #000;
+    opacity: var(--spotlight-dim);
     pointer-events:none;
     transition: opacity var(--spotlight-anim);
     z-index: 1; /* above image, below play/badges */
   }
 
   &:hover::before {
-    opacity: 0;
+    opacity: var(--spotlight-dim-hover);
   }
 }
 // Fixed Z-index for play icon
-.spot-media-play{ z-index: 1; }
+.spot-media-play {
+  pointer-events: none;
+  z-index: 1;
+}
 
 /* Fade the dark overlay not only on image hover, but also when:
    - the whole card is hovered
@@ -573,7 +577,7 @@ $iransansx-font-path: "../fonts" !default;
 .card:focus-within .zoom-dark::before,
 .zoom-container:hover::before,
 .zoom-container:focus::before {
-  opacity: 0;
+  opacity: var(--spotlight-dim-hover);
 }
 
 /* scale the image when the card is focused via keyboard (title focused) */
