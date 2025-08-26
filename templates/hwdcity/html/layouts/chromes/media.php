@@ -3,6 +3,7 @@ defined('_JEXEC') or die;
 
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\Component\Tags\Site\Helper\RouteHelper as TagsRouteHelper;
 
 /** @var array $displayData */
 $module  = $displayData['module'];
@@ -39,8 +40,8 @@ $src      = (string) $params->get('media_link_source', 'menu');
 
 if ($src === 'menu' && (int) $params->get('media_link_menu')) {
     $linkHref = Route::_('index.php?Itemid=' . (int) $params->get('media_link_menu'));
-} elseif ($src === 'category' && (int) $params->get('media_link_cat')) {
-    $linkHref = Route::_('index.php?option=com_content&view=category&id=' . (int) $params->get('media_link_cat'));
+} elseif ($src === 'tag' && (int) $params->get('media_link_tag')) {
+    $linkHref = Route::_(TagsRouteHelper::getComponentTagRoute((int) $params->get('media_link_tag')));
 }
 ?>
 <<?php echo $moduleTag; ?> <?php echo ArrayHelper::toString($moduleAttribs); ?>>
