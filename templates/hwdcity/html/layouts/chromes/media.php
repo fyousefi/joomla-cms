@@ -12,7 +12,7 @@ $params  = $displayData['params'];
 if ($module->content === null || $module->content === '') return;
 
 $moduleTag = $params->get('module_tag', 'div');
-$moduleAttribs['class'] = trim('mod-style-review mod-spotlight-wrap ' . htmlspecialchars((string) $params->get('moduleclass_sfx',''), ENT_QUOTES, 'UTF-8'));
+$moduleAttribs['class'] = trim('mod-style-review mod-spotlight-wrap mb-0 ' . htmlspecialchars((string) $params->get('moduleclass_sfx',''), ENT_QUOTES, 'UTF-8'));
 
 $headerTag   = htmlspecialchars($params->get('header_tag', 'h3'), ENT_QUOTES, 'UTF-8');
 $headerClass = trim((string) $params->get('header_class', ''));

@@ -294,7 +294,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     </div>
 
     <?php if ($this->countModules('footer', true)) : ?>
-        <footer class="container-footer footer full-width">
+        <footer class="container-footer footer full-width mt-0">
             <div class="grid-child">
                 <jdoc:include type="modules" name="footer" style="none" />
             </div>
