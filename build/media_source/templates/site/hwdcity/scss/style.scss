@@ -717,6 +717,18 @@ $iransansx-font-path: "../fonts" !default;
 }
 
 /* Spotlight: Media */
+// Hero ratio: 21:9 by default
+.ratio-hero { --aspect-ratio: 42.8571428571%; } /* 9/21 * 100 */
+
+// phones (sm only) => 16:9
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .ratio-hero { --aspect-ratio: 56.25%; }       /* 9/16 * 100 */
+}
+
+// xs & sm (<=767.98px) to be 16:9
+@media (max-width: 767.98px){ .ratio-hero{ --aspect-ratio:56.25%; } }
+
+
 
 
 

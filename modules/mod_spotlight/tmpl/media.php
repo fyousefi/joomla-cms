@@ -23,7 +23,7 @@ endif;
 $count = count($items);
 
 // Card
-$renderCard = static function ($item) {
+$renderCard = static function ($item, bool $isHero = false) {
     $href = Route::_('index.php?option=com_content&view=article&id=' . (int) $item->id);
     $img  = $item->image_intro ?? '';
     $alt  = $item->image_intro_alt ?? ($item->title ?? '');
@@ -31,6 +31,9 @@ $renderCard = static function ($item) {
     $catId    = ($item->catid ?? 0);
     $catLink  = (Route::_(RouteHelper::getCategoryRoute($item->catid)) ?? 0);
     $date     = $item->created ?? '';
+
+    $ratioClass = $isHero ? 'ratio-hero' : 'ratio-16x9';           // choose ratio
+    $svgViewBox = $isHero ? '0 0 21 9' : '0 0 16 9';               // match placeholder
     ?>
     <article class="card h-100 border-0 bg-transparent shadow-0 position-relative">
         <?php if ($catTitle !== '' && $catId > 0): ?>
@@ -42,7 +45,7 @@ $renderCard = static function ($item) {
             </div>
         <?php endif; ?>
         <a class="text-decoration-none zoom-container zoom-dark" href="<?php echo $href; ?>">
-            <div class="ratio ratio-16x9 position-relative">
+            <div class="ratio <?php echo $ratioClass; ?> position-relative">
                 <!-- centered play mark -->
                 <span class="spot-media-play fa-3x position-absolute top-50 start-50 translate-middle d-inline-flex align-items-center justify-content-center">
                     <i class="fa-regular fa-circle-play"></i>
@@ -53,7 +56,7 @@ $renderCard = static function ($item) {
                          alt="<?php echo htmlspecialchars($alt, ENT_QUOTES, 'UTF-8'); ?>">
                 <?php else: ?>
                     <img loading="lazy" decoding="async"
-                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23e9ecef'/%3E%3C/svg%3E"
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='<?php echo $svgViewBox; ?>'%3E%3Crect width='100%25' height='100%25' fill='%23e9ecef'/%3E%3C/svg%3E"
                          alt="">
                 <?php endif; ?>
             </div>
@@ -77,17 +80,17 @@ $renderCard = static function ($item) {
 ?>
 
 <!-- HERO ROW (first item full width) -->
-<div class="row g-3 g-md-4">
-    <div class="col-12 col-lg-12">
-        <?php $renderCard($items[0]); ?>
+<div class="row g-3 g-md-4 justify-content-center">
+    <div class="col-12 col-lg-8">
+        <?php $renderCard($items[0], true); // ratio-hero = 21x9 ?>
     </div>
 </div>
 
 <!-- GRID ROW (rest of items: 1-col xs, 3-col md, 4-col lg) -->
-<div class="row g-3 g-md-4">
+<div class="row g-3 g-md-4 justify-content-center">
     <?php foreach (array_slice($items, 1) as $item): ?>
-        <div class="col-12 col-md-4 col-lg-3">
-            <?php $renderCard($item); ?>
+        <div class="col-12 col-md-3 col-lg-2">
+            <?php $renderCard($item); // default 16x9 ?>
         </div>
     <?php endforeach; ?>
 </div>
