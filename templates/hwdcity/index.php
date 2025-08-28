@@ -293,10 +293,15 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
     </div>
 
-    <?php if ($this->countModules('footer', true)) : ?>
+    <?php if ($this->countModules('footer1', true) || $this->countModules('footer2', true) || $this->countModules('footer3', true) || $this->countModules('footer4', true)) : ?>
         <footer class="container-footer footer full-width mt-0">
-            <div class="grid-child">
-                <jdoc:include type="modules" name="footer" style="none" />
+            <div class="container py-4 py-md-5">
+                <div class="row g-4 fs-9">
+                    <div class="col-12 col-lg-4"><?php echo $this->countModules('footer1') ? '<jdoc:include type="modules" name="footer1" style="spotfooter" />' : ''; ?></div>
+                    <div class="col-6 col-lg-2"><?php echo $this->countModules('footer2') ? '<jdoc:include type="modules" name="footer2" style="spotfooter" />' : ''; ?></div>
+                    <div class="col-6 col-lg-2"><?php echo $this->countModules('footer3') ? '<jdoc:include type="modules" name="footer3" style="spotfooter" />' : ''; ?></div>
+                    <div class="col-12 col-lg-4"><?php echo $this->countModules('footer4') ? '<jdoc:include type="modules" name="footer4" style="spotfooter" />' : ''; ?></div>
+                </div>
             </div>
         </footer>
     <?php endif; ?>
