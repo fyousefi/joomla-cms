@@ -40,7 +40,7 @@ $renderCard = static function ($item, bool $isHero = false) {
             <div class="position-absolute top-0 end-0 m-2 z-2">
                 <a href="<?php echo $catLink; ?>"
                    class="badge text-bg-danger text-decoration-none fw-normal">
-                    <?php echo htmlspecialchars($catTitle, ENT_QUOTES, 'UTF-8'); ?>
+                    <span><?php echo htmlspecialchars($catTitle, ENT_QUOTES, 'UTF-8'); ?></span>
                 </a>
             </div>
         <?php endif; ?>
