@@ -362,4 +362,14 @@ $font-sizes: (
 .w-35 { width: 35% !important; }
 .w-40 { width: 40% !important; }
 
+// Custom Link color
+.link-danger {
+  color: var(--danger) !important;
+  text-decoration: none; // optional: remove underline
+
+  &:hover,
+  &:focus {
+    color: var(--black) !important;
+  }
+}
 

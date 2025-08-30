@@ -25,7 +25,22 @@ if ($params->get('articles_layout') == 1) {
         $displayInfo = $item->displayHits || $item->displayAuthorName || $item->displayCategoryTitle || $item->displayDate;
         ?>
         <li>
-            <article class="mod-articles-item d-flex align-items-start gap-3 py-2 position-relative" itemscope itemtype="https://schema.org/Article">
+            <?php if ($item->displayDate || $item->displayCategoryTitle || $item->displayAuthorName || $item->displayHits) : ?>
+                <div class="mt-1 small text-body-secondary d-flex flex-wrap gap-2 fs-12">
+                    <?php if ($item->displayDate) : ?><span><?php echo $item->displayDate; ?></span><?php endif; ?>
+                    <?php if ($item->displayCategoryTitle) : ?>
+                        <span>
+                <?php echo $item->displayCategoryLink
+                    ? '<a class="link-danger text-decoration-none" href="' . $item->displayCategoryLink . '">' . $item->displayCategoryTitle . '</a>'
+                    : $item->displayCategoryTitle; ?>
+              </span>
+                    <?php endif; ?>
+                    <?php if ($item->displayAuthorName) : ?><span><?php echo $item->displayAuthorName; ?></span><?php endif; ?>
+                    <?php if ($item->displayHits) : ?><span><?php echo $item->displayHits; ?></span><?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <article class="mod-articles-item d-flex gap-3 py-2 position-relative" itemscope itemtype="https://schema.org/Article">
                 <?php
                 $hasImage = in_array($params->get('img_intro_full'), ['intro','full']) && !empty($item->imageSrc);
                 $imgW     = isset($item->imageWidth)  ? (int) $item->imageWidth  : null;
@@ -36,7 +51,7 @@ if ($params->get('articles_layout') == 1) {
                 ?>
 
                 <!-- One anchor covers image + text -->
-                <a href="<?php echo $link; ?>" class="d-flex align-items-start gap-3 text-decoration-none stretched-link">
+                <a href="<?php echo $link; ?>" class="d-flex align-items-center gap-3 text-decoration-none stretched-link">
 
                     <!-- Right: text -->
                     <div class="flex-grow-1">
@@ -46,21 +61,6 @@ if ($params->get('articles_layout') == 1) {
                         <?php echo $title; ?>
                     </<?php echo $item_heading; ?>>
                 <?php endif; ?>
-
-                    <?php if ($item->displayDate || $item->displayCategoryTitle || $item->displayAuthorName || $item->displayHits) : ?>
-                        <div class="mt-1 small text-body-secondary d-flex flex-wrap gap-2">
-                            <?php if ($item->displayDate) : ?><span><?php echo $item->displayDate; ?></span><?php endif; ?>
-                            <?php if ($item->displayCategoryTitle) : ?>
-                                <span>
-                <?php echo $item->displayCategoryLink
-                    ? '<a class="link-secondary text-decoration-none" href="' . $item->displayCategoryLink . '">' . $item->displayCategoryTitle . '</a>'
-                    : $item->displayCategoryTitle; ?>
-              </span>
-                            <?php endif; ?>
-                            <?php if ($item->displayAuthorName) : ?><span><?php echo $item->displayAuthorName; ?></span><?php endif; ?>
-                            <?php if ($item->displayHits) : ?><span><?php echo $item->displayHits; ?></span><?php endif; ?>
-                        </div>
-                    <?php endif; ?>
 
                     <?php if ($params->get('show_introtext', 0)) : ?>
                         <div class="mt-1 text-body-secondary"><?php echo $item->displayIntrotext; ?></div>
