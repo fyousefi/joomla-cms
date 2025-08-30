@@ -348,10 +348,18 @@ $font-sizes: (
   4: 1.4rem,
   5: 1.25rem,
   6: 1.1rem,
-  7: 1rem,
-  8: .875rem,
-  9: .8125rem,
-  10: .75rem,
-  11: .6875rem,
-  12: .625rem
+  7: 1rem, // 16 px
+  8: .875rem, // 14px
+  9: .8125rem, // 13px
+  10: .75rem, //  12px
+  11: .6875rem, // 11px
+  12: .625rem, // 10px
+  13: .938rem, // 15px
 );
+
+// Custom widths
+.w-30 { width: 30% !important; }
+.w-35 { width: 35% !important; }
+.w-40 { width: 40% !important; }
+
+
