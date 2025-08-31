@@ -19,7 +19,7 @@ endif;
         $label = trim((string) $item->title);
         ?>
         <a href="<?php echo $href; ?>"
-           class="ht-link fw-normal fs-9 me-2 mb-2 px-3 py-2 text-decoration-none">
+           class="ht-link fw-normal fs-9 me-2 mb-2 px-2 py-1 text-decoration-none">
             <?php echo htmlspecialchars($label !== '' ? $label : ('#' . (int) $item->id), ENT_QUOTES, 'UTF-8'); ?>
         </a>
     <?php endforeach; ?>

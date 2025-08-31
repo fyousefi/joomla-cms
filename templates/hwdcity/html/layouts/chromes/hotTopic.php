@@ -30,7 +30,7 @@ $moduleAttribs['class'] = trim(
 
 // Header classes (allow admin “Header Class” too)
 $headerAttribs          = [];
-$headerAttribs['class'] = 'mod-title hot-topic-title text-danger' . ($headerClass !== '' ? ' ' . $headerClass : '');
+$headerAttribs['class'] = 'mod-title hot-topic-title text-danger fs-13' . ($headerClass !== '' ? ' ' . $headerClass : '');
 
 // ARIA
 if ($moduleTag !== 'div') {
