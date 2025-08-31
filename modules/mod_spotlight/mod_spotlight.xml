@@ -285,7 +285,7 @@
 								type="text"
 								label="MOD_SPOTLIGHT_ITEM_ICON_LABEL"
 								description="MOD_SPOTLIGHT_ITEM_ICON_DESC"
-								default="fa-solid fa-hashtag"
+								default="fa fa-hashtag"
 							/>
 						</fields>
 					</form>
