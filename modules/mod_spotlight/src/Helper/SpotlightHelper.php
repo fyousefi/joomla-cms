@@ -28,6 +28,8 @@ final class SpotlightHelper implements DatabaseAwareInterface
             $fieldName = 'items_hot';
         } elseif ($type === 'review') {
             $fieldName = 'items_review';
+        } elseif ($type === 'guide') {
+            $fieldName = 'items_guide';
         } else {
             $fieldName = 'items_editor';
         }
@@ -41,20 +43,28 @@ final class SpotlightHelper implements DatabaseAwareInterface
         // Build id list and override labels (hot)
         $labelById = [];   // for hot
         $scoreById = [];   // for review
+        $colorById = [];   // guide
+        $iconById  = [];   // guide
         $ids       = [];
         foreach ($rows as $r) {
             $id = (int) ($r['id'] ?? 0);
             if ($id > 0) {
                 $ids[] = $id;
 
-                if ($type === 'hot' && !empty($r['override_title'])) {
+                if (($type === 'hot' || $type === 'guide') && !empty($r['override_title'])) {
                     $labelById[$id] = (string) $r['override_title'];
+                }
+
+                if ($type === 'guide') {
+                    if (!empty($r['color'])) { $colorById[$id] = (string) $r['color']; }
+                    if (!empty($r['icon']))  { $iconById[$id]  = (string) $r['icon'];  }
                 }
 
                 if ($type === 'review' && isset($r['score']) && $r['score'] !== '') {
                     // keep as float; formatting is done in layout
                     $scoreById[$id] = (float) $r['score'];
                 }
+
             }
         }
 
@@ -79,7 +89,7 @@ final class SpotlightHelper implements DatabaseAwareInterface
             ->order('FIELD(a.id,' . implode(',', $ids) . ')')
             ->setLimit(\count($ids));
 
-        if ($type === 'hot') {
+        if ($type === 'hot' || $type === 'guide') {
             $q->select(['a.id']); // light
         } else {
             $q->select(['a.id', 'a.title', 'a.images']); // Editor & Review need title+image
@@ -96,6 +106,22 @@ final class SpotlightHelper implements DatabaseAwareInterface
                 $o                  = new \stdClass();
                 $o->id              = $id;
                 $o->title           = $labelById[$id] ?? ''; // admin-provided
+                $o->image_intro     = '';
+                $o->image_intro_alt = '';
+                $out[]              = $o;
+            }
+            return $out;
+        }
+
+        // guide (hot+color+icon)
+        if ($type === 'guide') {
+            foreach ($rowsDb as $r) {
+                $id                 = (int) $r->id;
+                $o                  = new \stdClass();
+                $o->id              = $id;
+                $o->title           = $labelById[$id] ?? '';
+                $o->color           = $colorById[$id] ?? '';         // e.g. #C70101
+                $o->icon            = $iconById[$id] ?? '';          // e.g. fas fa-bolt
                 $o->image_intro     = '';
                 $o->image_intro_alt = '';
                 $out[]              = $o;
@@ -200,7 +226,9 @@ final class SpotlightHelper implements DatabaseAwareInterface
                 $out[]     = [
                     'id'             => $id,
                     'override_title' => isset($row['override_title']) ? (string) $row['override_title'] : '',
-                    'score'          => isset($row['score']) ? (string) $row['score'] : '', // keep raw; cast later
+                    'score'          => isset($row['score']) ? (string) $row['score'] : '',
+                    'color'          => isset($row['color']) ? (string) $row['color'] : '',
+                    'icon'           => isset($row['icon'])  ? (string) $row['icon']  : '',
                 ];
                 if (\count($out) >= $cap) {
                     break;

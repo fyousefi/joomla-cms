@@ -40,6 +40,7 @@
 					<option value="hot">MOD_SPOTLIGHT_TYPE_OPTION_HOT</option>
 					<option value="review">MOD_SPOTLIGHT_TYPE_OPTION_REVIEW</option>
 					<option value="media">MOD_SPOTLIGHT_TYPE_OPTION_MEDIA</option>
+					<option value="guide">MOD_SPOTLIGHT_TYPE_OPTION_GUIDE</option>
 
 				</field>
 
@@ -232,6 +233,63 @@
 					description="MOD_SPOTLIGHT_LINK_LABEL_DESC"
 					showon="type:media"
 					filter="string" />
+
+				<!-- GUIDE (Hot Topic + color/icon) SUBFORM -->
+				<field
+					name="items_guide"
+					type="subform"
+					label="MOD_SPOTLIGHT_GUIDE_ITEMS_LABEL"
+					description="MOD_SPOTLIGHT_GUIDE_ITEMS_DESC"
+					showon="type:guide"
+					multiple="true"
+					min="0"
+					max="20"
+					layout="mod_spotlight.subform.numbered-table"
+					buttons="add,remove,move"
+					sortable="true"
+				>
+					<form>
+						<fields name="item">
+							<field
+								type="ModalSelect"
+								name="article_id"
+								label="MOD_SPOTLIGHT_ITEM_ARTICLE_LABEL"
+								select="true"
+								iconSelect="fa fa-file"
+								description="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								titleSelect="MOD_SPOTLIGHT_ITEM_ARTICLE_DESC"
+								urlSelect="index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component"
+								clear="true"
+								sql_title_table="#__content"
+								sql_title_column="title"
+								sql_title_key="id"
+							/>
+							<field
+								name="override_title"
+								type="text"
+								label="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_LABEL"
+								description="MOD_SPOTLIGHT_ITEM_OVERRIDE_TITLE_DESC"
+								filter="string"
+								size="10"
+							/>
+							<field
+								name="color"
+								type="color"
+								label="MOD_SPOTLIGHT_ITEM_COLOR_LABEL"
+								description="MOD_SPOTLIGHT_ITEM_COLOR_DESC"
+								default="#C70101"
+							/>
+							<!-- Use type="faicon" if you added the custom admin picker; otherwise switch to type="text" -->
+							<field
+								name="icon"
+								type="text"
+								label="MOD_SPOTLIGHT_ITEM_ICON_LABEL"
+								description="MOD_SPOTLIGHT_ITEM_ICON_DESC"
+								default="fa-solid fa-hashtag"
+							/>
+						</fields>
+					</form>
+				</field>
 
 			</fieldset>
 

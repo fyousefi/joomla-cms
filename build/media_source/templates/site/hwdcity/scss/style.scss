@@ -728,7 +728,30 @@ $iransansx-font-path: "../fonts" !default;
 // xs & sm (<=767.98px) to be 16:9
 @media (max-width: 767.98px){ .ratio-hero{ --aspect-ratio:56.25%; } }
 
-// Footer
+/* Module Spotlight: Guide type format */
+// Guide tiles: default = accent text, hover = accent bg + white text
+.guide-tile{
+  display:block;
+  text-align:center;
+
+  color: var(--accent);                 /* icon + label use currentColor */
+  background: transparent;
+  transition: background-color .25s ease, color .25s ease, box-shadow .2s ease, transform .15s ease;
+  text-decoration: none;
+
+  &:hover,
+  &:focus{
+    background: var(--accent);
+    color:#fff;                         /* makes both icon and label white */
+  }
+
+  &:focus-visible{ outline:0; box-shadow:0 0 0 .2rem rgba(0,0,0,.1); }
+}
+
+.guide-tile i,
+.guide-tile span{
+  color: currentColor;                  /* inherit from .guide-tile */
+}
 
 
 

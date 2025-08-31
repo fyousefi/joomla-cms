@@ -25,7 +25,7 @@ $headerCls = trim((string) $params->get('header_class', ''));
 
 // WRAPPER CLASSES (no .row to avoid overflow)
 $wrapper = trim(
-    ($module->position ?: '') . ' hwd-card d-flex flex-column gap-3 bg-body'
+    ($module->position ?: '') . ' hwd-card d-flex flex-column bg-body'
     . ' ' . htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_QUOTES, 'UTF-8')
 );
 
