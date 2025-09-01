@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Discussion" option="Default option">
+		<message>
+			Create a small discussion.
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params" >
+		<fieldset name="basic">
+			<field name="object" label="Object/Component" type="text" default="" />
+			<field name="object_id" label="Object ID" type="text" default="0" filter="int" />
+		</fieldset>
+	</fields>
+</metadata>

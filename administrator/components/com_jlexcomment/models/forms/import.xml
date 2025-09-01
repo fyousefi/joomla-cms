@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="basic"
+            addfieldpath="/administrator/components/com_jlexcomment/models/fields">
+            <field
+                    type="modal_object"
+                    name="object"
+                    label="JCM_ENTRY"
+                    size="80"
+                    required="true" />
+
+            <field type="jcm_csv" name="comment" label="JCM_COMMENT" required="true" />
+            <field type="jcm_csv" name="date" label="JCM_CREATED_DATE" required="true" />
+            <field type="jcm_csv" name="author" label="JCM_AUTHOR_NAME" required="true" />
+
+            <field type="checkbox" name="heading" label="JCM_INCLUDE_HEADING_ROW" default="0" value="1" />
+
+            <field type="checkbox" name="publish" label="JCM_PUBLISH" default="1" value="1" />
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>COM_JLEXCOMMENT</name>
+	<author>JLexArt.com</author>
+	<creationDate>Aug 26, 2024</creationDate>
+	<copyright>Copyright [c] JLexArt. All rights reserved.</copyright>
+	<version>3.4.2</version>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<description>THANK YOU for Using JLexArt's Products!</description>
+	<scriptfile>scriptfile.php</scriptfile>
+	<install>
+		<sql>
+			<file driver="mysqli" charset="utf8">install.mysql.sql</file>
+			<file driver="mysql" charset="utf8">install.mysql.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysqli" charset="utf8">uninstall.mysql.sql</file>
+			<file driver="mysql" charset="utf8">uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+
+	<media destination="jcm" folder="media">
+		<folder>avatar</folder>
+		<folder>cache</folder>
+		<folder>compression</folder>
+		<folder>images</folder>
+		<folder>og</folder>
+		<folder>other</folder>
+		<folder>reaction</folder>
+		<folder>rz</folder>
+		<folder>stickers</folder>
+		<folder>sys</folder>
+		<folder>thumb</folder>
+	</media>
+
+	<files folder="site">
+		<folder>assets</folder>
+		<folder>controllers</folder>
+		<folder>libraries</folder>
+		<folder>models</folder>
+		<folder>themes</folder>
+		<folder>views</folder>
+		<filename>bootstrap.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>jlexcomment.php</filename>
+		<filename>load.php</filename>
+	</files>
+
+	<administration>
+		<menu view="dashboard">COM_JLEXCOMMENT</menu>
+		<submenu>
+			<menu view="dashboard" link="option=com_jlexcomment&amp;view=dashboard">JCM_MN_DASHBOARD</menu>
+			<menu view="items" link="option=com_jlexcomment&amp;view=items">JCM_MN_ENTRIES</menu>
+			<menu view="comments" link="option=com_jlexcomment&amp;view=comments">JCM_MN_COMMENTS</menu>
+			<menu view="settings" link="option=com_jlexcomment&amp;view=settings">JCM_MN_SETTINGS</menu>
+			<menu view="stickergroup" link="option=com_jlexcomment&amp;view=stickergroup">JCM_MN_STICKER_GROUP</menu>
+			<menu view="sticker" link="option=com_jlexcomment&amp;view=sticker">JCM_MN_STICKER</menu>
+			<menu view="subscription" link="option=com_jlexcomment&amp;view=subscription">JCM_MN_SUBSCRIPTION</menu>
+			<menu view="blacklist" link="option=com_jlexcomment&amp;view=blacklist">JCM_MN_BLACKLIST</menu>
+			<menu view="import" link="option=com_jlexcomment&amp;view=import">JCM_MN_IMPORT</menu>
+			<menu view="reporting" link="option=com_jlexcomment&amp;view=reporting">JCM_MN_REPORTING</menu>
+			<menu view="reporting" link="option=com_jlexcomment&amp;view=style">JCM_MN_STYLE_GROUP</menu>
+			<menu view="roles" link="option=com_jlexcomment&amp;view=roles">JCM_MN_ROLES</menu>
+			<menu view="replacer" link="option=com_jlexcomment&amp;view=replacer">JCM_MN_REPLACER</menu>
+			<menu view="users" link="option=com_jlexcomment&amp;view=users">JCM_MN_USERS</menu>
+			<menu view="mailq" link="option=com_jlexcomment&amp;view=mailq">JCM_MN_MAILQ</menu>
+			<menu view="integration" link="option=com_jlexcomment&amp;view=integration">JCM_MN_INTEGRATION</menu>
+			<menu view="sync" link="option=com_jlexcomment&amp;view=sync">JCM_MN_SYNC</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>controller.php</filename>
+			<filename>jlexcomment.php</filename>
+			<filename>install.mysql.sql</filename>
+			<filename>uninstall.mysql.sql</filename>
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>libraries</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>update</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="admin/languages">
+			<language tag="en-GB">en-GB.com_jlexcomment.sys.ini</language>
+		</languages>
+	</administration>
+
+	<updateservers>
+		<server type="extension" priority="1" name="JLex Comment Updates">https://www.jlexart.com/fn/connect/check?id=15&amp;format=xml</server>
+	</updateservers>
+</extension>

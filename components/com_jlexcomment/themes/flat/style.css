@@ -1,0 +1,36 @@
+#jlexcomment button{height:35px;line-height:35px}
+#jlexcomment ul.jcm-top{border-bottom:1px solid #66676a}
+#jlexcomment .jcm-form{background:#f1f2f5;border:none;border-radius:24px;transition:all .1s}
+#jlexcomment .jcm-input-cm{background:none;height:48px}
+#jlexcomment .jcm-text-placeholder{top:9px;left:20px;color:#888;font-size:16px}
+#jlexcomment .hovercard img,.jcm-dg-comments .uc-thumb img,#jlexcomment .jcm-thumb-small{border-radius:50%}
+#jlexcomment .jcm-flex-content{background:#f1f2f5;padding:10px;border-radius:10px}
+#jlexcomment a.jcm-i3::before{background:#ddd}
+#jlexcomment .jcm-form-cp.active .jcm-form{border-radius:10px}
+#jlexcomment ._controller{background:none;border-color:rgba(0,0,0,0.07);margin:0 15px;padding:10px 0;height:auto}
+#jlexcomment .jcm-btn-open{color:#66676a}
+#jlexcomment .jcm-btn-open:hover{color:#333}
+#jlexcomment .jcm-form-cp.active .jcm-input-cm{padding:15px}
+#jlexcomment button.jcm-btn-post.forMember,#jlexcomment .login-buttons button{background:#1878f3;height:35px;line-height:35px}
+#jlexcomment ._controller::after{content:"";display:table;clear:both}
+#jlexcomment input[type="text"],#jlexcomment input[type="email"],#jlexcomment input[type="password"],#jlexcomment textarea,.jcm-dialog input[type="text"],.jcm-dialog input[type="email"],.jcm-dialog input[type="password"],.jcm-dialog textarea{height:35px;padding:0 7px;border:none;background:#f1f2f5!important}
+#jlexcomment .jcm-subdiv{padding-top:10px}
+#jlexcomment #jcm-header a,#jlexcomment .jcm-author a,#jlexcomment .jcm-dropdown-menu > li > ._dx{color:inherit}
+#jlexcomment ul.jcm-dropdown-menu{border:none;box-shadow:3px 2px 10px rgba(0,0,0,0.25)}
+#jlexcomment ._media_box{border:none;margin:0 15px}
+#jlexcomment .jcm-media-preview,#jlexcomment .jcm-media-preview:nth-child(2n){background:rgba(0,0,0,0.1);border-radius:3px;margin-bottom:7px}
+#jlexcomment ul.jcm-images-slideshow li{margin:5px 5px 0 0}
+#jlexcomment .jcm-files-attached li{background:rgba(0,0,0,0.07)}
+#jlexcomment .jcm-sticker-preview{padding:10px}
+.jcm-sticker-preview .giphy-item{max-width:200px}
+#jlexcomment .jcm-input-cm._style{margin:0}
+#jlexcomment .jcm-input-cm._style .jcm-textarea{border-radius:5px!important}
+#jlexcomment .jcm-vote-down{border-width:1px}
+#jlexcomment.jcm-xsmall .hovercard{margin:5px;width:30px;height:30px}
+#jlexcomment.jcm-xsmall .jcm-post-header{margin-top:-5px}
+#jlexcomment button.jcm-btn-post.forMember,#jlexcomment .jcm_form_input .jcm-btn-cancel{height:35px;line-height:35px;border-radius:3px}
+.tribute-container ul{background:#fff;border-radius:5px;border:1px solid #ccc;overflow:hidden;padding:0;margin:0;font-size:.8em}
+.tribute-container li img{border-radius:50%}
+#jlexcomment .jcm-text-fm .ls button{line-height:normal}
+#jlexcomment .jcm-player{background:#fff;border:none;border-radius:5px;overflow:hidden}
+#jlexcomment .jcm-player .jcm-player-title{background:none;border:none;padding:7px 15px;text-align:center}

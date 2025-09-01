@@ -291,6 +291,33 @@
 					</form>
 				</field>
 
+				<!-- GUIDE: ‘View all’ / target link -->
+				<field name="guide_link_source" type="list"
+					   label="MOD_SPOTLIGHT_LINK_SOURCE_LABEL"
+					   description="MOD_SPOTLIGHT_LINK_SOURCE_DESC"
+					   default="menu"
+					   class="form-select"
+					   showon="type:guide">
+					<option value="menu">MOD_SPOTLIGHT_LINK_SOURCE_MENU</option>
+					<option value="category">MOD_SPOTLIGHT_LINK_SOURCE_CATEGORY</option>
+				</field>
+
+				<field name="guide_link_menu" type="menuitem"
+					   label="MOD_SPOTLIGHT_LINK_MENU_LABEL"
+					   description="MOD_SPOTLIGHT_LINK_MENU_DESC"
+					   showon="type:guide[AND]guide_link_source:menu" />
+
+				<field name="guide_link_cat" type="category" extension="com_content"
+					   label="MOD_SPOTLIGHT_LINK_CAT_LABEL"
+					   description="MOD_SPOTLIGHT_LINK_CAT_DESC"
+					   showon="type:guide[AND]guide_link_source:category" />
+
+				<field name="guide_link_label" type="text"
+					   label="MOD_SPOTLIGHT_LINK_LABEL_LABEL"
+					   description="MOD_SPOTLIGHT_LINK_LABEL_DESC"
+					   showon="type:guide"
+					   filter="string" />
+
 			</fieldset>
 
 			<fieldset name="advanced">

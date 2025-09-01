@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="jform">
+        <fieldset name="basic">
+            <field
+                    type="text"
+                    name="title"
+                    id="title"
+                    label="JCM_ENTRY_NAME"
+                    size="80"
+                    maxLength="255"
+                    required="true" />
+
+            <field
+                    type="text"
+                    name="com_name"
+                    id="com_name"
+                    label="JCM_ENTRY_TYPE"
+                    size="40"
+                    maxLength="40"
+                    required="true"
+                    description="Sub name of component. Eg: k2" />
+
+            <field
+                    type="text"
+                    name="com_key"
+                    id="com_key"
+                    label="JCM_ENTRY_ID"
+                    size="40"
+                    maxLength="40"
+                    required="true"
+                    description="ID of item. Eg: ID of article K2" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    id="created_time"
+                    label="JCM_CREATED_DATE"
+                    required="true"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s" />
+
+            <field
+                    type="url"
+                    name="url"
+                    id="url"
+                    label="JCM_RELATIVE_URL"
+                    required="true"
+                    hint="path-item/example"
+                    description="JCM_RELATIVE_URL_DESC"
+                    />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    id="published"
+                    class="btn-group"
+                    layout="joomla.form.field.radio.switcher"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="0">JCM_UNPUBLISH</option>
+                    <option value="1">JCM_PUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+        <fields name="params">
+            <fieldset name="params">
+                <field
+                        type="radio"
+                        name="live"
+                        default="0"
+                        id="live"
+                        class="btn-group"
+                        layout="joomla.form.field.radio.switcher"
+                        label="JCM_LIVE"
+                        >
+                        <option value="0">JCM_DISABLE</option>
+                        <option value="1">JCM_ENABLE</option>
+                </field>
+                <field name="live_refresh" default="5" label="JCM_REFRESH_TIME"
+                description="JCM_REFRESH_TIME_DESC" showon="live:1" />
+
+                <field
+                        type="radio"
+                        name="readonly"
+                        default="0"
+                        class="btn-group"
+                        layout="joomla.form.field.radio.switcher"
+                        label="JCM_READ_ONLY"
+                        description="JCM_READ_ONLY_DESC"
+                        >
+                        <option value="0">JNO</option>
+                        <option value="1">JYES</option>
+                </field>
+            </fieldset>
+        </fields>
+    </fields>
+</form>

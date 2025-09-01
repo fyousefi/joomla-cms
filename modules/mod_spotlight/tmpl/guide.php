@@ -2,6 +2,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
 use Joomla\CMS\Router\Route;
 
 /** @var array $items */
@@ -10,11 +11,31 @@ use Joomla\CMS\Router\Route;
 
 $app = Factory::getApplication();
 
+// Build target URL
+$link = '';
+$src  = (string) $params->get('guide_link_source', 'menu');
+
+if ($src === 'menu') {
+    $itemid = (int) $params->get('guide_link_menu');
+    if ($itemid) {
+        $link = Route::_('index.php?Itemid=' . $itemid);
+    }
+} elseif ($src === 'category') {
+    $catid = (int) $params->get('guide_link_cat');
+    if ($catid) {
+        $link = Route::_(RouteHelper::getCategoryRoute($catid));
+    }
+}
+
+$linkLabel = trim((string) $params->get('guide_link_label', ''));
+
 if (empty($items)) : ?>
     <div class="text-muted small py-3"><?php echo JText::_('MOD_SPOTLIGHT_EMPTY'); ?></div>
     <?php return;
 endif;
 ?>
+
+
 
 <!-- Responsive grid -->
 <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-0">
@@ -40,4 +61,12 @@ endif;
             </a>
         </div>
     <?php endforeach; ?>
+    <?php if ($link && $linkLabel !== ''): ?>
+        <div class="col-12 col-lg-12 col-md-12">
+            <div class="d-grid gap-2">
+            <a class="btn btn-danger btn-sm border-0 rounded-0" href="<?php echo $link; ?>">
+                <?php echo htmlspecialchars($linkLabel, ENT_QUOTES, 'UTF-8'); ?>
+            </a></div>
+        </div>
+    <?php endif; ?>
 </div>

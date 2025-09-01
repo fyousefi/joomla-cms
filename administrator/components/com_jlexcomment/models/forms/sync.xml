@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset name="basic">
+        <field type="text" name="object" label="JCM_OBJECT" required="true" />
+
+        <field type="radio" name="published" label="JCM_PUBLISHED" class="btn-group" default="0">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field type="spacer" hr="true" />
+
+        <field type="radio" name="entry_details" label="JCM_SYNC_ENTRY_DETAILS" class="btn-group" default="0">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field type="jcodeditor" name="cb_entry_details" label="JCM_SYNC_CB_ENTRY_DETAILS" filter="raw" showon="entry_details:1" />
+
+        <field type="spacer" hr="true" />
+
+        <field type="radio" name="entry_updated" label="JCM_SYNC_ENTRY_UPDATED" class="btn-group" default="0">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field type="jcodeditor" name="cb_entry_updated" label="JCM_SYNC_CB_ENTRY_UPDATED" filter="raw" vars="object_id, comment_count, all_comment_count" showon="entry_updated:1" />
+
+        <field type="spacer" hr="true" />
+
+        <field type="radio" name="author_follow" label="JCM_SYNC_AUTHOR_FOLLOW" class="btn-group" default="0">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field type="jcodeditor" name="cb_author_follow" label="JCM_SYNC_CB_AUTHOR_FOLLOW" filter="raw" vars="object_id, entry_id" showon="author_follow:1" />
+
+        <field type="hidden" name="id" />
+    </fieldset>
+</form>

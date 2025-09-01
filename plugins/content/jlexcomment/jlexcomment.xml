@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="content" method="upgrade">
+	<name>Content - JLex Comment</name>
+	<author>JLexArt</author>
+	<creationDate>April 4, 2020</creationDate>
+	<copyright>Copyright (C) 2013-2016 JLexArt. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>support@jlexart.com</authorEmail>
+	<authorUrl>www.jlexart.com</authorUrl>
+	<version>1.1.6</version>
+	<description><![CDATA[
+	<div style="clear:both">
+	Thanks for using our extensions. Get more applications for <b>JLex Comment</b> here: <a href="http://www.jlexart.com/documentation/jlex-comment#section-2-2" target="_blank">JLexArt</a>
+	</div>
+	]]></description>
+	<files>
+		<filename plugin="jlexcomment">jlexcomment.php</filename>
+		<filename>index.html</filename>
+		<folder>elements</folder>
+		<folder>assets</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_jlexcomment.ini</language>
+		<language tag="en-GB">en-GB.plg_content_jlexcomment.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/plugins/content/jlexcomment/elements">				
+				<field name="cm_count" type="radio" label="Display number of Comment" default="1" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field type="notice" hidden="true" />
+			</fieldset>
+			<fieldset name="joomla_content">
+				<field name="joomla_item" type="radio" label="INTEGRATION_WITH_JOOMLA_CONTENT" default="1" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="category" type="category" extension="com_content" label="CATEGORY" description="" multiple="true" />
+				<field name="joomla_child" type="radio" label="CHILDREN_CATEGORY" default="1" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="joomla_featured" type="radio" label="CHILDREN_FEATURED" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+			<fieldset name="k2" addfieldpath="/plugins/content/jlexcomment/elements">
+				<field name="k2_item" type="radio" label="INTEGRATION_WITH_K2" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="category_k2" type="categoryk2" label="CATEGORY" description="" />
+				<field name="k2_child" type="radio" label="CHILDREN_CATEGORY" default="1" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="k2_featured" type="radio" label="CHILDREN_FEATURED" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>	
+			</fieldset>
+			<fieldset name="virtuemart" addfieldpath="/plugins/content/jlexcomment/elements">
+				<field name="virtuemart_item" type="radio" label="INTEGRATION_WITH_VM" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="category_virtuemart" type="virtuemart" label="CATEGORY" description="" />
+			</fieldset>
+			<fieldset name="jdownloads" addfieldpath="/plugins/content/jlexcomment/elements">
+				<field name="jdownloads_item" type="radio" label="INTEGRATION_WITH_JDOWNLOAD" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="category_jdownloads" type="jdownloads" label="CATEGORY" description="" />
+				<field name="jdownloads_child" type="radio" label="CHILDREN_CATEGORY" default="1" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>	
+			</fieldset>
+			<fieldset name="icagenda" addfieldpath="/plugins/content/jlexcomment/elements">
+				<field name="icagenda_item" type="radio" label="INTEGRATION_WITH_ICAGENDA" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="category_icagenda" type="icagenda" label="CATEGORY" description="" />
+			</fieldset>
+			<fieldset name="dpcalendar">
+				<field name="dpcalendar_item" type="radio" label="DPCalendar" default="0" class="btn-group">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

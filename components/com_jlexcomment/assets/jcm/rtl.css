@@ -1,0 +1,137 @@
+#jlexcomment ul.jcm-task-list.jcm-inline > li+li {
+    margin-right: 10px!important;
+    margin-left: 0!important;
+}
+
+#jlexcomment a.jcm-readmore, #jlexcomment a.jcm-readless {
+    left: 0;
+    right: auto!important;
+}
+
+#jlexcomment .hovercard {
+    float: right;
+}
+
+#jlexcomment .hovercard+.jcm-post-content {
+    margin-right: 60px;
+    margin-left: 0;
+}
+
+#jlexcomment .hovercard+.jcm-form {
+    margin-right: 60px;
+    margin-left: 0;
+}
+
+#jlexcomment ul.jcm-inline > li+li {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+#jlexcomment .jcm-pull-right {
+    float: left;
+}
+
+#jlexcomment .jcm-pull-left {
+    float: right;
+}
+
+#jlexcomment .jcm-text-placeholder {
+    right: 7px;
+    left: auto;
+}
+
+#jlexcomment .jcm-btn-open {
+    float: right;
+}
+
+.jcm-text-fm .ls {
+    left: auto;
+    right: 10px;
+}
+
+
+#jlexcomment input[type="text"], #jlexcomment input[type="email"], #jlexcomment input[type="password"], #jlexcomment textarea, .jcm-dialog input[type="text"], .jcm-dialog input[type="email"], .jcm-dialog input[type="password"], .jcm-dialog textarea
+{
+    margin: 0 0 10px 15px;
+}
+
+.jcm-dialog button + button {
+    margin-left: 0;
+    margin-right: 7px;
+}
+
+#jlexcomment .jcm-connect {
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+#jlexcomment .jcm-post-header .jcm-q-menu {
+    left: 0;
+    right: auto;
+}
+
+#jlexcomment .jcm-report {
+    padding-right: 15px;
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 15px;
+    border-left: none;
+    border-right: 1px solid #ccc;
+}
+
+#jlexcomment .jcm-media-preview .jcm-ext {
+    float: right;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+#jlexcomment .jcm-media-preview .jcm-info {
+    margin-left: 0;
+    margin-right: 55px;
+}
+
+#jlexcomment .jcm-media-preview ._task {
+    left: 0;
+    right: auto;
+}
+
+#jlexcomment .jcm-sticker-preview ._img_box {
+    float: right;
+}
+
+#jlexcomment .jcm-sticker-preview ._remove {
+    right: auto;
+    left: 5px;
+}
+
+#jlexcomment .jcm-subdiv {
+    float: right;
+    margin-right: 60px;
+    margin-left: 0;
+}
+
+#jlexcomment .jcm-form-cp.active .jcm-symbol-limit{left:0;right:auto}
+
+#jlexcomment button.jcm-btn-post.forMember, #jlexcomment .jcm_form_input .jcm-btn-cancel {
+    margin: 5px 0 0 5px;
+}
+
+#jlexcomment ._controller {
+    text-align: left;
+}
+
+#jlexcomment.jcm-xsmall .hovercard+.jcm-form, #jlexcomment.jcm-xsmall .forGuest {
+    margin-right: 0;
+}
+
+#jlexcomment.jcm-xsmall ul.jcm-childs {
+    border-left: none;
+    padding-left: 0;
+    border-right: 3px solid #dfdfdf;
+    padding-right: 7px;
+}
+
+.jcm-dialog ul.jcm-inline li+li {
+    margin-right: 10px;
+    margin-left: 0;
+}

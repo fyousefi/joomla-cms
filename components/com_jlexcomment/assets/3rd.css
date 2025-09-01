@@ -1,0 +1,12 @@
+span.uc-action {
+    text-transform: lowercase;
+    color: #444;
+}
+.uc-item+.uc-item {
+    margin-top: 15px;
+}
+.uc-date {
+    font-size: 90%;
+    margin-left: 5px;
+    color: #777;
+}

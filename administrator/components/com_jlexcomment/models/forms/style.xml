@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="jform">
+        <fieldset name="basic">
+            <field
+                    type="text"
+                    name="caption"
+                    label="JCM_CAPTION"
+                    size="80"
+                    required="true" />
+
+            <field  type="textarea"
+                    name="css"
+                    label="JCM_CSS"
+                    required="true" />
+
+            <field  type="text"
+                    name="maxlength"
+                    label="JCM_MAX_COMMENT_LENGTH"
+                    default="0" />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="1">JCM_PUBLISH</option>
+                    <option value="0">JCM_UNPUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

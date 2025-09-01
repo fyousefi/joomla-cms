@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS `#__jlexcomment`;
+DROP TABLE IF EXISTS `#__jlexcomment_blacklist`;
+DROP TABLE IF EXISTS `#__jlexcomment_media`;
+DROP TABLE IF EXISTS `#__jlexcomment_notification`;
+DROP TABLE IF EXISTS `#__jlexcomment_notification_off`;
+DROP TABLE IF EXISTS `#__jlexcomment_obj`;
+DROP TABLE IF EXISTS `#__jlexcomment_replacer`;
+DROP TABLE IF EXISTS `#__jlexcomment_report`;
+DROP TABLE IF EXISTS `#__jlexcomment_roles`;
+DROP TABLE IF EXISTS `#__jlexcomment_sticker`;
+DROP TABLE IF EXISTS `#__jlexcomment_sticker_group`;
+DROP TABLE IF EXISTS `#__jlexcomment_subscribe`;
+DROP TABLE IF EXISTS `#__jlexcomment_style`;
+DROP TABLE IF EXISTS `#__jlexcomment_users`;
+DROP TABLE IF EXISTS `#__jlexcomment_vote`;
+DROP TABLE IF EXISTS `#__jlexcomment_sync`;

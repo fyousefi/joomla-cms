@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="jform">
+        <fieldset name="notification">
+            <field name="notification" 
+                    label="JCM_NOTIFICATION" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+            <field  name="alert_reply" 
+                    label="JCM_INCLUDE_REPLY" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    
+                    showon="notification:1"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field  name="alert_method" 
+                    label="JCM_SENDING_METHOD" 
+                    type="list"
+                    default="0"
+                    showon="notification:1"
+            >
+                <option value="1">JCM_IMMEDIATELY</option>
+                <option value="0">JCM_CRONJOB_RED</option>
+            </field>
+            <field  name="alert_date" 
+                    label="JCM_BEGIN_DATE" 
+                    type="calendar"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s"
+                    default="now" showon="notification:1" />
+            <field  name="alert_email" 
+                    label="JCM_EMAIL" 
+                    type="text"
+                    description="JCM_EMAIL_NOF_DESC" showon="notification:1" />
+            <field  name="alert_quick_task" 
+                    label="JCM_QUICK_MOD" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    
+                    description="JCM_QUICK_MOD_DESC">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field  name="email_to_owner" 
+                    label="JCM_SEND_COPY_OWN" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    
+                    description="JCM_SEND_COPY_OWN_DESC">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="notification_user">
+            <field  name="nof_user" 
+                    label="JCM_NOTIFICATION" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    description="JCM_NOTIFICATION_USER_DESC"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+            <field  name="nof_date" 
+                    label="JCM_BEGIN_DATE" 
+                    type="calendar"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s"
+                    default="now" showon="nof_user:1" />
+            <field  name="nof_mention_type" 
+                    label="JCM_NOF_WHEN_MENTION" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                     showon="nof_user:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+             <field  name="nof_reply_type" 
+                    label="JCM_NOF_WHEN_REPLY" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                     showon="nof_user:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field  name="nof_alert" 
+                    label="JCM_ALERT_FRONT_END" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    description="JCM_ALERT_FRONT_END_DESC"
+                     showon="nof_user:1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="rss">
+            <field  name="rss" 
+                    label="JCM_ENABLE_RSS" 
+                    type="radio" 
+                    class="btn-group"
+                    
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field name="rss_length" label="JCM_RSS_LENGTH" type="text"
+                    filter="integer" default="50" showon="rss:1" />
+        </fieldset>
+
+        <fieldset name="cronjob">
+            <field type="jcm_ogurl" label="JCM_CRONJOB_URL" method="cronjob" />
+            <field type="jcm_ogurl" label="JCM_CRONJOB_SYNC_URL" method="cronjob_sync" description="JCM_CRONJOB_SYNC_URL_DESC" />
+            <field type="jcm_ogurl" label="JCM_CRONJOB_DOC" method="cronjob_guide" />
+        </fieldset>
+
+        <fieldset name="authentication">
+            <field  name="login" 
+                    label="JCM_LOGIN_SITE" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="login_type" 
+                    label="JCM_LOGIN_TYPE"
+                    type="list"
+                    default="dialog" showon="login:1">
+                <option value="dialog">JCM_LOGIN_DIALOG</option>
+                <option value="url">JCM_LOGIN_URL</option>
+            </field>
+
+            <field name="login_url" label="JCM_LOGIN_CUSTOM_URL" type="text" showon="login:1[AND]login_type:url"/>
+
+            <field  name="oauth_fb" 
+                    label="JCM_LOGIN_USE_FACEBOOK_ACCOUNT" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field type="text" name="oauth_fb_public" label="JCM_FB_APP_ID" showon="oauth_fb:1" />
+            <field type="text" name="oauth_fb_secret" label="JCM_FB_APP_SECRET" showon="oauth_fb:1" />
+
+            <field type="jcm_ogurl" label="JCM_FB_REDIRECT" method="facebook" showon="oauth_fb:1" />
+
+            <field  name="oauth_tw" 
+                    label="JCM_LOGIN_USE_TWITTER_ACCOUNT" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field type="text" name="oauth_tw_public" label="JCM_TW_API_KEY" showon="oauth_tw:1" />
+            <field type="text" name="oauth_tw_secret" label="JCM_TW_API_SECRET" showon="oauth_tw:1" />
+            <field type="jcm_ogurl" label="JCM_TW_REDIRECT" method="twitter" showon="oauth_tw:1" />
+
+            <field  name="oauth_gg" 
+                    label="JCM_LOGIN_USE_GOOGLE_ACCOUNT" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field type="text" name="oauth_gg_public" label="JCM_GG_CLIENT_ID" showon="oauth_gg:1"/>
+            <field type="text" name="oauth_gg_secret" label="JCM_GG_CLIENT_SECRET" showon="oauth_gg:1" />
+            <field type="jcm_ogurl" label="JCM_GG_REDIRECT" method="google" showon="oauth_gg:1" />
+
+            <field  name="oauth_vk" 
+                    label="JCM_LOGIN_USE_VK_ACCOUNT" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field type="text" name="oauth_vk_app_id" label="JCM_VK_APP_ID" showon="oauth_vk:1" />
+            <field type="text" name="oauth_vk_app_secret" label="JCM_VK_APP_SECRET" showon="oauth_vk:1" />
+
+            <field  name="oauth_sign_up" 
+                    label="JCM_SIGNUP_LINK" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    description="JCM_SIGNUP_LINK_DESC"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="remember_me" 
+                    label="JCM_REMEMBER_ME" 
+                    description="JCM_REMEMBER_ME_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="comment">
+            <field  name="author_thumb" 
+                    label="JCM_AUTHOR_AVATAR" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+
+            <field name="default_avatar" label="JCM_DEFAULT_AVATAR" type="text" hint="images/avatar.png" default="media/jcm/avatar/jcm_avatar.png" showon="author_thumb:1" />
+
+            <field  name="rand_avatar" 
+                    label="JCM_RAND_AVATAR" 
+                    description="JCM_RAND_AVATAR_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    showon="author_thumb:1"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field name="author_name" 
+                    label="JCM_AUTHOR_NAME" 
+                    type="list"
+                    default="1">
+                <option value="screen_name">JCM_SCREEN_NAME</option>
+                <option value="username">JCM_USERNAME</option>
+            </field>
+
+            <field name="profile_3rd"
+                    label="JCM_AVATAR_SOURCE"
+                    type="list"
+                    default="jlexcomment"
+                    description="JCM_AVATAR_SOURCE_DESC">
+                <option value="jlexcomment">JNONE</option>
+                <option value="jlexreview">JLex Review</option>
+                <option value="jlexguestbook">JLex GuestBook</option>
+                <option value="easysocial">EasySocial</option>
+                <option value="easyprofile">EasyProfile</option>
+                <option value="k2">K2</option>
+                <option value="cb">Community Builder</option>
+                <option value="djclassfields">DJ Classfields</option>
+                <option value="easyblog">EasyBlog</option>
+                <option value="easydiscuss">EasyDiscuss</option>
+                <option value="gravatar">Gravatar</option>
+                <option value="jomsocial">JomSocial</option>
+                <option value="kunena">Kunena</option>
+                <option value="kunena3">Kunena 3</option>
+                <option value="field">JCM_JOOMLA_USER_FIELD</option>
+            </field>
+
+            <field type="number" name="user_field_id" label="JCM_JOOMLA_USER_FIELD_ID" description="JCM_JOOMLA_USER_FIELD_ID_DESC" min="1" showon="author_thumb:1[AND]profile_3rd:field" />
+
+            <field  name="jcm_layout_role" 
+                    label="JCM_MN_ROLES" 
+                    type="radio" 
+                    class="btn-group"
+                    description="JCM_ROLES_DESC"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="jcm_layout_ppl" 
+                    label="JCM_PP_LISTING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+
+            <field  name="jcm_layout_date" 
+                    label="JCM_COMMENT_DATE" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+
+            <field name="jcm_date_format"
+                    label="JCM_DATE_FORMAT"
+                    type="list"
+                    default="sub" showon="jcm_layout_date:1">
+                    <option value="sub">JCM_TIME_AGO</option>
+                    <option value="m/d/Y">m/d/Y</option>
+                    <option value="d/m/Y">d/m/Y</option>
+                    <option value="H:i d/m/Y">HH:MM d/m/Y</option>
+                    <option value="H:i d.m.Y">HH:MM d.m.Y</option>
+                    <option value="H:i m/d/Y">HH:MM m/d/Y</option>
+            </field>
+
+            <field  name="jcm_layout_vote" 
+                    label="JCM_VOTING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="jcm_reaction"
+                    label="JCM_VOTING_TYPE"
+                    type="list"
+                    default="0" showon="jcm_layout_vote:1">
+                <option value="0">JCM_UP_DOWN</option>
+                <option value="1">JCM_REACTION</option>
+            </field>
+
+            <field  name="jcm_reaction_data" 
+                    label="JCM_REACTION_DATA" 
+                    type="jcm_reaction" showon="jcm_reaction:1" />
+
+            <field  name="private_comment" 
+                    label="JCM_PRIVATE_COMMENT"
+                    description="JCM_PRIVATE_COMMENT_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jcm_layout_tg_reply" 
+                    label="JCM_COL_EXPAND_CM" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    description="JCM_COL_EXPAND_CM_DESC">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+
+            <field  name="collapse_all" 
+                    label="JCM_COLLAPSE_ALL"
+                    description="JCM_COLLAPSE_ALL_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="cm_collapse" 
+                    label="JCM_COLLAPSE" 
+                    description="JCM_COLLAPSE_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="replacer" 
+                    label="JCM_ENABLE_REPLACER" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="format_link" 
+                    label="JCM_FORMAT_LINK" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    description="JCM_FORMAT_LINK_DESC">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="schema" 
+                    label="JCM_COMMENT_SCHEMA" 
+                    description="JCM_COMMENT_SCHEMA_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="jcm_layout_sharing" 
+                    label="JCM_SHARING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="jcm_layout_sharing_fb" 
+                    label="JCM_FB_SHARING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1" showon="jcm_layout_sharing:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jcm_layout_sharing_tw" 
+                    label="JCM_TW_SHARING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1" showon="jcm_layout_sharing:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jcm_layout_sharing_gg" 
+                    label="JCM_GG_SHARING" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1" showon="jcm_layout_sharing:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jcm_share_link" 
+                    type="list"
+                    label="JCM_SHARE_LINK_TYPE"
+                    default="query" showon="jcm_layout_sharing:1">
+                <option value="fragment">JCM_FRAGMENT</option>
+                <option value="query">JCM_QUERY_STRING</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="comment_list">
+            <field type="text" name="cms_in_page"
+                label="JCM_NUMBER_COMMENT_ON_PAGE" default="20" />
+            <field type="number" name="reply_in_cm"
+                label="JCM_NUMBER_REPLY_PREVIEW" description="JCM_NUMBER_REPLY_PREVIEW_DESC" default="5" />
+            <field type="number" name="reply_in_cm_more"
+                label="JCM_NUMBER_REPLY_PREVIEW_CLICK" description="JCM_NUMBER_REPLY_PREVIEW_CLICK_DESC" default="5" />
+            <field type="list" name="sort"
+                label="JCM_COMMENT_SORT_BY" default="best">
+                <option value="best">JCM_BEST</option>
+                <option value="popular">JCM_POPULAR</option>
+                <option value="asc">JCM_OLDEST</option>
+                <option value="desc">JCM_NEWEST</option>
+            </field>
+            <field type="list" name="sort_child"
+                label="JCM_COMMENT_SORT_BY_CHILD" default="desc">
+                <option value="best">JCM_BEST</option>
+                <option value="popular">JCM_POPULAR</option>
+                <option value="asc">JCM_OLDEST</option>
+                <option value="desc">JCM_NEWEST</option>
+            </field>
+
+            <field  name="child_style" 
+                    label="JCM_CHILD_STYLE" 
+                    type="list" 
+                    default="1">
+                <option value="1">JCM_INLINE</option>
+                <option value="0">JCM_TREE</option>
+            </field>
+
+            <field  name="jcm_layout_sort" 
+                    label="JCM_SORTING_TOOL" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="comment_form">
+            <field type="list" name="form_possition"
+                label="JCM_FORM_POSITION" default="top">
+                <option value="top">JCM_TOP_OF_COMMENT</option>
+                <option value="bottom">JCM_BOTTOM_OF_COMMENT</option>
+            </field>
+
+            <field  name="form_email_field" 
+                    label="JCM_EMAIL_FIELD" 
+                    type="list"
+                    default="1">
+                <option value="1">JCM_REQUIRE</option>
+                <option value="2">JCM_OPTIONAL</option>
+                <option value="0">JCM_IGNORE</option>
+            </field>
+
+            <field  name="text_format" 
+                    label="JCM_TEXT_FORMAT" 
+                    description="JCM_TEXT_FORMAT_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jcm_layout_media" 
+                    label="JCM_MEDIA" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field name="media_filetype" label="JCM_FILE_EXTENSION_ALLOW"
+                type="textarea" default="jpg,jpeg,png,gif,zip,rar" showon="jcm_layout_media:1" />
+            <field name="media_filesize" label="JCM_MAX_FILE_SIZE"
+                type="number" default="2" min="1" showon="jcm_layout_media:1" />
+
+            <field name="maxfilenum" label="JCM_MAX_FILE_NUM" description="JCM_MAX_FILE_NUM_DESC"
+                type="number" default="0" min="0" showon="jcm_layout_media:1" />
+
+            <field name="media_base" label="JCM_FILE_PATH"
+                type="text" default="media/jcm" showon="jcm_layout_media:1" />
+
+            <field name="media_photosize" label="JCM_PHOTO_MAX_SIZE" description="JCM_PHOTO_MAX_SIZE_DESC"
+                type="text" default="1000" showon="jcm_layout_media:1" />
+
+            <field  name="sticker" 
+                    label="JCM_STICKER" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="sticker_auto" 
+                    label="JCM_STICKER_AUTO_POST" 
+                    description="JCM_STICKER_AUTO_POST_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1" showon="sticker:1">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+
+            <field  name="sticker_photo" 
+                    label="JCM_STICKER_PHOTO" 
+                    description="JCM_STICKER_PHOTO_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1" showon="sticker:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="sticker_photo_sz" 
+                    label="JCM_STICKER_PHOTO_SIZE" 
+                    description="JCM_STICKER_PHOTO_SIZE_DESC"
+                    type="number" 
+                    min="100"
+                    default="300" showon="sticker:1[AND]sticker_photo:1" />
+
+            <field  name="emoji" 
+                    label="JCM_EMOJI" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="location" 
+                    label="JCM_LOCATION" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field name="map_api_key" type="text" label="JCM_GG_MAP_API" default="" showon="location:1" />
+
+            <field  name="cm_style" 
+                    label="JCM_COMMENT_STYLE" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field name="cm_rule"
+                    label="JCM_COMMENT_RULE"
+                    description="JCM_COMMENT_RULE_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field name="cm_rule_content"
+                    label="JCM_COMMENT_RULE_CONTENT"
+                    type="editor"
+                    width="300" filter="safehtml" showon="cm_rule:1" />
+
+            <field name="cm_rule_checkbox"
+                    label="JCM_RULE_CHECKBOX"
+                    description="JCM_RULE_CHECKBOX_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    showon="cm_rule:1">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="giphy">
+            <field  name="giphy" 
+                    label="JCM_GIPHY" 
+                    description="JCM_GIPHY_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field type="text" name="giphy_key"
+                label="JCM_GIPHY_KEY" description="JCM_GIPHY_KEY_DESC" showon="giphy:1"/>
+        </fieldset>
+
+        <fieldset name="restrictions">
+            <field type="text" name="min_cm_length"
+                    label="JCM_MIN_COMMENT_LENGTH" default="0" />
+            <field type="text" name="max_cm_length"
+                    label="JCM_MAX_COMMENT_LENGTH" default="0" />
+            <field type="text" name="between_cm_post"
+                    label="JCM_PERIOD_BTW_POST" default="30" />
+            <field  name="filter_bad_word" 
+                    label="JCM_FILTER_BAD_WORD" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+            <field type="textarea" name="bad_words" label="JCM_BAD_WORDS" showon="filter_bad_word:1" />
+            
+            <field  name="bw_next" 
+                    label="JCM_FILTER_BAD_WORD_NEXT" 
+                    description="JCM_FILTER_BAD_WORD_NEXT_DESC"
+                    type="list"
+                    default="0"
+                    showon="filter_bad_word:1">
+                <option value="0">JCM_CENSOR_LIST</option>
+                <option value="1">JCM_MOD_LIST</option>
+                <option value="2">JCM_FORBIDDEN_LIST</option>
+            </field>
+
+            <field  name="hold_cm_link" 
+                    label="JCM_HOLD_CM_LINK" 
+                    description="JCM_HOLD_CM_LINK_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field type="number" name="max_post" label="JCM_MAX_POST_ENTRY" description="JCM_MAX_POST_ENTRY_DESC" min="0" default="0" />
+            <field  name="vote_own_cm" 
+                    label="JCM_VOTE_OWN_COMMENT" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+
+            <field type="number" name="unpublish_report_act" label="JCM_UNPUBLISH_CM_AFTER_REPORT_COUNT" min="0" description="JCM_UNPUBLISH_CM_AFTER_REPORT_COUNT_DESC" default="0" />
+
+            <field type="number" name="unpublish_downvote_act" label="JCM_UNPUBLISH_CM_AFTER_DOWNVOTE_COUNT" min="0" description="JCM_UNPUBLISH_CM_AFTER_DOWNVOTE_COUNT_DESC" default="0" />
+
+            <field  name="deny_edit_when_child" 
+                    label="JCM_EDIT_WHEN_CHILD"
+                    description="JCM_EDIT_WHEN_CHILD_DESC" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="edit_after" 
+                    label="JCM_EDIT_AFTER"
+                    description="JCM_EDIT_AFTER_DESC" 
+                    type="number"
+                    min="0"
+                    filter="integer"
+                    default="0" />
+
+            <field type="jcm_ogurl" label="JCM_CRONJOB_TASK_URL" method="cronjob_task" description="JCM_CRONJOB_TASK_URL_DESC" />
+        </fieldset>
+
+        <fieldset name="security">
+            <field  name="check_name" 
+                    label="JCM_CHECKNAME" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field  name="denied_names" type="textarea"
+                    label="JCM_DENIED_NAMES" default="administrator,moderator" showon="check_name:1" />
+            <field  name="blacklist" 
+                    label="JCM_ENABLE_BLACKLIST" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field  name="email_verify" 
+                    label="JCM_VERIFY_SUBSCRIBER_EMAIL" 
+                    type="radio" 
+                    class="btn-group"
+                    default="0"
+                    description="JCM_VERIFY_SUBSCRIBER_EMAIL_DESC">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="auto_suggest_sub" 
+                    label="JCM_SUGGEST_AUTO_SUBSCRIBER" 
+                    description="JCM_SUGGEST_AUTO_SUBSCRIBER_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="auto_sub" 
+                    label="JCM_AUTO_SUBSCRIBER"
+                    description="JCM_AUTO_SUBSCRIBER_DESC" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    showon="auto_suggest_sub:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+        </fieldset>
+
+        <fieldset name="advanced">
+            <field name="email_tpl_path" label="JCM_EMAIL_TPL_PATH"
+                type="text" description="JCM_EMAIL_TPL_PATH_DESC" default="administrator/components/com_jlexcomment/libraries/email_templates" />
+
+            <field  name="ip_address" 
+                    label="JCM_SAVE_IP_ADDRESS" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+
+            <field  name="cache" 
+                    label="JCM_COMMENT_CACHE" 
+                    description="JCM_COMMENT_CACHE_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="cache_on_change" 
+                    label="JCM_COMMENT_CACHE_CLEAR_ON_CHANGE" 
+                    description="JCM_COMMENT_CACHE_CLEAR_ON_CHANGE_DESC"
+                    type="list" 
+                    default="1" showon="cache:1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field name="cache_time" label="JCM_COMMENT_CACHE_TIME" description="JCM_COMMENT_CACHE_TIME_DESC" type="number" default="15" showon="cache:1" />
+
+            <field  name="count_cm" 
+                    label="JCM_COUNT_REPLY" 
+                    description="JCM_COUNT_REPLY_DESC"
+                    type="list"
+                    default="0">
+                <option value="1">JCM_COUNT_REPLY_OPT1</option>
+                <option value="0">JCM_COUNT_REPLY_OPT2</option>
+            </field>
+
+            <field  name="cm_link" 
+                    label="JCM_LINK_TYPE" 
+                    description="JCM_LINK_TYPE_DESC"
+                    type="list"
+                    default="0">
+                <option value="1">JCM_RELATIVE</option>
+                <option value="0">JCM_ABSOLUTE</option>
+                <option value="2">JCM_SYNC</option>
+            </field>
+
+            <field  name="filter_language" 
+                    label="JCM_FILTER_LANGUAGE" 
+                    description="JCM_FILTER_LANGUAGE_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+            
+
+            <field name="cm_bk_settings"
+                    label="JCM_IN_OUT_SETTINGS"
+                    type="jcm_in_out_settings" />
+
+            <field type="textarea" name="custom_css" label="JCM_CUSTOM_CSS" />
+
+            <field type="textarea" name="custom_js" label="JCM_CUSTOM_JS" filter="raw" />
+
+            <field  name="openform" 
+                    label="JCM_OPENFORM_ROOT_REPLY" 
+                    description="JCM_OPENFORM_ROOT_REPLY_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+            <field type="list" name="openformpos" label="JCM_OPENFORM_POS" default="top" showon="openform:1">
+                <option value="top">JCM_TOP</option>
+                <option value="bottom">JCM_BOTTOM</option>
+            </field>
+
+            <field  name="lightboxjs" 
+                    label="JCM_LIGHTBOX_SCRIPT" 
+                    description="JCM_LIGHTBOX_SCRIPT_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="twemoji" 
+                    label="JCM_TWEMOJI" 
+                    description="JCM_TWEMOJI_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_DISABLE</option>
+                <option value="1">JCM_ENABLE</option>
+            </field>
+
+            <field  name="dis_scroll" 
+                    label="JCM_SCROLL_ANIMATION" 
+                    description="JCM_SCROLL_ANIMATION_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+
+            <field  name="helpful" 
+                    label="JCM_HELPFUL_INTEGRATION"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field name="helpful_id" label="JCM_HELPFUL_SECTION_ID" type="number" filter="integer" min="1" default="1" showon="helpful:1" />
+        </fieldset>
+
+        <fieldset name="system">
+            <field name="theme" label="JCM_TEMPLATE" type="jcm_theme" default="default" />
+
+            <field  name="rtl" 
+                    label="JCM_RTL_LAYOUT" 
+                    description="JCM_RTL_LAYOUT_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="0">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="css_default" 
+                    label="JCM_LOAD_CSS" 
+                    type="radio" 
+                    class="btn-group"
+                    default="1"
+                    >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="jquery_ready" 
+                    label="JCM_JQUERY_READY" 
+                    description="JCM_JQUERY_READY_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+
+            <field  name="fontawesome" 
+                    label="JCM_FONTAWESOME" 
+                    description="JCM_FONTAWESOME_DESC"
+                    type="radio" 
+                    class="btn-group"
+                    default="1">
+                <option value="0">JCM_GLOBAL</option>
+                <option value="1">JCM_CDN</option>
+            </field>
+
+            <field  name="fontawesome_v" 
+                    label="JCM_FONTAWESOME_VERSION"
+                    type="list"
+                    default="v5">
+                <option value="v4">Version 4</option>
+                <option value="v5">Version 5</option>
+            </field>
+        </fieldset>
+    </fields>
+</form>

@@ -1,0 +1,140 @@
+a.hasPopover .icon-arrow-down-3,
+a.hasPopover .icon-arrow-up-3 {
+    margin-left: 5px;
+}
+
+#system-message-container {
+    float: none!important;
+}
+
+#jlexcomment {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+#jlexcomment a {text-decoration: none;}
+
+.center {text-align: center;}
+
+#jlexcomment .jcm-cm-full.active{z-index: 100000;}
+
+#jlexcomment._settings legend {
+    color: #f1f1f1;
+    margin: 25px 0 10px 0;
+    font-size: 1.2em;
+    background: linear-gradient(to right, #2a69b8, #fff);
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+#jlexcomment._settings .tab-content {
+    padding: 10px;
+}
+
+#jlexcomment._settings #adminForm {
+    background: #fff;
+}
+
+#jlexcomment._settings ul.nav-tabs {
+    background: #ddd;
+    margin: 0;
+    display: block;
+    text-align: left;
+}
+
+#jlexcomment._settings ul.nav-tabs>li {
+    display: inline-block;
+    padding: 0;
+}
+
+#jlexcomment._settings ul.nav-tabs>li>a {
+    display: block;
+    padding: 13px 20px 10px 20px;
+    color: #888;
+    border-bottom: 3px solid transparent;
+}
+
+#jlexcomment._settings ul.nav-tabs>li>a.active {
+    border-color: #2a69b8;
+    color: #000;
+    font-weight: 500;
+}
+
+#jlexcomment .table {
+    border: 1px solid #d1d1d1;
+}
+
+.view-item #jlexcomment h3 {
+    margin-top: 35px;
+}
+
+.input-append.input-group .btn {
+    border-radius: 0;
+}
+
+.input-append.input-group {
+    border-radius: 0.3rem;
+    overflow: hidden;
+}
+
+#permissions-sliders ul.nav-tabs {
+    float: left;
+    width: 250px;
+    background: none!important;
+    padding: 15px 0;
+}
+
+#permissions-sliders ul.nav-tabs>li {
+    display: block!important;
+}
+
+#permissions-sliders .tab-content {
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+}
+
+#jlexcomment._settings #permissions-sliders ul.nav-tabs>li>a {
+    border: 1px solid transparent;
+    border-radius: 7px 0 0 7px;
+    border-right-color: #fff!important;
+    padding: 10px 15px 10px 15px;
+}
+
+#permissions-sliders ul.nav-tabs>li>a.active {
+    border-color: #ccc!important;
+    position: relative;
+    right: -1px;
+}
+
+#permissions-sliders input[type="checkbox"] {
+    margin: 0 5px 0 0;
+}
+
+.jcm-reaction-item {
+    background: #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#jcm-reaction-text .jcm-reaction-item input {
+    border: none!important;
+    background: #f1f1f1;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+    margin: 0 3px 0 0;
+}
+
+#jcm-reaction-text ._add {
+    display: block;
+    width: 100%;
+}
+
+#jlexcomment._settings .tab-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.header {padding:0!important;}

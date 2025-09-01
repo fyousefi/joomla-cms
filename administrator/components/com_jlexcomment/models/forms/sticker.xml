@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="basic"
+            addfieldpath="/administrator/components/com_jlexcomment/models/fields">
+            <field
+                    type="text"
+                    name="caption"
+                    label="JCM_CAPTION"
+                    size="80"
+                    required="true" />
+
+            <field type="file" name="file" required="true"
+                    accept="image/*"
+                    label="JCM_SELECT_IMG_FILE" />
+
+            <field type="jcm_img" name="preview" label="JCM_PREVIEW" />
+
+            <field
+                    type="jcm_stickergroup"
+                    name="group_id"
+                    label="JCM_MN_STICKER_GROUP" default="-1" />
+
+            <field
+                    type="user"
+                    name="created_by"
+                    label="JCM_CREATED_BY"
+                    default="CURRENT"
+                    required="true"
+                    class="input-medium" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    label="JCM_CREATED_DATE"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s"
+                    class="input-medium" />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="1">JCM_PUBLISH</option>
+                    <option value="0">JCM_UNPUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

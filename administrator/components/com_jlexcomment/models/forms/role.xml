@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="basic">
+            <field  type="usergrouplist" 
+                    label="JCM_USER_GROUP" 
+                    name="group_id"
+                    required="true" />
+
+           <field
+                    type="text"
+                    name="title"
+                    label="JCM_CAPTION"
+                    size="30"
+                    required="true" />
+
+            <field
+                    type="color"
+                    name="colour"
+                    label="JCM_COLOR"
+                    required="true"
+                    default="#0f4d59" />
+
+            <field
+                    type="user"
+                    name="created_by"
+                    label="JCM_CREATED_BY"
+                    default="CURRENT"
+                    class="input-medium" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    id="created_time"
+                    label="JCM_CREATED_TIME"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s" />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="1">JCM_PUBLISH</option>
+                    <option value="0">JCM_UNPUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

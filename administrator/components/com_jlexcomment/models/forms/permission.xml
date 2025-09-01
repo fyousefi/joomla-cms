@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <fields name="jform">
+        <fieldset name="post">
+            <field
+                    name="u_post_comment"
+                    type="permission"
+                    label="JCM_PM_POST_NEW_COMMENT" />
+            <field
+                    name="u_reply_comment"
+                    type="permission"
+                    label="JCM_PM_POST_REPLY_TO_COMMENT" />
+            <field
+                    name="u_upload_file"
+                    type="permission"
+                    label="JCM_PM_UPLOAD_FILE" />
+            <field
+                    name="u_download_file"
+                    type="permission"
+                    label="JCM_PM_DOWNLOAD_FILE" />
+
+            <field
+                    name="u_mention"
+                    type="permission"
+                    label="JCM_PM_MENTION_PEOPLE" />
+
+            <field
+                    name="u_vote_comment"
+                    type="permission"
+                    label="JCM_PM_VOTE_A_COMMENT" />
+
+            <field
+                    name="u_report_comment"
+                    type="permission"
+                    label="JCM_PM_REPORT_A_COMMENT" />
+
+            <field
+                    name="u_sub_comment"
+                    type="permission"
+                    label="JCM_PM_SUBSCRIBE" />
+
+            <field
+                    name="u_auto_publish"
+                    type="permission"
+                    label="JCM_PM_AUTO_PUBLISH_COMMENT" />
+        </fieldset>
+
+        <fieldset name="administration">
+            <field
+                    name="u_edit_own_comment"
+                    type="permission"
+                    label="JCM_PM_EDIT_OWN_COMMENT"
+                    guest="false"
+                    />
+            
+            <field
+                    name="u_del_own_comment"
+                    type="permission"
+                    label="JCM_PM_DELETE_OWN_COMMENT"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_edit_any_comment"
+                    type="permission"
+                    label="JCM_PM_EDIT_ANY_COMMENT"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_del_any_comment"
+                    type="permission"
+                    label="JCM_PM_DELETE_ANY_COMMENT"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_state_any_comment"
+                    type="permission"
+                    label="JCM_PM_PUBLISH_ANY_COMMENT"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_feature_any_comment"
+                    type="permission"
+                    label="JCM_PM_FEATURE_ANY_COMMENT"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_show_ip_addr"
+                    type="permission"
+                    label="JCM_PM_SHOW_IP_ADDRESS"
+                    guest="false"
+                    />
+
+            <field
+                    name="u_show_author_email"
+                    type="permission"
+                    label="JCM_PM_SHOW_EMAIL_OF_AUTHOR"
+                    guest="false"
+                    />
+        </fieldset>
+    </fields>
+</permissions>

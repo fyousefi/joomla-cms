@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="basic"
+            addfieldpath="/administrator/components/com_jlexcomment/models/fields">
+            <field
+                    type="text"
+                    name="name"
+                    label="JCM_NAME"
+                    size="80"
+                    required="true" />
+
+           <field
+                    type="text"
+                    name="email"
+                    label="JCM_EMAIL"
+                    size="80"
+                    required="true" />
+
+            <field
+                    type="modal_object"
+                    name="obj_id"
+                    label="JCM_ENTRY"
+                    required="true" />
+
+            <field
+                    type="user"
+                    name="created_by"
+                    label="JCM_CREATED_BY"
+                    default="0"
+                    class="input-medium" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    id="created_time"
+                    label="JCM_CREATED_DATE"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s" />
+
+            <field
+                    type="radio"
+                    name="email_confirmed"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_EMAIL_VERIFIED"
+                    >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

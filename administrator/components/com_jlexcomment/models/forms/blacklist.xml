@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="basic"
+            addfieldpath="/administrator/components/com_jlexcomment/models/fields">
+            <field
+                    type="list"
+                    name="mt"
+                    label="JCM_METHOD"
+                    default="1"
+                    required="true">
+                <option value="1">JCM_USER_MEMBER</option>
+                <option value="3">JCM_IP_ADDRESS</option>
+            </field>
+
+           <field
+                    type="text"
+                    name="method_other"
+                    label="JCM_VALUE"
+                    size="80" showon="mt:3" hint="192.168.1.1" />
+
+            <field
+                    type="user"
+                    name="method_user"
+                    label="JCM_SELECT_USER"
+                    size="80"
+                    class="input-medium" showon="mt:1" />
+
+            <field type="textarea" name="reason" label="JCM_REASON" />
+
+            <field
+                    type="user"
+                    name="created_by"
+                    label="JCM_CREATED_BY"
+                    default="CURRENT"
+                    class="input-medium" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    id="created_time"
+                    label="JCM_CREATED_DATE"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s" />
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

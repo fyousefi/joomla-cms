@@ -1,0 +1,1 @@
+ALTER TABLE `#__jlexcomment_obj` CHANGE `title` `title` VARCHAR(250)  CHARACTER SET utf8mb4  NOT NULL  DEFAULT '';

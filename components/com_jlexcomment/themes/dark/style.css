@@ -1,0 +1,48 @@
+#jlexcomment #jcm-header a{color:#dfdfdf}
+#jlexcomment #jcm-header a:hover,#jlexcomment #jcm-header a.active{color:#fff}
+#jlexcomment .jcm-form{background:#242526;border:none}
+#jlexcomment .jcm-text-placeholder{color:#e1e1e1;left:10px;top:8px}
+#jlexcomment .jcm-input-cm{background:#3a3b3c;height:48px;border-radius:3px}
+#jlexcomment .jcm-form-cp.active .jcm-input-cm{border-radius:3px 3px 0 0}
+#jlexcomment ._controller{background:none;border-color:transparent}
+#jlexcomment .jcm-protect-layer{background:rgba(0,0,0,0.5)}
+#jlexcomment .jcm-btn-open{color:#1877f2}
+#jlexcomment .jcm-btn-open.jcm-btn-emoticon{color:#ffce2f}
+#jlexcomment .jcm-btn-open.jcm-btn-upload{color:#45bd62}
+#jlexcomment input[type="text"],#jlexcomment input[type="email"],#jlexcomment input[type="password"],#jlexcomment textarea{border:none;background:#3a3b3c;padding:0 10px;color:#fff}
+#jlexcomment button,#jlexcomment button.jcm-btn-post.forMember{background:#1877f2}
+#jlexcomment .jcm_form_input .jcm-btn-cancel{color:#ccc}
+#jlexcomment .jcm-media-preview{background:rgba(255,255,255,0.1)}
+#jlexcomment .jcm-media-preview:nth-child(2n){background:rgba(255,255,255,0.2)}
+#jlexcomment .jcm-media-preview .jcm-ext{background:#45bd62;text-shadow:none}
+#jlexcomment .jcm-media-preview ._size{color:#aaa}
+#jlexcomment ._media_box{border-color:rgba(0,0,0,0.02)}
+#jlexcomment .jcm-sticker-preview{border:none;background:rgba(0,0,0,0.4)}
+#jlexcomment .jcm-flex-content{background:#242526;padding:10px;border-radius:7px}
+#jlexcomment .jcm-post-body{color:#e4e6eb}
+#jlexcomment .jcm-date,#jlexcomment ul.jcm-task-list a{color:rgba(255,255,255,0.6)}
+#jlexcomment ul.jcm-dropdown-menu{border:none;background:rgba(0,0,0,0.95)}
+#jlexcomment .jcm-dropdown-menu > li > ._dx{background:none;color:#dfdfdf}
+.jcm-dialog{color:#333}
+#jlexcomment.jcm-xsmall .hovercard{margin: 0 5px 0 5px; top: 5px;}
+
+.jcm-dialog{color:#fff;background:#222}
+.jcm-dialog.wide{box-shadow:2px 2px 12px red}
+.jcm-dialog .jcm-dg-caption{background:rgba(0,0,0,.2);color:inherit;border-color:rgba(255,255,255,.1)}
+.jcm-dialog .jcm-dg-content{background:none}
+.jcm-dialog .jcm-dg-footer{background:none;border-color:rgba(255,255,255,.2)}
+.jcm-dialog label{color:#eee}
+.jcm-dialog input[type="text"],.jcm-dialog input[type="email"],.jcm-dialog input[type="password"],.jcm-dialog textarea{background:#3a3b3c!important;border:none;color:#fff!important}
+.jcm-dg-comments .uc-date { color: #ddd; }
+.jcm-dg-comments p.uc-comment { color: #e1e1e1; }
+
+.tribute-container ul{padding:5px 0;border-radius:5px;box-shadow:0 0 10px rgba(0,0,0,0.4);background:#444}
+.tribute-container li.highlight,.tribute-container li:hover{background:#444}
+.jcm-dg-thumb label.thumb-remove{background:rgba(0,0,0,0.5)}
+ul.jcm-list-notifications li.unread a
+ul.jcm-list-notifications li+li a{border-color:#333}
+ul.jcm-list-notifications a{background:rgba(0,0,0,0.2);color:#fff;text-decoration:none}
+ul.jcm-list-notifications ._comment{color:#dfdfdf}
+ul.jcm-list-notifications li.unread a{background:rgba(255,255,255,.1)}
+
+#jlexcomment a._page_previous,#jlexcomment a._page_next{background:rgba(0,0,0,0.75)}

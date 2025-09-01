@@ -1,0 +1,12 @@
+body.com_jlexcomment.view-dashboard {
+    background: #f0f4fb;
+}
+
+body.com_jlexcomment.view-dashboard #jlexcomment {
+	margin-top: 30px;
+}
+
+.view-settings #adminForm,
+.view-import .jcm-box {
+    box-shadow: none;
+}

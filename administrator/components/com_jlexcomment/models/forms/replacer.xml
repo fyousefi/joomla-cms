@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="jform">
+        <fieldset name="basic">
+            <field
+                    type="text"
+                    name="caption"
+                    label="JCM_CAPTION"
+                    required="true" />
+
+            <field
+                    type="textarea"
+                    name="regexClause"
+                    label="Regex (PHP pattern)"
+                    required="true" filter="raw" />
+
+            <field
+                    type="textarea"
+                    name="replaceClause"
+                    label="JCM_REPLACE_TO"
+                    required="true" filter="raw" />
+
+            <field
+                    type="user"
+                    name="created_by"
+                    label="JCM_CREATED_BY"
+                    default="CURRENT"
+                    required="true"
+                    class="input-medium" />
+
+            <field
+                    type="calendar"
+                    name="created_time"
+                    id="created_time"
+                    label="JCM_CREATED_DATE"
+                    default="now"
+                    format="%Y-%m-%d %H:%M:%S"
+                    filterformat="Y-m-d H:i:s" />
+
+            <field
+                    type="usergrouplist"
+                    name="group_cid"
+                    id="created_time"
+                    label="JCM_USER_GROUP"
+                    multiple="true"
+                    required="true" />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="1">JCM_PUBLISH</option>
+                    <option value="0">JCM_UNPUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

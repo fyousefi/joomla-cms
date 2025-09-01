@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="jform">
+        <fieldset name="basic">
+            <field
+                    type="text"
+                    name="name"
+                    label="JCM_NAME"
+                    size="80"
+                    required="true" />
+
+            <field
+                    type="textarea"
+                    name="description"
+                    label="JCM_DESCRIPTION" />
+
+            <field
+                    type="radio"
+                    name="published"
+                    default="1"
+                    class="btn-group"
+                    label="JCM_PUBLISH"
+                    >
+                    <option value="1">JCM_PUBLISH</option>
+                    <option value="0">JCM_UNPUBLISH</option>
+            </field>
+
+            <field type="hidden" name="id" default="0" />
+        </fieldset>
+    </fields>
+</form>

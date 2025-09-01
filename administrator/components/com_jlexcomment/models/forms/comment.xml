@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+<fieldset name="basic" addfieldpath="/administrator/components/com_jlexcomment/models/fields">
+        <field
+                type="textarea"
+                name="comment"
+                label="JCM_COMMENT"
+                required="true"
+                id="jcm-comment-textbox"
+                filter="safehtml"
+                />
+
+        <field type="modal_sticker"
+                name="sticker_id"
+                label="JCM_STICKER"
+                default="0"
+                />
+
+        <field type="text"
+                name="giphy_id"
+                label="JCM_GIPHY"
+                default=""
+                hint="GIPHY_ID,WIDTH,HEIGHT"
+                />
+
+        <field
+                type="modal_object"
+                name="obj_id"
+                label="JCM_ENTRY"
+                required="true" />
+
+        <field
+                type="modal_comment"
+                name="parent_id"
+                label="JCM_PARENT_COMMENT"
+                 />
+
+        <field
+                type="calendar"
+                name="created_time"
+                label="JCM_CREATED_DATE"
+                required="true"
+                default="now"
+                format="%Y-%m-%d %H:%M:%S"
+                filterformat="Y-m-d H:i:s"
+                class="input-medium" filter="none" />
+
+        <field
+                type="calendar"
+                name="modified_time"
+                label="JCM_MODIFIED_DATE"
+                format="%Y-%m-%d %H:%M:%S"
+                filterformat="Y-m-d H:i:s"
+                class="input-medium" filter="none" />
+
+
+        <field name="created_by" type="user"
+            label="JCM_CREATED_BY" default="CURRENT"
+            class="input-medium"  />
+
+        <field name="guest_name" type="text"
+            label="JCM_GUEST_NAME" default="" id="guest_name" showon="created_by:0" />
+
+        <field name="guest_email" type="text"
+            label="JCM_GUEST_EMAIL" default="" id="guest_email" showon="created_by:0" />
+
+        <field name="modified_by" type="user"
+            label="JCM_MODIFIED_BY"
+            class="input-medium"  />
+
+        <field
+                type="radio"
+                name="published"
+                default="1"
+                class="btn-group"
+                label="JCM_PUBLISH"
+                layout="joomla.form.field.radio.switcher"
+                >
+                <option value="0">JCM_UNPUBLISH</option>
+                <option value="1">JCM_PUBLISH</option>
+        </field>
+
+        <field
+                type="radio"
+                name="featured"
+                default="0"
+                class="btn-group"
+                label="JCM_FEATURE"
+                layout="joomla.form.field.radio.switcher"
+                >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+        </field>
+
+        <field
+                type="radio"
+                name="locked"
+                default="0"
+                class="btn-group"
+                label="JCM_MARK_PRIVATE_COMMENT"
+                layout="joomla.form.field.radio.switcher"
+                >
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+        </field>
+
+        <field type="jcm_style"
+                name="style_id"
+                label="JCM_STYLE"
+                default="0"
+                />
+
+        <field name="language" type="contentlanguage"
+            label="Language" class="custom-select">
+            <option value="*">JALL</option>
+        </field>
+
+        <field type="hidden" name="id" default="0" />
+    </fieldset>
+
+    <fields name="params">
+        <fieldset name="params">
+            <fields name="map">
+                <field type="text" name="name" label="JCM_NAME" />
+                <field type="text" name="address" label="JCM_EMBED_LOCATION" />
+                <field type="text" name="icon" label="JCM_ICON" />
+                <field type="text" name="lng" label="JCM_LNG" />
+                <field type="text" name="lat" label="JCM_LAT" />
+            </fields>
+        </fieldset>
+    </fields>
+</form>
