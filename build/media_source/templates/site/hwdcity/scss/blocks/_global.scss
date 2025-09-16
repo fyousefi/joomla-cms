@@ -61,13 +61,14 @@ h6 {
 
 a {
   color: var(--#{$prefix}link-color);
+  transition: .3s ease;
 
   &:hover {
     color: var(--#{$prefix}link-hover-color);
   }
 
   &:not([class]) {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   &.navbar-brand {

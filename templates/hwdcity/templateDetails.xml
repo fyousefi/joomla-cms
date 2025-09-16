@@ -18,6 +18,10 @@
 		<filename>templateDetails.xml</filename>
 		<folder>html</folder>
 	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/tpl_hwdcity.ini</language>
+		<language tag="en-GB">language/en-GB/tpl_hwdcity.sys.ini</language>
+	</languages>
 	<media destination="templates/site/hwdcity" folder="media">
 		<folder>js</folder>
 		<folder>css</folder>

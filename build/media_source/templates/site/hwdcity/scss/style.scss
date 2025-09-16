@@ -754,7 +754,29 @@ $iransansx-font-path: "../fonts" !default;
 }
 
 
+/* Content */
 
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left:  13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom:13px solid $white;
+}
+
+.jcm-count-cm {
+  transition: 300ms;
+}
+
+.com-content-article__body {
+  p a {
+    color: $danger;
+    transition: 300ms;
+    &:hover {
+      color: #343434;
+    }
+  }
+}
 
 
 

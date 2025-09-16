@@ -126,9 +126,11 @@
   }
 
   .item-image {
-    margin-top: 3px;
-    margin-bottom: 15px;
     overflow: hidden;
+
+    img {
+      width: 100%
+    }
 
     .boxed & {
       margin-bottom: 0;
@@ -153,6 +155,14 @@
 
     .image-right & {
       padding-right: 25px;
+    }
+
+    p a {
+      color: $danger;
+      transition: 300ms;
+      &:hover {
+        color: #343434;
+      }
     }
   }
 

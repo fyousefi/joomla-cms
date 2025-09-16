@@ -7,6 +7,8 @@
  * @author      JLexArt.COM (support@jlexart.com)
  */
 
+use Joomla\CMS\Language\Text;
+
 defined('_JEXEC') or die;
 
 class plgContentJLexComment extends JPlugin
@@ -39,7 +41,7 @@ class plgContentJLexComment extends JPlugin
             case "k2":
                 if(!isset($row->id)) return false;
                 $id = $row->id;
-                
+
                 break;
 
             case "jdownloads":
@@ -50,7 +52,7 @@ class plgContentJLexComment extends JPlugin
 
             case "virtuemart":
                 if(!isset($row->virtuemart_product_id)) return false;
-                $id = $row->virtuemart_product_id;  
+                $id = $row->virtuemart_product_id;
                 break;
 
             case "dpcalendar":
@@ -100,7 +102,7 @@ class plgContentJLexComment extends JPlugin
                 $item->title  = $row->title;
                 $item->catid  = @$row->catid;
                 $item->featured = @$row->featured;
-                
+
                 $field  = "text";
 
                 if($option=="content")
@@ -127,7 +129,7 @@ class plgContentJLexComment extends JPlugin
 
                 $item->title  = $row->product_name;
                 $item->catid  = $row->virtuemart_category_id;
-                $item->rid    = $app->input->getInt("virtuemart_product_id", 0);  
+                $item->rid    = $app->input->getInt("virtuemart_product_id", 0);
                 break;
 
             case "dpcalendar":
@@ -166,7 +168,7 @@ class plgContentJLexComment extends JPlugin
                 return $item;
             }
         }
-        
+
         switch ($option)
         {
             case 'content':
@@ -245,7 +247,7 @@ class plgContentJLexComment extends JPlugin
         if ($this->params->def('joomla_child',1)<1)
         {
             return false;
-        } 
+        }
 
         $db = JFactory::getDbo();
         $parent = $catid;
@@ -335,7 +337,7 @@ class plgContentJLexComment extends JPlugin
     {
         $this->_enabled($context,$row);
     }
-    
+
 
     public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
     {
@@ -346,12 +348,12 @@ class plgContentJLexComment extends JPlugin
                     ))) return '';
 
         $info = $this->_enabled($context, $row);
-        
+
         if(!$info || !$info->enable) return '';
-        
+
         $loader = JPATH_ROOT . '/components/com_jlexcomment/load.php';
         require_once $loader;
-        
+
         $url = "";
         switch ($info->option)
         {
@@ -367,14 +369,14 @@ class plgContentJLexComment extends JPlugin
                 $url = JRoute::_('index.php?option=com_jdownloads&amp;view=download&amp;id='.$row->slug.'&amp;catid='.$row->cat_id);
                 break;
         }
-        
+
         $data = JLexCommentLoader::count_cm( $info->option, $info->id, null, false);
 
         $url  = !empty($data->url) ? $data->url : $url;
 
-        $icon = '<img src="'.JUri::base(true).'/plugins/content/jlexcomment/assets/icon.png" />';
-        $prefix = $data->cm_count > 0 ? ($data->cm_count>1?JText::sprintf("PLG_CONTENT_JCM_COMMENTS",$data->cm_count):JText::_("PLG_CONTENT_JCM_COMMENT")) : JText::_("PLG_CONTENT_JCM_WRITE_COMMENT");
-        $html = '<a class="jcm-count-cm" href="'.$url.'#comment">'. $icon .' '. $prefix .'</a>';
+        $icon = '<i class="fa-solid fa-comments"></i>';
+        $prefix = $data->cm_count > 0 ? ($data->cm_count>1?Text::sprintf("PLG_CONTENT_JCM_COMMENTS",'('.$data->cm_count.')'):JText::_("PLG_CONTENT_JCM_COMMENT")) : JText::_("PLG_CONTENT_JCM_WRITE_COMMENT");
+        $html = '<a class="jcm-count-cm text-decoration-none py-2 px-27 fs-9 position-absolute bottom-0 end-0 link-danger" href="'.$url.'#comment">'. $prefix .' '. $icon .'</a>';
 
         return $html;
     }
@@ -382,7 +384,7 @@ class plgContentJLexComment extends JPlugin
     public function onContentAfterDisplay($context, &$row, &$params, $page = 0)
     {
         $info = $this->_enabled( $context, $row );
-        
+
         if (!$info || !$info->enable || !$info->entry) return '';
 
         $loader = JPATH_ROOT . '/components/com_jlexcomment/load.php';
@@ -410,9 +412,9 @@ class plgContentJLexComment extends JPlugin
             {
                 $loader = JPATH_ROOT . '/components/com_jlexcomment/load.php';
                 require_once $loader;
-                
+
                 $output = JLexCommentLoader::count_cm( 'icagenda', $item->id, $item->url, true);
-            
+
                 return $output;
             }
 
@@ -436,7 +438,7 @@ class plgContentJLexComment extends JPlugin
             {
                 $loader = JPATH_ROOT . '/components/com_jlexcomment/load.php';
                 require_once $loader;
-            
+
                 $output = JLexCommentLoader::init('icagenda', $item->id, $item->title);
                 echo $output;
             }
