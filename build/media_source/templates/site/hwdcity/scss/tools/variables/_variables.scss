@@ -365,6 +365,9 @@ $font-sizes: (
 .w-35 { width: 35% !important; }
 .w-40 { width: 40% !important; }
 
+// Custom height
+.h-65 { height: 260px !important; } // 260px in 400px
+
 // Custom Link color
 .link-danger {
   color: var(--danger) !important;
