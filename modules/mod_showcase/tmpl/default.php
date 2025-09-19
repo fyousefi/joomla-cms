@@ -25,7 +25,7 @@ use Joomla\Component\Content\Site\Helper\RouteHelper;
         <div class="position-relative overflow-hidden bg-dark img-hover-blur-dark">
             <div class="ratio ratio-16x9-plus-g1">
                 <?php if ($img): ?>
-                    <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" loading="lazy">
+                    <img src="<?= $img ?>" class="w-100 h-100 object-fit-cover" alt="<?= htmlspecialchars($item->title) ?>" fetchpriority="high">
                 <?php endif; ?>
             </div>
             <div class="position-absolute top-0 end-0 m-2 z-2">
