@@ -778,6 +778,13 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
-
+/* Hide/show sticky menu animation */
+.container-nav {
+  transition: transform .2s ease;
+  will-change: transform;
+}
+.container-nav.nav-hide {
+  transform: translateY(-100%);
+}
 
 

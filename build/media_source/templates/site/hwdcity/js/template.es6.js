@@ -118,6 +118,62 @@ Joomla = window.Joomla || {};
     }
   });
 
+  // Menu scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.container-nav');
+    if (!nav) return;
+
+    // The section after which we allow hiding:
+    const triggerEl = document.querySelector('.container-top-b');
+
+    // Compute the document Y at which hiding is allowed
+    let triggerY = 0; // default: top of page (i.e., always allow) when element missing
+    function computeTrigger() {
+      if (!triggerEl) { triggerY = 0; return; }
+      const r = triggerEl.getBoundingClientRect();
+      triggerY = window.pageYOffset + r.top; // absolute Y of .container-top-b
+    }
+
+    let lastY = window.pageYOffset || 0;
+    const threshold = 6; // px to avoid jitter
+    const minTop = 32; // always show very near top
+    const isMenuOpen = () => !!document.querySelector('.navbar-collapse.show');
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.pageYOffset || 0;
+        const dy = y - lastY;
+
+        // If we're before the trigger section, keep the nav visible.
+        const beforeTrigger = y < Math.max(triggerY, minTop);
+
+        if (beforeTrigger || isMenuOpen()) {
+          nav.classList.remove('nav-hide');
+        } else if (dy > threshold) {
+          nav.classList.add('nav-hide'); // scrolling down -> hide
+        } else if (dy < -threshold) {
+          nav.classList.remove('nav-hide'); // scrolling up -> show
+        }
+
+        lastY = y;
+        ticking = false;
+      });
+    }
+
+    // Init + listeners
+    computeTrigger();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { computeTrigger(); lastY = window.pageYOffset || 0; });
+    window.addEventListener('load', computeTrigger);
+
+    // Optional: keep trigger updated if that section’s height changes
+    if ('ResizeObserver' in window && triggerEl) {
+      new ResizeObserver(computeTrigger).observe(triggerEl);
+    }
+  });
   /**
    * Initialize when a part of the page was updated
    */
