@@ -123,39 +123,37 @@ Joomla = window.Joomla || {};
     const nav = document.querySelector('.container-nav');
     if (!nav) return;
 
-    // The section after which we allow hiding:
     const triggerEl = document.querySelector('.container-top-b');
+    const mq = window.matchMedia('(min-width: 992px)'); // desktop only
 
-    // Compute the document Y at which hiding is allowed
-    let triggerY = 0; // default: top of page (i.e., always allow) when element missing
+    let triggerY = 0;
     function computeTrigger() {
       if (!triggerEl) { triggerY = 0; return; }
       const r = triggerEl.getBoundingClientRect();
-      triggerY = window.pageYOffset + r.top; // absolute Y of .container-top-b
+      triggerY = window.pageYOffset + r.top;
     }
 
     let lastY = window.pageYOffset || 0;
-    const threshold = 6; // px to avoid jitter
-    const minTop = 32; // always show very near top
+    const threshold = 6;
+    const minTop = 32;
     const isMenuOpen = () => !!document.querySelector('.navbar-collapse.show');
 
     let ticking = false;
     function onScroll() {
+      if (!mq.matches) return; // disable on tablets/phones
       if (ticking) return;
       ticking = true;
+
       requestAnimationFrame(() => {
         const y = window.pageYOffset || 0;
         const dy = y - lastY;
-
-        // If we're before the trigger section, keep the nav visible.
         const beforeTrigger = y < Math.max(triggerY, minTop);
 
         if (beforeTrigger || isMenuOpen()) {
           nav.classList.remove('nav-hide');
-        } else if (dy > threshold) {
-          nav.classList.add('nav-hide'); // scrolling down -> hide
-        } else if (dy < -threshold) {
-          nav.classList.remove('nav-hide'); // scrolling up -> show
+        } else {
+          if (dy > threshold) nav.classList.add('nav-hide'); // down -> hide
+          if (dy < -threshold) nav.classList.remove('nav-hide'); // up -> show
         }
 
         lastY = y;
@@ -163,15 +161,38 @@ Joomla = window.Joomla || {};
       });
     }
 
-    // Init + listeners
-    computeTrigger();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', () => { computeTrigger(); lastY = window.pageYOffset || 0; });
-    window.addEventListener('load', computeTrigger);
+    function enableDesktopMode() {
+      computeTrigger();
+      lastY = window.pageYOffset || 0;
+      onScroll(); // sync state immediately
+    }
 
-    // Optional: keep trigger updated if that section’s height changes
+    function disableMobileMode() {
+      // ensure nav is visible when leaving desktop
+      nav.classList.remove('nav-hide');
+    }
+
+    // Init + listeners
+    enableDesktopMode();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      if (mq.matches) enableDesktopMode();
+      else disableMobileMode();
+    });
+    window.addEventListener('load', () => {
+      if (mq.matches) enableDesktopMode();
+    });
+
+    // React to breakpoint changes immediately
+    if (mq.addEventListener) {
+      mq.addEventListener('change', (e) => (e.matches ? enableDesktopMode() : disableMobileMode()));
+    } else if (mq.addListener) { // older browsers
+      mq.addListener((e) => (e.matches ? enableDesktopMode() : disableMobileMode()));
+    }
+
+    // Keep trigger updated if that section’s height changes
     if ('ResizeObserver' in window && triggerEl) {
-      new ResizeObserver(computeTrigger).observe(triggerEl);
+      new ResizeObserver(() => { if (mq.matches) computeTrigger(); }).observe(triggerEl);
     }
   });
   /**
