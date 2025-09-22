@@ -38,13 +38,13 @@
 		<position>banner-mid</position>
 		<position>top-b</position>
 		<position>hot-topic</position>
-		<position>right</position>
-		<position>right-fixed</position>
+		<position>right-top</position>
+		<position>sidebar-right</position>
 		<position>breadcrumbs</position>
 		<position>content-top</position>
 		<position>content-bottom</position>
-		<position>left</position>
-		<position>left-fixed</position>
+		<position>left-top</position>
+		<position>sidebar-left</position>
 		<position>bottom-a</position>
 		<position>banner-bottom</position>
 		<position>bottom-b</position>
