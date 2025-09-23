@@ -245,6 +245,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
         <?php if ($this->countModules('sidebar-left', true)) : ?>
             <div class="grid-child container-sidebar-left sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+                <jdoc:include type="modules" name="left-top" style="noCard" />
                 <jdoc:include type="modules" name="sidebar-left" style="card" />
             </div>
         <?php endif; ?>
@@ -264,6 +265,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 
         <?php if ($this->countModules('sidebar-right', true)) : ?>
             <div class="grid-child container-sidebar-right sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+                <jdoc:include type="modules" name="right-top" style="noCard" />
                 <jdoc:include type="modules" name="sidebar-right" style="card" />
             </div>
         <?php endif; ?>
