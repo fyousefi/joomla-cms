@@ -195,6 +195,7 @@ Joomla = window.Joomla || {};
       new ResizeObserver(() => { if (mq.matches) computeTrigger(); }).observe(triggerEl);
     }
   });
+
   /**
    * Initialize when a part of the page was updated
    */

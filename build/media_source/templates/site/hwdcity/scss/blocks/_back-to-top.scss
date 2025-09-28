@@ -8,13 +8,13 @@
   bottom: 1rem;
   z-index: 10000;
   padding: $hwcity-grid-gutter * .5;
-  color: var(--hwcity-color-primary, $standard-color-primary);
+  color: var(--white, $white);
   pointer-events: all;
-  background-color: var(--white, $white);
-  border: 1px solid var(--hwcity-color-primary, $standard-color-primary);
-  border-radius: $border-radius;
+  background-color: var(--hwcity-color-hover);
+  //border: 1px solid var(--hwcity-color-primary, $standard-color-primary);
+  //border-radius: $border-radius;
   opacity: 0;
-  transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in, background-color 200ms ease-in;
 
   &.visible {
     opacity: 1;
@@ -23,7 +23,7 @@
   &:hover,
   &:focus {
     color: var(--white, $white);
-    background-color: var(--hwcity-color-hover);
-    border-color: var(--white, $white);
+    background-color: var(--black, $black);
+    //border-color: var(--white, $white);
   }
 }

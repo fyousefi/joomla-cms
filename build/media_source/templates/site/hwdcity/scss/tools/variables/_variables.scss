@@ -321,7 +321,8 @@ $spacers: (
   25: $spacer * 0.625,   // 10 px
   26: $spacer * 0.688,   // 11.008 px
   27: $spacer * 1.25,    // 20 px
-  28: $spacer * 1.875    // 30 px
+  28: $spacer * 1.875,   // 30 px
+  29: $spacer * 0.813    // 13 px
 );
 
 // Aspect ratios
@@ -344,20 +345,20 @@ $badge-skew-x:          15deg;     // Skew angle (Positive = right-leaning (use 
 
 // Custom Fonts
 $font-sizes: (
-  1: 2.25rem,
-  2: 1.75rem,
-  3: 1.5rem,
-  4: 1.4rem,
-  5: 1.25rem,
-  6: 1.1rem,
-  7: 1rem, // 16 px
-  8: .875rem, // 14px
-  9: .8125rem, // 13px
-  10: .75rem, //  12px
+  1: 2.25rem,   // 36 px
+  2: 1.75rem,   // 28 px
+  3: 1.5rem,    // 24 px
+  4: 1.4rem,    // 22.4 px
+  5: 1.25rem,   // 20 px
+  6: 1.1rem,    // 17.6 px
+  7: 1rem,      // 16 px
+  8: .875rem,   // 14px
+  9: .8125rem,  // 13px
+  10: .75rem,   // 12px
   11: .6875rem, // 11px
-  12: .625rem, // 10px
-  13: .938rem, // 15px
-  14: .781rem, // 12.5 px
+  12: .625rem,  // 10px
+  13: .938rem,  // 15px
+  14: .781rem,  // 12.5 px
 );
 
 // Custom widths
@@ -378,3 +379,4 @@ $font-sizes: (
     color: var(--black) !important;
   }
 }
+

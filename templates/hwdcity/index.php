@@ -44,6 +44,7 @@ $assetColorName  = 'theme.' . $paramsColorName;
 // Use a font scheme if set in the template style options
 $paramsFontScheme = $this->params->get('useFontScheme', false);
 $fontStyles       = '';
+$isUserLayout     = ($option == 'com_users') ? 'd-none' : '';
 
 if ($paramsFontScheme) {
     if (stripos($paramsFontScheme, 'https://') === 0) {
@@ -143,7 +144,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     . $hasClass
     . ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">
-    <header class="header container-header full-width<?php echo $stickyHeader ? ' ' . $stickyHeader : ''; ?>">
+    <header class="header container-header full-width <?php echo $stickyHeader ? ' ' . $stickyHeader : ''; echo $isUserLayout ?>">
 
         <?php if ($this->countModules('topbar')) : ?>
             <div class="container-topbar">
@@ -244,9 +245,9 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('sidebar-left', true)) : ?>
-            <div class="grid-child container-sidebar-left sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
-                <jdoc:include type="modules" name="left-top" style="noCard" />
-                <jdoc:include type="modules" name="sidebar-left" style="card" />
+            <div class="grid-child container-sidebar-left sticky-lg-top <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+                    <jdoc:include type="modules" name="left-top" style="noCard" />
+                    <jdoc:include type="modules" name="sidebar-left" style="card" />
             </div>
         <?php endif; ?>
 
@@ -264,7 +265,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         </div>
 
         <?php if ($this->countModules('sidebar-right', true)) : ?>
-            <div class="grid-child container-sidebar-right sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+            <div class="grid-child container-sidebar-right sticky-lg-top <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
                 <jdoc:include type="modules" name="right-top" style="noCard" />
                 <jdoc:include type="modules" name="sidebar-right" style="card" />
             </div>
@@ -309,8 +310,8 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     <?php endif; ?>
 
     <?php if ($this->params->get('backTop') == 1) : ?>
-        <a href="#top" id="back-top" class="back-to-top-link" aria-label="<?php echo Text::_('TPL_hwdcity_BACKTOTOP'); ?>">
-            <span class="icon-arrow-up icon-fw" aria-hidden="true"></span>
+        <a href="#top" id="back-top" class="back-to-top-link rounded-0 py-2 px-29 " aria-label="<?php echo Text::_('TPL_hwdcity_BACKTOTOP'); ?>">
+            <span class="icon-arrow-up fs-6 icon-fw align-middle" aria-hidden="true"></span>
         </a>
     <?php endif; ?>
 

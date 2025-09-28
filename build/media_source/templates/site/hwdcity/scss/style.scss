@@ -37,6 +37,10 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 // Modules
 .card-header {
   color: $standard-color-hover;
@@ -786,5 +790,44 @@ $iransansx-font-path: "../fonts" !default;
 .container-nav.nav-hide {
   transform: translateY(-100%);
 }
+
+/* Article Social Links */
+
+.social-icons {
+  @include media-breakpoint-up(md) {
+    font-size: 20px;
+    line-height: 1;
+    padding-left: .5rem !important;
+  }
+  a {
+    color: #6c757d;
+    transition: color 0.3s;
+    &:hover {
+      color: $danger; /* Bootstrap primary color */
+    }
+  }
+}
+
+/* Forms */
+input, input[type="text"], input[type="password"], input[type="email"],
+button[type="button"], .form-check-input[type="checkbox"] {
+  border-radius: 0;
+}
+
+/* Left/Right Sidebar */
+
+.site-grid,
+.container-sidebar-left,
+.container-sidebar-right { overflow: visible; }
+
+@media (min-width: 992px) {
+  /* applied only while scrolling down */
+  .is-sticky-down {
+    position: sticky;
+    top: calc(var(--navH, 0px) + 20px);
+  }
+}
+
+
 
 

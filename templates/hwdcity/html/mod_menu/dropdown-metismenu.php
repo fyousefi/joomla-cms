@@ -14,8 +14,8 @@ use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Utilities\ArrayHelper;
 
 /** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
-$wa = $app->getDocument()->getWebAssetManager();
-$wa->disableScript('mod_menu');
+/*$wa = $app->getDocument()->getWebAssetManager();
+$wa->disableScript('mod_menu');*/
 
 $attributes          = [];
 $attributes['class'] = 'mod-menu mod-menu_dropdown mod-list hwdcity-menu ' . $class_sfx;

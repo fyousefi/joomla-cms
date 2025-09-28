@@ -13,20 +13,11 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
-use Joomla\CMS\Factory;
 
 $blockPosition = $displayData['params']->get('info_block_position', 0);
-$input = Factory::getApplication()->getInput();
-$option = $input->getCmd('option', '');
-$view   = $input->getCmd('view', '');
-$articleView = ($option === 'com_content' && $view === 'article');
-
-// Get the current URL and article title
-$currentUrl = Route::_(RouteHelper::getArticleRoute($displayData['item']->slug, $displayData['item']->catid, $displayData['item']->language));
-$articleTitle = $displayData['item']->title;
 
 ?>
-<div class="article-info text-muted fs-14 <?= $articleView ? 'py-3' : 'py-2' ?>">
+<div class="article-info text-muted fs-14 py-2">
 
     <?php
     if (
@@ -81,37 +72,6 @@ $articleTitle = $displayData['item']->title;
         <?php if ($displayData['params']->get('show_hits')) : ?>
             <?php echo $this->sublayout('hits', $displayData); ?>
         <?php endif; ?>
-    <?php endif; ?>
-
-    <?php if ($articleView) : ?>
-        <!-- Social media sharing block -->
-                <span class="social-icons float-end ps-1">
-                    <a href="https://telegram.me/share/url?url=<?php echo $currentUrl; ?>&text=<?php echo $articleTitle; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در تلگرام">
-                        <span class="fab fa-telegram" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end ps-1">
-                    <a href="https://x.com/intent/post?text=<?php echo $articleTitle; ?>. <?php echo $currentUrl; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در توییتر">
-                        <span class="fab fa-x-twitter" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end ps-1">
-                    <a href="whatsapp://send?text=<?php echo $articleTitle; ?>. <?php echo $currentUrl; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در این واتس اپ">
-                        <span class="fab fa-whatsapp" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end">
-                    <a href="mailto:?subject=<?php echo $articleTitle; ?>&body=<?php echo $currentUrl; ?>"
-                       aria-label="اشتراک با ایمیل">
-                        <span class="fa fa-envelope" aria-hidden="true"></span>
-                    </a>
-                </span>
     <?php endif; ?>
 </div>
 

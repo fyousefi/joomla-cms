@@ -50,7 +50,7 @@ if (!empty($attribs['class'])) {
 
 // Header style (centered, red like screenshots)
 $headerWrapCls = 'hwd-card-header d-flex justify-content-start align-items-center py-26 px-3 border-bottom border-2';
-$headerTextCls = 'text-danger fw-bold fs-7 m-0' . $headerCls;
+$headerTextCls = 'text-danger fw-bold fs-7 m-0 ' . $headerCls;
 
 // Render
 ?>
