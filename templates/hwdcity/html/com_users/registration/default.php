@@ -13,13 +13,16 @@
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 /** @var \Joomla\Component\Users\Site\View\Registration\HtmlView $this */
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->getDocument()->getWebAssetManager();
 $wa->useScript('keepalive')
     ->useScript('form.validate');
-
+$root = rtrim(Uri::root(), '/');
+$ref  = $_SERVER['HTTP_REFERER'] ?? '';
+$back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('index.php');
 ?>
 <div class="container mt-8">
     <div class="com-users-registration registration row justify-content-center">
@@ -60,13 +63,13 @@ $wa->useScript('keepalive')
         <div class="com-users-registration__submit control-group text-center">
             <div class="controls d-grid gap-2 pb-2">
                 <button type="submit" class="com-users-registration__register btn btn-danger fs-8 rounded-0 validate">
-                    <?php echo Text::_('JREGISTER'); ?>
+                    <?php echo Text::_('TPL_HWDCITY_JREGISTER'); ?>
                 </button>
                 <input type="hidden" name="option" value="com_users">
                 <input type="hidden" name="task" value="registration.register">
             </div>
             <hr class="border border-secondary border-1 opacity-25">
-            <a href="<?php JRoute::_('index.php') ?>" class="btn btn-link fs-8 rounded-0 text-decoration-none fs-9 p-0">
+            <a href="<?php echo htmlspecialchars($back, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-link fs-8 rounded-0 text-decoration-none fs-9 p-0">
                 <?php echo Text::_('TPL_HWDCITY_BACK'); ?>
                 <i class="fa fa-arrow-left align-middle"></i>
             </a>

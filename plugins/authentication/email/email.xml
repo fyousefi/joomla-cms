@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="authentication" method="upgrade">
+	<name>plg_authentication_email</name>
+	<author>Michael Richey</author>
+	<creationDate>2005-11</creationDate>
+	<copyright>(C) 2005 Michael Richey, All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>michael@richeyweb.com</authorEmail>
+	<authorUrl>https://www.richeyweb.com</authorUrl>
+	<version>5.0.1</version>
+	<description>PLG_AUTHENTICATION_EMAIL_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\Authentication\Email</namespace>
+	<files>
+		<folder plugin="email">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_authentication_email.ini</language>
+		<language tag="en-GB">language/en-GB/plg_authentication_email.sys.ini</language>
+	</languages>
+    <updateservers>
+        <server type="extension" priority="1" name="RicheyWeb Update Site">https://www.richeyweb.com/updates/authenticationemail.xml</server>
+    </updateservers>   
+</extension>

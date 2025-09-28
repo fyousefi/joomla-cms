@@ -16,6 +16,7 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 /** @var \Joomla\Component\Users\Site\View\Login\HtmlView $this */
 
@@ -31,6 +32,9 @@ $option = $input->getCmd('option', '');
 $view   = $input->getCmd('view', '');
 $loginView = ($option === 'com_users' && $view === 'login');
 
+$root = rtrim(Uri::root(), '/');
+$ref  = $_SERVER['HTTP_REFERER'] ?? '';
+$back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('index.php');
 ?>
 
 <div class="container mt-8">
@@ -111,14 +115,14 @@ $loginView = ($option === 'com_users' && $view === 'login');
 
             <div class="com-users-login__submit control-group text-center mb-0">
                 <div class="controls d-grid gap-2 pb-2">
-                    <button type="submit" class="btn btn-danger fs-8 rounded-0" style="--bs-btn-hover-bg: #000;">
+                    <button type="submit" class="btn btn-danger fs-8" style="--bs-btn-hover-bg: #000;">
                         <?php echo Text::_('JLOGIN'); ?>
                     </button>
                 </div>
 
                 <hr class="border border-secondary border-1 opacity-25">
 
-                <a href="<?php JRoute::_('index.php') ?>" class="btn btn-link fs-8 rounded-0 text-decoration-none fs-9 p-0">
+                <a href="<?php echo htmlspecialchars($back, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-link fs-8 text-decoration-none fs-9 p-0">
                     <?php echo Text::_('TPL_HWDCITY_BACK'); ?>
                     <i class="fa fa-arrow-left align-middle"></i>
                 </a>

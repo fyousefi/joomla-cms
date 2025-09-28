@@ -814,6 +814,19 @@ button[type="button"], .form-check-input[type="checkbox"] {
   border-radius: 0;
 }
 
+fieldset {
+  margin-bottom: 0;
+  & + fieldset {
+    margin-top: 0;
+    .control-group {
+      margin-top: 0;
+    }
+    legend, hr {
+      display: none;
+    }
+  }
+}
+
 /* Left/Right Sidebar */
 
 .site-grid,
