@@ -808,7 +808,9 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
-/* Forms: Login, Registration, Reminder, Reset */
+/*
+  Forms: Login, Registration, Reminder, Reset
+*/
 input, input[type="text"], input[type="password"], input[type="email"],
 button[type="button"]{
   //border-radius: 0;
@@ -819,8 +821,6 @@ button[type="button"]{
   height: 56px;
   line-height: 25.6px;
 }
-
-
 
 .form-check-input {
   --form-check-bg: rgba(108, 117, 125, 0.15);
@@ -839,6 +839,9 @@ fieldset {
     legend, hr {
       display: none;
     }
+    .form-check-inline{
+      display: block;
+    }
   }
   // Moved outside of fieldset
   /*.controls button {
@@ -853,6 +856,12 @@ fieldset {
   .field-spacer {
     display: none;
   }
+}
+
+// LTR inputs
+#jform_username, #jform_password1,
+#jform_password2, #jform_com_fields_mobile {
+  direction: rtl;
 }
 
 // Forms buttons for all user layouts
@@ -883,7 +892,7 @@ fieldset {
   font-size: 16px;
   position: absolute;
   inset-inline-start: 1rem;  /* RTL/LTR friendly */
-  top: 30%;
+  top: 35%;
   margin: 0;
   pointer-events: none;
   color: var(--bs-secondary-color, #6c757d);
@@ -896,13 +905,16 @@ fieldset {
 
 /* Hide label while focused OR once field is valid (keeps hidden after typing) */
 .control-group:has(.form-control:focus) .control-label,
-.control-group:has(.form-control:valid) .control-label{
+.control-group:has(.form-control:valid) .control-label,
+.control-group:has(.form-control:not(:placeholder-shown)) > .control-label {
   opacity: 0;
   transform: translateY(-.2rem);
 }
 
+
 /* Keep label visible for invalid fields when NOT focused */
-.control-group:has(.form-control:invalid:not(:focus)) .control-label{
+.control-group:has(.form-control:invalid:not(:focus)) .control-label,
+.control-group:has(.form-control:placeholder-shown) > .control-label{
   opacity: 1;
   transform: none;
   //color: var(--bs-danger, #dc3545);
@@ -921,10 +933,10 @@ fieldset {
   margin-bottom: .5rem; /* normal title spacing */
 }
 
-/* Password groups: ensure the same padding applies inside .input-group */
-/* .password-group .input-group > .control-label{
-  top: 40%;
-} */
+/* Password1 fixed position*/
+#jform_password1-lbl{
+  padding-top: 5%;
+}
 
 
 

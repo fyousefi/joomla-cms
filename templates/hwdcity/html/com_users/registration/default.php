@@ -24,7 +24,7 @@ $root = rtrim(Uri::root(), '/');
 $ref  = $_SERVER['HTTP_REFERER'] ?? '';
 $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('index.php');
 ?>
-<div class="container mt-8">
+<div class="container my-8">
     <div class="com-users-registration registration row justify-content-center">
         <div class="col-sm-12 col-md-9 col-lg-4 p-0 fs-8">
     <?php if ($this->params->get('show_page_heading')) : ?>
@@ -41,7 +41,7 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
         </div>
     <?php endif; ?>
 
-    <form id="member-registration" action="<?php echo Route::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="com-users-registration__form form-validate px-5" enctype="multipart/form-data">
+    <form id="member-registration" action="<?php echo Route::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="com-users-registration__form form-validate" enctype="multipart/form-data">
         <?php // Iterate through the form fieldsets and display each one.?>
         <?php foreach ($this->form->getFieldsets() as $fieldset) : ?>
             <?php if ($fieldset->name === 'captcha' && $this->captchaEnabled) : ?>
@@ -70,7 +70,6 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
                 <input type="hidden" name="option" value="com_users">
                 <input type="hidden" name="task" value="registration.register">
             </div>
-            <hr class="border border-secondary border-1 opacity-25">
         </div>
         <?php echo HTMLHelper::_('form.token'); ?>
     </form>
