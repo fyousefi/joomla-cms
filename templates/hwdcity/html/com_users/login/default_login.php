@@ -71,7 +71,7 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
             <form action="<?php echo Route::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="com-users-login__form form-validate form-horizontal well " id="com-users-login__form">
 
                 <fieldset>
-                    <?php echo $this->form->renderFieldset('credentials', ['class' => 'com-users-login__input rounded-0']); ?>
+                    <?php echo $this->form->renderFieldset('credentials', ['class' => 'com-users-login__input']); ?>
 
                     <?php if (PluginHelper::isEnabled('system', 'remember')) : ?>
                         <div class="com-users-login__remember">
@@ -119,7 +119,7 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
 
                     <div class="com-users-login__submit control-group text-center mb-0">
                         <div class="controls d-grid gap-2 pb-2">
-                            <button type="submit" class="btn btn-danger fs-8" style="--bs-btn-hover-bg: #000;">
+                            <button type="submit" class="btn btn-danger fs-8">
                                 <?php echo Text::_('JLOGIN'); ?>
                             </button>
                         </div>
