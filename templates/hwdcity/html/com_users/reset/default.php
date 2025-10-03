@@ -41,7 +41,9 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
 
     <?php if ($this->params->get('menu_image') != '') : ?>
         <div class="p-2 text-center">
+            <a href="<?php echo htmlspecialchars($root, ENT_QUOTES, 'UTF-8'); ?>">
             <?php echo HTMLHelper::_('image', $this->params->get('menu_image'), 'logo alt' , ['class' => 'w-50']); ?>
+            </a>
         </div>
     <?php endif; ?>
 
