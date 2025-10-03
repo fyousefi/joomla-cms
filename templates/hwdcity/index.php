@@ -257,7 +257,10 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
             <?php endif; ?>
             <jdoc:include type="modules" name="breadcrumbs" style="none" />
             <jdoc:include type="modules" name="main-top" style="card" />
-            <jdoc:include type="message" />
+            <div class="col-lg-6 offset-lg-3">
+                <jdoc:include type="message" />
+            </div>
+
             <main>
                 <jdoc:include type="component" />
             </main>
