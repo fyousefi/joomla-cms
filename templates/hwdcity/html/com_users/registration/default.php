@@ -26,15 +26,17 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
 ?>
 <div class="container mt-8">
     <div class="com-users-registration registration row justify-content-center">
-        <div class="col-sm-12 col-md-9 col-lg-4 bg-body border border-1 rounded p-0 fs-8">
+        <div class="col-sm-12 col-md-9 col-lg-4 p-0 fs-8">
     <?php if ($this->params->get('show_page_heading')) : ?>
         <div class="page-header">
             <h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
         </div>
     <?php endif; ?>
-
+            <a href="<?php echo htmlspecialchars($back, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-link fs-2 text-decoration-none p-0">
+                <i class="fa-regular fa-circle-xmark align-middle"></i>
+            </a>
     <?php if ($this->params->get('menu_image') != '') : ?>
-        <div class="bg-dark p-2 text-center">
+        <div class="p-2 text-center">
             <?php echo HTMLHelper::_('image', $this->params->get('menu_image'), 'logo alt' , ['class' => 'w-50']); ?>
         </div>
     <?php endif; ?>
@@ -51,7 +53,7 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
                     <?php // If the fieldset has a label set, display it as the legend.?>
                     <?php if (isset($fieldset->label)) : ?>
                         <legend class="text-center py-3 fs-5 text-secondary"><?php echo Text::_($fieldset->label); ?></legend>
-                        <hr class="border border-secondary border-1 opacity-25">
+                        <hr class="border border-secondary border-1 opacity-0">
                     <?php endif; ?>
                     <?php echo $this->form->renderFieldset($fieldset->name); ?>
                 </fieldset>
@@ -62,17 +64,13 @@ $back = (is_string($ref) && str_starts_with($ref, $root)) ? $ref : Route::_('ind
         <?php endif; ?>
         <div class="com-users-registration__submit control-group text-center">
             <div class="controls d-grid gap-2 pb-2">
-                <button type="submit" class="com-users-registration__register btn btn-danger fs-8 rounded-0 validate">
+                <button type="submit" class="com-users-registration__register btn btn-danger fs-8 validate">
                     <?php echo Text::_('TPL_HWDCITY_JREGISTER'); ?>
                 </button>
                 <input type="hidden" name="option" value="com_users">
                 <input type="hidden" name="task" value="registration.register">
             </div>
             <hr class="border border-secondary border-1 opacity-25">
-            <a href="<?php echo htmlspecialchars($back, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-link fs-8 rounded-0 text-decoration-none fs-9 p-0">
-                <?php echo Text::_('TPL_HWDCITY_BACK'); ?>
-                <i class="fa fa-arrow-left align-middle"></i>
-            </a>
         </div>
         <?php echo HTMLHelper::_('form.token'); ?>
     </form>

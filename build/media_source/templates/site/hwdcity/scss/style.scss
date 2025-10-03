@@ -808,12 +808,27 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
-/* Forms */
+/* Forms: Login, Registration, Reminder, Reset */
 input, input[type="text"], input[type="password"], input[type="email"],
-button[type="button"], .form-check-input[type="checkbox"] {
-  border-radius: 0;
+button[type="button"]{
+  //border-radius: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 56px;
+  line-height: 25.6px;
 }
 
+
+
+.form-check-input {
+  --form-check-bg: rgba(108, 117, 125, 0.15);
+  border: 0;
+  background-color: var(--form-check-bg);
+}
+
+// Reset to no rounded
 fieldset {
   margin-bottom: 0;
   & + fieldset {
@@ -825,7 +840,85 @@ fieldset {
       display: none;
     }
   }
+
+  .controls button {
+    border-radius: 0.75rem;
+    height: 56px;
+    line-height: 25.6px;
+    font-size: 18px !important;
+    font-weight: 700;
+  }
+
+  .form-control-feedback,
+  .field-spacer {
+    display: none;
+  }
+
 }
+
+// Show password btn
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  background-color: rgba(108, 117, 125, 0.15);
+}
+
+/* Soft input bg (your original) */
+.controls .form-control{
+  background: var(--bs-secondary-bg, rgba(108,117,125,.15));
+}
+
+/* Position the label over the input */
+.control-group:has(.controls > .form-control, .controls .input-group > .form-control){
+  position: relative;
+}
+
+.control-group:has(.controls > .form-control, .controls .input-group > .form-control) > .control-label{
+  font-size: 16px;
+  position: absolute;
+  inset-inline-start: 1rem;  /* RTL/LTR friendly */
+  top: 30%;
+  margin: 0;
+  pointer-events: none;
+  color: var(--bs-secondary-color, #6c757d);
+  padding: 0 .25rem;
+  line-height: 1.2;
+  transition: opacity .2s ease, transform .2s ease;
+  transform: translateY(-.2rem);
+  z-index: 2;     /* for .input-group */
+}
+
+/* Hide label while focused OR once field is valid (keeps hidden after typing) */
+.control-group:has(.form-control:focus) .control-label,
+.control-group:has(.form-control:valid) .control-label{
+  opacity: 0;
+  transform: translateY(-.2rem);
+}
+
+/* Keep label visible for invalid fields when NOT focused */
+.control-group:has(.form-control:invalid:not(:focus)) .control-label{
+  opacity: 1;
+  transform: none;
+  //color: var(--bs-danger, #dc3545);
+  background: transparent;
+}
+
+/* ---- DO NOT float labels for checkbox/radio groups ---- */
+.control-group:has(fieldset.checkboxes) > .control-label{
+  position: static;
+  padding: 0;
+  background: none;
+  opacity: 1;
+  transform: none;
+  z-index: auto;
+  display: block;
+  margin-bottom: .5rem; /* normal title spacing */
+}
+
+/* Password groups: ensure the same padding applies inside .input-group */
+/* .password-group .input-group > .control-label{
+  top: 40%;
+} */
+
+
 
 /* Left/Right Sidebar */
 
