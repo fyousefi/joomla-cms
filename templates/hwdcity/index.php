@@ -134,7 +134,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     <jdoc:include type="scripts" />
 </head>
 
-<body class="site <?php echo $option
+<body class="site ss02 <?php echo $option
     . ' ' . $wrapper
     . ' view-' . $view
     . ($layout ? ' layout-' . $layout : ' no-layout')
@@ -245,13 +245,13 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <?php endif; ?>
 
         <?php if ($this->countModules('sidebar-left', true)) : ?>
-            <div class="grid-child container-sidebar-left sticky-lg-top <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+            <div class="grid-child container-sidebar-left sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
                     <jdoc:include type="modules" name="left-top" style="noCard" />
                     <jdoc:include type="modules" name="sidebar-left" style="card" />
             </div>
         <?php endif; ?>
 
-        <div class="grid-child container-component mb-lg-5">
+        <div class="grid-child container-component">
             <?php if ($this->countModules('hot-topic', true)): ?>
                 <jdoc:include type="modules" name="hot-topic" style="none" />
             <?php endif; ?>
@@ -268,7 +268,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         </div>
 
         <?php if ($this->countModules('sidebar-right', true)) : ?>
-            <div class="grid-child container-sidebar-right sticky-lg-top <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+            <div class="grid-child container-sidebar-right sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
                 <jdoc:include type="modules" name="right-top" style="noCard" />
                 <jdoc:include type="modules" name="sidebar-right" style="card" />
             </div>
