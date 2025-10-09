@@ -45,6 +45,8 @@ $assetColorName  = 'theme.' . $paramsColorName;
 $paramsFontScheme = $this->params->get('useFontScheme', false);
 $fontStyles       = '';
 $isUserLayout     = ($option == 'com_users') ? 'd-none' : '';
+$isFullLayout     = (($option == 'com_content' & $layout == 'blog') & ($view == 'category' || $view == 'article')) ? 'full-width' : 'grid-child container-component';
+//var_dump($layout);exit();
 
 if ($paramsFontScheme) {
     if (stripos($paramsFontScheme, 'https://') === 0) {
@@ -144,181 +146,186 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     . $hasClass
     . ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">
-    <header class="header container-header full-width <?php echo $stickyHeader ? ' ' . $stickyHeader : ''; echo $isUserLayout ?>">
+<header class="header container-header full-width <?php echo $stickyHeader ? ' ' . $stickyHeader : ''; echo $isUserLayout ?>">
 
-        <?php if ($this->countModules('topbar')) : ?>
-            <div class="container-topbar">
-                <jdoc:include type="modules" name="topbar" style="none" />
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('below-top')) : ?>
-            <div class="grid-child container-below-top">
-                <jdoc:include type="modules" name="below-top" style="none" />
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->params->get('brand', 1)) : ?>
-            <div class="grid-child d-none d-lg-block">
-                <div class="d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center align-items-lg-start gap-3 w-100">
-                    <!-- Banner: below logo on mobile, left side on desktop -->
-                    <?php if ($this->countModules('logo-ads', true)) : ?>
-                        <div class="order-1 order-lg-2 text-center text-lg-end w-lg-auto">
-                            <jdoc:include type="modules" name="logo-ads" style="none" />
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Logo (fixed position, right-aligned on desktop) -->
-                    <div class="order-2 order-lg-1">
-                        <div class="navbar-brand">
-                            <a class="brand-logo" href="<?php echo $this->baseurl; ?>/">
-                                <?php echo $logo; ?>
-                            </a>
-                            <?php if ($this->params->get('siteDescription')) : ?>
-                                <div class="site-description"><?php echo htmlspecialchars($this->params->get('siteDescription')); ?></div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
-    </header>
-
-    <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
-        <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 pb-md-2 pb-lg-0 sticky-top">
-
-            <div class="mobile-logo d-lg-none px-5 pt-1">
-                <a href="<?php echo $this->baseurl; ?>/">
-                    <?php echo $logo; ?>
-                </a>
-            </div>
-
-            <?php if ($this->countModules('menu', true)) : ?>
-                <jdoc:include type="modules" name="menu" style="none" />
-            <?php endif; ?>
-
-            <?php if ($this->countModules('search', true)) : ?>
-                <div class="container-search">
-                    <jdoc:include type="modules" name="search" style="none" />
-                </div>
-            <?php endif; ?>
+    <?php if ($this->countModules('topbar')) : ?>
+        <div class="container-topbar">
+            <jdoc:include type="modules" name="topbar" style="none" />
         </div>
     <?php endif; ?>
 
-    <div class="site-grid">
+    <?php if ($this->countModules('below-top')) : ?>
+        <div class="grid-child container-below-top">
+            <jdoc:include type="modules" name="below-top" style="none" />
+        </div>
+    <?php endif; ?>
 
-        <?php if ($this->countModules('logo-ads', true) || $this->countModules('banner-top')) : ?>
-            <div class="container-banner-top">
+    <?php if ($this->params->get('brand', 1)) : ?>
+        <div class="grid-child d-none d-lg-block">
+            <div class="d-flex flex-column-reverse flex-lg-row justify-content-between align-items-center align-items-lg-start gap-3 w-100">
+                <!-- Banner: below logo on mobile, left side on desktop -->
                 <?php if ($this->countModules('logo-ads', true)) : ?>
-                    <div class="d-lg-none pt-1 d-flex justify-content-center gap-2">
+                    <div class="order-1 order-lg-2 text-center text-lg-end w-lg-auto">
                         <jdoc:include type="modules" name="logo-ads" style="none" />
                     </div>
                 <?php endif; ?>
-                <?php if ($this->countModules('banner-top', true)) : ?>
-                    <div class="pt-1 d-flex flex-lg-row flex-wrap justify-content-center gap-2 ">
-                        <jdoc:include type="modules" name="banner-top" style="none" />
+
+                <!-- Logo (fixed position, right-aligned on desktop) -->
+                <div class="order-2 order-lg-1">
+                    <div class="navbar-brand">
+                        <a class="brand-logo" href="<?php echo $this->baseurl; ?>/">
+                            <?php echo $logo; ?>
+                        </a>
+                        <?php if ($this->params->get('siteDescription')) : ?>
+                            <div class="site-description"><?php echo htmlspecialchars($this->params->get('siteDescription')); ?></div>
+                        <?php endif; ?>
                     </div>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('top-a', true)) : ?>
-            <div class="grid-child container-top-a">
-                <jdoc:include type="modules" name="top-a" style="card" />
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('banner-mid', true)) : ?>
-            <div class="container-banner-mid">
-                <?php if ($this->countModules('banner-mid', true)) : ?>
-                    <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
-                        <jdoc:include type="modules" name="banner-mid" style="none" />
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('top-b', true)) : ?>
-            <div class="grid-child container-top-b">
-                <jdoc:include type="modules" name="top-b" style="card" />
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('sidebar-left', true)) : ?>
-            <div class="grid-child container-sidebar-left sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
-                    <jdoc:include type="modules" name="left-top" style="noCard" />
-                    <jdoc:include type="modules" name="sidebar-left" style="card" />
-            </div>
-        <?php endif; ?>
-
-        <div class="grid-child container-component">
-            <?php if ($this->countModules('hot-topic', true)): ?>
-                <jdoc:include type="modules" name="hot-topic" style="none" />
-            <?php endif; ?>
-            <jdoc:include type="modules" name="breadcrumbs" style="none" />
-            <jdoc:include type="modules" name="main-top" style="card" />
-            <div class="col-lg-6 offset-lg-3">
-                <jdoc:include type="message" />
-            </div>
-
-            <main>
-                <jdoc:include type="component" />
-            </main>
-            <jdoc:include type="modules" name="main-bottom" style="card" />
-        </div>
-
-        <?php if ($this->countModules('sidebar-right', true)) : ?>
-            <div class="grid-child container-sidebar-right sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
-                <jdoc:include type="modules" name="right-top" style="noCard" />
-                <jdoc:include type="modules" name="sidebar-right" style="card" />
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <div class="site-grid">
-        <?php if ($this->countModules('bottom-a', true)) : ?>
-            <div class="container-bottom-a full-width">
-                <jdoc:include type="modules" name="bottom-a" style="card" />
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('banner-bottom', true)) : ?>
-            <div class="container-banner-bottom">
-                <?php if ($this->countModules('banner-bottom', true)) : ?>
-                    <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
-                        <jdoc:include type="modules" name="banner-bottom" style="none" />
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($this->countModules('bottom-b', true)) : ?>
-            <div class="container-bottom-b full-width">
-                <jdoc:include type="modules" name="bottom-b" style="media" />
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <?php if ($this->countModules('footer1', true) || $this->countModules('footer2', true) || $this->countModules('footer3', true) || $this->countModules('footer4', true)) : ?>
-        <footer class="container-footer footer full-width mt-0">
-            <div class="container py-4 py-md-5">
-                <div class="row g-4 fs-9">
-                    <div class="col-12 col-lg-4"><?php echo $this->countModules('footer1') ? '<jdoc:include type="modules" name="footer1" style="spotfooter" />' : ''; ?></div>
-                    <div class="col-6 col-lg-2"><?php echo $this->countModules('footer2') ? '<jdoc:include type="modules" name="footer2" style="spotfooter" />' : ''; ?></div>
-                    <div class="col-6 col-lg-2"><?php echo $this->countModules('footer3') ? '<jdoc:include type="modules" name="footer3" style="spotfooter" />' : ''; ?></div>
-                    <div class="col-12 col-lg-4"><?php echo $this->countModules('footer4') ? '<jdoc:include type="modules" name="footer4" style="spotfooter" />' : ''; ?></div>
                 </div>
             </div>
-        </footer>
+        </div>
+    <?php endif; ?>
+</header>
+
+<?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
+    <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 pb-md-2 pb-lg-0 sticky-top">
+
+        <div class="mobile-logo d-lg-none px-5 pt-1">
+            <a href="<?php echo $this->baseurl; ?>/">
+                <?php echo $logo; ?>
+            </a>
+        </div>
+
+        <?php if ($this->countModules('menu', true)) : ?>
+            <jdoc:include type="modules" name="menu" style="none" />
+        <?php endif; ?>
+
+        <?php if ($this->countModules('search', true)) : ?>
+            <div class="container-search">
+                <jdoc:include type="modules" name="search" style="none" />
+            </div>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<div class="site-grid">
+
+    <?php if ($this->countModules('logo-ads', true) || $this->countModules('banner-top')) : ?>
+        <div class="container-banner-top">
+            <?php if ($this->countModules('logo-ads', true)) : ?>
+                <div class="d-lg-none pt-1 d-flex justify-content-center gap-2">
+                    <jdoc:include type="modules" name="logo-ads" style="none" />
+                </div>
+            <?php endif; ?>
+            <?php if ($this->countModules('banner-top', true)) : ?>
+                <div class="pt-1 d-flex flex-lg-row flex-wrap justify-content-center gap-2 ">
+                    <jdoc:include type="modules" name="banner-top" style="none" />
+                </div>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
 
-    <?php if ($this->params->get('backTop') == 1) : ?>
-        <a href="#top" id="back-top" class="back-to-top-link rounded-0 py-2 px-29 " aria-label="<?php echo Text::_('TPL_hwdcity_BACKTOTOP'); ?>">
-            <span class="icon-arrow-up fs-6 icon-fw align-middle" aria-hidden="true"></span>
-        </a>
+    <?php if ($this->countModules('top-a', true)) : ?>
+        <div class="grid-child container-top-a">
+            <jdoc:include type="modules" name="top-a" style="card" />
+        </div>
     <?php endif; ?>
 
-    <jdoc:include type="modules" name="debug" style="none" />
+    <?php if ($this->countModules('banner-mid', true)) : ?>
+        <div class="container-banner-mid">
+            <?php if ($this->countModules('banner-mid', true)) : ?>
+                <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
+                    <jdoc:include type="modules" name="banner-mid" style="none" />
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->countModules('top-b', true)) : ?>
+        <div class="grid-child container-top-b">
+            <jdoc:include type="modules" name="top-b" style="card" />
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->countModules('sidebar-left', true)) : ?>
+        <div class="grid-child container-sidebar-left sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+            <jdoc:include type="modules" name="left-top" style="noCard" />
+            <jdoc:include type="modules" name="sidebar-left" style="card" />
+        </div>
+    <?php endif; ?>
+
+    <div class="<?php echo $isFullLayout; ?>">
+        <?php if ($this->countModules('hot-topic', true)): ?>
+            <jdoc:include type="modules" name="hot-topic" style="none" />
+        <?php endif; ?>
+        <jdoc:include type="modules" name="breadcrumbs" style="none" />
+        <jdoc:include type="modules" name="main-top" style="card" />
+
+        <?php if($isUserLayout): ?>
+        <div class="col-lg-6 offset-lg-3">
+            <?php endif; ?>
+            <jdoc:include type="message" />
+            <?php if($isUserLayout): ?>
+        </div>
+    <?php endif; ?>
+
+        <main>
+            <jdoc:include type="component" />
+        </main>
+        <jdoc:include type="modules" name="main-bottom" style="card" />
+    </div>
+
+    <?php if ($this->countModules('sidebar-right', true)) : ?>
+        <div class="grid-child container-sidebar-right sticky-lg-top z-3 <?php echo $scrollSidebars ? 'overflow-y-auto vh-100' : ''; ?>">
+            <jdoc:include type="modules" name="right-top" style="noCard" />
+            <jdoc:include type="modules" name="sidebar-right" style="card" />
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="site-grid">
+    <?php if ($this->countModules('bottom-a', true)) : ?>
+        <div class="container-bottom-a full-width">
+            <jdoc:include type="modules" name="bottom-a" style="card" />
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->countModules('banner-bottom', true)) : ?>
+        <div class="container-banner-bottom">
+            <?php if ($this->countModules('banner-bottom', true)) : ?>
+                <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
+                    <jdoc:include type="modules" name="banner-bottom" style="none" />
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($this->countModules('bottom-b', true)) : ?>
+        <div class="container-bottom-b full-width">
+            <jdoc:include type="modules" name="bottom-b" style="media" />
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php if ($this->countModules('footer1', true) || $this->countModules('footer2', true) || $this->countModules('footer3', true) || $this->countModules('footer4', true)) : ?>
+    <footer class="container-footer footer full-width mt-0">
+        <div class="container py-4 py-md-5">
+            <div class="row g-4 fs-9">
+                <div class="col-12 col-lg-4"><?php echo $this->countModules('footer1') ? '<jdoc:include type="modules" name="footer1" style="spotfooter" />' : ''; ?></div>
+                <div class="col-6 col-lg-2"><?php echo $this->countModules('footer2') ? '<jdoc:include type="modules" name="footer2" style="spotfooter" />' : ''; ?></div>
+                <div class="col-6 col-lg-2"><?php echo $this->countModules('footer3') ? '<jdoc:include type="modules" name="footer3" style="spotfooter" />' : ''; ?></div>
+                <div class="col-12 col-lg-4"><?php echo $this->countModules('footer4') ? '<jdoc:include type="modules" name="footer4" style="spotfooter" />' : ''; ?></div>
+            </div>
+        </div>
+    </footer>
+<?php endif; ?>
+
+<?php if ($this->params->get('backTop') == 1) : ?>
+    <a href="#top" id="back-top" class="back-to-top-link rounded-0 py-2 px-29 " aria-label="<?php echo Text::_('TPL_hwdcity_BACKTOTOP'); ?>">
+        <span class="icon-arrow-up fs-6 icon-fw align-middle" aria-hidden="true"></span>
+    </a>
+<?php endif; ?>
+
+<jdoc:include type="modules" name="debug" style="none" />
 </body>
 
 </html>
