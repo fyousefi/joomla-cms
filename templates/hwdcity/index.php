@@ -189,7 +189,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
 <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
     <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 pb-md-2 pb-lg-0 sticky-top">
 
-        <div class="mobile-logo d-lg-none px-5 pt-1">
+        <div class="mobile-logo d-lg-none px-5 pt-3">
             <a href="<?php echo $this->baseurl; ?>/">
                 <?php echo $logo; ?>
             </a>
