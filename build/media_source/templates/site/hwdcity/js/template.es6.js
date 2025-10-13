@@ -127,8 +127,12 @@ Joomla = window.Joomla || {};
     const mq = window.matchMedia('(min-width: 992px)'); // desktop only
 
     let triggerY = 0;
+
     function computeTrigger() {
-      if (!triggerEl) { triggerY = 0; return; }
+      if (!triggerEl) {
+        triggerY = 0;
+        return;
+      }
       const r = triggerEl.getBoundingClientRect();
       triggerY = window.pageYOffset + r.top;
     }
@@ -139,6 +143,7 @@ Joomla = window.Joomla || {};
     const isMenuOpen = () => !!document.querySelector('.navbar-collapse.show');
 
     let ticking = false;
+
     function onScroll() {
       if (!mq.matches) return; // disable on tablets/phones
       if (ticking) return;
@@ -192,9 +197,30 @@ Joomla = window.Joomla || {};
 
     // Keep trigger updated if that section’s height changes
     if ('ResizeObserver' in window && triggerEl) {
-      new ResizeObserver(() => { if (mq.matches) computeTrigger(); }).observe(triggerEl);
+      new ResizeObserver(() => {
+        if (mq.matches) computeTrigger();
+      }).observe(triggerEl);
     }
   });
+
+  // Offcanvas click handler
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.offcanvas a.d-block');
+    if (!link) return;
+
+    const list = link.closest('ul').querySelectorAll('a.d-block');
+
+    // Reset all to default inactive state
+    list.forEach((a) => {
+      a.classList.remove('bg-danger', 'text-white');
+      a.classList.add('text-light');
+    });
+
+    // Highlight the clicked link
+    link.classList.remove('text-light');
+    link.classList.add('bg-danger', 'text-white');
+  });
+
 
   /**
    * Initialize when a part of the page was updated

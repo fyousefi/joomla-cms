@@ -196,7 +196,7 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
 <?php if ($this->countModules('menu', true) || $this->countModules('search', true)) : ?>
     <div class="container-nav bg-black d-flex align-items-baseline px-lg-10 px-3 pb-md-2 pb-lg-0 sticky-top">
 
-        <div class="mobile-logo d-lg-none px-5 pt-3">
+        <div class="mobile-logo d-lg-none ps-5 pt-3">
             <a href="<?php echo $this->baseurl; ?>/">
                 <?php echo $logo; ?>
             </a>
