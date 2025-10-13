@@ -85,6 +85,7 @@ $wa->usePreset('template.hwdcity.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'
     ->registerAndUseStyle($assetColorName, 'global/' . $paramsColorName . '.css')
     ->useStyle('template.user')
     ->useScript('template.user')
+    ->useScript('bootstrap.offcanvas')
     ->addInlineStyle(":root {
 		--hue: 214;
 		--template-bg-light: #f0f4fb;
