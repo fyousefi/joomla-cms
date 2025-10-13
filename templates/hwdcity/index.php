@@ -14,6 +14,8 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Plugin\PluginHelper;
+
 
 /** @var Joomla\CMS\Document\HtmlDocument $this */
 
@@ -46,7 +48,6 @@ $paramsFontScheme = $this->params->get('useFontScheme', false);
 $fontStyles       = '';
 $isUserLayout     = ($option == 'com_users') ? 'd-none' : '';
 $isFullLayout     = (($option == 'com_content' & $layout == 'blog') & ($view == 'category' || $view == 'article')) ? 'full-width' : 'grid-child container-component';
-//var_dump($layout);exit();
 
 if ($paramsFontScheme) {
     if (stripos($paramsFontScheme, 'https://') === 0) {
@@ -85,7 +86,6 @@ $wa->usePreset('template.hwdcity.' . ($this->direction === 'rtl' ? 'rtl' : 'ltr'
     ->registerAndUseStyle($assetColorName, 'global/' . $paramsColorName . '.css')
     ->useStyle('template.user')
     ->useScript('template.user')
-    ->useScript('bootstrap.offcanvas')
     ->addInlineStyle(":root {
 		--hue: 214;
 		--template-bg-light: #f0f4fb;
@@ -127,6 +127,11 @@ $stickyHeader = $this->params->get('stickyHeader') ? 'position-sticky sticky-top
 
 // Defer fontawesome for increased performance. Once the page is loaded javascript changes it to a stylesheet.
 $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
+
+// TOC offcanvas
+$ocData = $app->getUserState('plg.offcanvasbreak.data');
+$bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -145,6 +150,7 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
     . ($itemid ? ' itemid-' . $itemid : '')
     . ($pageclass ? ' ' . $pageclass : '')
     . $hasClass
+    . $bodyOverflowFix
     . ($this->direction == 'rtl' ? ' rtl' : '');
 ?>">
 <header class="header container-header full-width <?php echo $stickyHeader ? ' ' . $stickyHeader : ''; echo $isUserLayout ?>">
@@ -205,6 +211,23 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
                 <jdoc:include type="modules" name="search" style="none" />
             </div>
         <?php endif; ?>
+
+        <?php
+            static $ocPrintedBtn = false;
+            if ($ocPrintedBtn) return;
+
+            $data = $app->getUserState('plg.offcanvasbreak.data', []);
+
+            if (!empty($data['sections'])) {
+                // Button only
+                $displayData = $data;  // contains articleId, sections, title
+                include PluginHelper::getLayoutPath('content', 'offcanvasbreak', 'toggler');
+                $ocPrintedBtn = true;
+
+                // Clear after use to avoid leaking across subsequent non-article renders
+                //$app->setUserState('plg.offcanvasbreak.data', null);
+            }
+        ?>
     </div>
 <?php endif; ?>
 
@@ -325,6 +348,16 @@ $wa->getAsset('style', 'fontawesome')->setAttribute('rel', 'lazy-stylesheet');
         <span class="icon-arrow-up fs-6 icon-fw align-middle" aria-hidden="true"></span>
     </a>
 <?php endif; ?>
+
+<?php
+    // Offcanvas panel
+    if (!empty($data['sections'])) {
+        $displayData = $data;
+        include PluginHelper::getLayoutPath('content', 'offcanvasbreak', 'panel');
+        // now it's safe to clear for this request
+        $app->setUserState('plg.offcanvasbreak.data', null);
+    }
+?>
 
 <jdoc:include type="modules" name="debug" style="none" />
 </body>
