@@ -15,31 +15,34 @@ use Joomla\CMS\Layout\LayoutHelper;
 
 /* --------------------------------------------------------------------
    Normalize layout param:
-   Horizontal  → 3 columns (image below title)
-   Vertical    → 1 column (image beside title)
+   Horizontal  → 3 columns (image above title, p-1)
+   Vertical    → 1 column (image beside title, py-2)
 -------------------------------------------------------------------- */
 $rawLayout    = $params->get('articles_layout', 0);
 $isHorizontal = (string)$rawLayout === '1' || $rawLayout === 1 || strtolower((string)$rawLayout) === 'horizontal';
 
 /* Build UL classes (Bootstrap only; no custom CSS) */
 $ulClasses = [
-    'mod-articles-items',   // keep module namespace
+    'mod-articles-items',
     'mod-list',
     'px-2',
-    'list-unstyled',        // remove UL default padding/bullets
-    'row',                  // Bootstrap grid row
+    'list-unstyled',
+    'row',
     $isHorizontal ? 'row-cols-3' : 'row-cols-1',
     'g-2'
 ];
 
 /* Per-item layout classes */
 $anchorClass = $isHorizontal
-    ? 'd-flex flex-column gap-2 text-decoration-none stretched-link'     // stack: title then image
+    ? 'd-flex flex-column gap-2 text-decoration-none stretched-link'   // stack: image then title
     : 'd-flex align-items-center gap-3 text-decoration-none stretched-link'; // row: image + text
 
 $thumbWrapClass = $isHorizontal
-    ? 'w-100 ratio ratio-16x9 overflow-hidden'   // full-width image below title
-    : 'flex-shrink-0 w-35 ratio ratio-16x9 overflow-hidden'; // compact side image
+    ? 'w-100 ratio ratio-16x9 overflow-hidden'
+    : 'flex-shrink-0 w-35 ratio ratio-16x9 overflow-hidden';
+
+// Article padding
+$articlePadding = $isHorizontal ? 'p-1' : 'py-2';
 ?>
 
 <ul class="<?php echo implode(' ', $ulClasses); ?>">
@@ -71,24 +74,11 @@ $thumbWrapClass = $isHorizontal
                 </div>
             <?php endif; ?>
 
-            <article class="mod-articles-item d-flex gap-3 py-2 position-relative" itemscope itemtype="https://schema.org/Article">
+            <article class="mod-articles-item d-flex gap-3 <?php echo $articlePadding; ?> position-relative" itemscope itemtype="https://schema.org/Article">
                 <a href="<?php echo $link; ?>" class="<?php echo $anchorClass; ?>">
-                    <!-- Text (title + optional intro) -->
-                    <div class="flex-grow-1">
-                        <?php if ($params->get('item_title')) : ?>
-                        <?php $item_heading = $params->get('item_heading', 'h4'); ?>
-                        <<?php echo $item_heading; ?> class="mod-articles-title m-0 fw-semibold fs-13">
-                        <?php echo $title; ?>
-                    </<?php echo $item_heading; ?>>
-                    <?php endif; ?>
 
-                    <?php if ($params->get('show_introtext', 0)) : ?>
-                        <div class="mt-1 text-body-secondary"><?php echo $item->displayIntrotext; ?></div>
-                    <?php endif; ?>
-                    </div>
-
-                    <!-- Image -->
-                    <?php if ($hasImage): ?>
+                    <?php if ($isHorizontal && $hasImage): ?>
+                        <!-- Image first in horizontal -->
                         <span class="<?php echo $thumbWrapClass; ?>">
                             <img
                                 src="<?php echo htmlspecialchars($item->imageSrc, ENT_QUOTES, 'UTF-8'); ?>"
@@ -99,6 +89,34 @@ $thumbWrapClass = $isHorizontal
                                 class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
                         </span>
                     <?php endif; ?>
+
+                    <!-- Text (title + optional intro) -->
+                    <div class="flex-grow-1">
+                        <?php if ($params->get('item_title')) : ?>
+                        <?php $item_heading = $params->get('item_heading', 'h4'); ?>
+                        <<?php echo $item_heading; ?> class="mod-articles-title m-0 fw-semibold fs-13">
+                        <?php echo $title; ?>
+                    </<?php echo $item_heading; ?>>
+                <?php endif; ?>
+
+                    <?php if ($params->get('show_introtext', 0)) : ?>
+                        <div class="mt-1 text-body-secondary"><?php echo $item->displayIntrotext; ?></div>
+                    <?php endif; ?>
+                    </div>
+
+                    <?php if (!$isHorizontal && $hasImage): ?>
+                        <!-- Image last in vertical -->
+                        <span class="<?php echo $thumbWrapClass; ?>">
+                            <img
+                                src="<?php echo htmlspecialchars($item->imageSrc, ENT_QUOTES, 'UTF-8'); ?>"
+                                alt="<?php echo $alt; ?>"
+                                <?php if ($imgW) : ?>width="<?php echo $imgW; ?>"<?php endif; ?>
+                                <?php if ($imgH) : ?>height="<?php echo $imgH; ?>"<?php endif; ?>
+                                loading="lazy" decoding="async"
+                                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+                        </span>
+                    <?php endif; ?>
+
                 </a>
             </article>
         </li>
