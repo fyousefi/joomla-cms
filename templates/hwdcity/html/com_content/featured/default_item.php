@@ -36,7 +36,7 @@ $isUnpublished     = $this->item->state == ContentComponent::CONDITION_UNPUBLISH
 
 <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
 
-<div class="item-content pb-3 px-27 lh-lg">
+<div class="item-content pb-3 px-27 lh-lg text-justify">
     <?php if ($isUnpublished) : ?>
         <div class="system-unpublished">
     <?php endif; ?>

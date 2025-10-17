@@ -257,7 +257,7 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
     <?php if ($this->countModules('banner-mid', true)) : ?>
         <div class="container-banner-mid">
             <?php if ($this->countModules('banner-mid', true)) : ?>
-                <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 ">
+                <div class="d-flex flex-lg-row justify-content-center flex-wrap gap-2 pt-1">
                     <jdoc:include type="modules" name="banner-mid" style="none" />
                 </div>
             <?php endif; ?>

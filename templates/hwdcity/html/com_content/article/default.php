@@ -61,7 +61,7 @@ $isExpired         = !is_null($this->item->publish_down) && $this->item->publish
         || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $assocParam; ?>
 
         <?php if ($params->get('show_title')) : ?>
-            <<?php echo $htag; ?> class="fs-2 fw-medium pb-1 lh-base">
+            <<?php echo $htag; ?> class="fs-2 fw-medium pb-1 lh-base text-justify">
                 <a class="text-decoration-none" href="<?php echo Route::_(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language)); ?>">
                     <?php echo $this->escape($this->item->title); ?>
                 </a>
@@ -110,7 +110,7 @@ $isExpired         = !is_null($this->item->publish_down) && $this->item->publish
             <?php if (isset($this->item->toc)) :
                 echo $this->item->toc;
             endif; ?>
-        <div class="com-content-article__body">
+        <div class="com-content-article__body text-justify">
             <?php echo $this->item->text; ?>
         </div>
 
