@@ -31,7 +31,8 @@ $info    = $params->get('info_block_position', 0);
 $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
 
 // Fetch modules for a position
-$mods = ModuleHelper::getModules('content-bottom');
+$mods       = ModuleHelper::getModules('content-bottom');
+$modsBanner = ModuleHelper::getModules('content-bottom-banner');
 
 // Check if associations are implemented. If they are, define the parameter.
 $assocParam        = (Associations::isEnabled() && $params->get('show_associations'));
@@ -151,6 +152,18 @@ $isExpired         = !is_null($this->item->publish_down) && $this->item->publish
             ?>
         <?php endif; ?>
 
+        <?php //Banner module position ?>
+            <?php if (!empty($modsBanner)) : ?>
+                <div class="content-bottom-banner py-3 my-4 border-top border-bottom border-light-subtle text-center">
+                    <?php foreach ($modsBanner as $mod) : ?>
+                        <div class="d-inline-block">
+                            <?php echo ModuleHelper::renderModule($mod, ['style' => 'none']); ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+        <?php //Article module position ?>
         <?php if (!empty($mods)) : ?>
             <div class="content-bottom my-3">
                 <?php foreach ($mods as $mod) : ?>

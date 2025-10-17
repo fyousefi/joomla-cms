@@ -42,6 +42,7 @@
 		<position>sidebar-right</position>
 		<position>breadcrumbs</position>
 		<position>content-top</position>
+		<position>content-bottom-banner</position>
 		<position>content-bottom</position>
 		<position>left-top</position>
 		<position>sidebar-left</position>
