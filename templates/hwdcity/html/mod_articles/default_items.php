@@ -28,7 +28,7 @@ $ulClasses = [
     'px-2',
     'list-unstyled',
     'row',
-    $isHorizontal ? 'row-cols-3' : 'row-cols-1',
+    $isHorizontal ? 'row-cols-1 row-cols-md-3' : 'row-cols-1', 
     'g-2'
 ];
 
