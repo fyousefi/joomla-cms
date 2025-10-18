@@ -26,6 +26,12 @@ $layoutAttr = [
     'src' => $images->image_intro,
     'alt' => empty($images->image_intro_alt) && empty($images->image_intro_alt_empty) ? false : $images->image_intro_alt,
 ];
+
+// Category badge data
+$catLink  = !empty($displayData->catid) ? Route::_(RouteHelper::getCategoryRoute($displayData->catid)) : '#';
+$catTitle = isset($displayData->category_title) ? (string) $displayData->category_title : '';
+$removePrefix = false; // ← set to false if you don't want to strip "اخبار"
+$badgeLbl = htmlspecialchars($removePrefix ? preg_replace('/^اخبار\s*/u', '', $catTitle) : $catTitle, ENT_QUOTES, 'UTF-8');
 ?>
 <figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative mb-3 h-65">
     <?php if ($params->get('link_intro_image') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
@@ -36,6 +42,15 @@ $layoutAttr = [
     <?php else : ?>
         <?php echo LayoutHelper::render('joomla.html.image', $layoutAttr); ?>
     <?php endif; ?>
+
+    <?php if ($badgeLbl !== '') : ?>
+        <div class="position-absolute top-0 end-0 m-2 z-2">
+            <a href="<?php echo $catLink; ?>" class="badge text-bg-danger text-decoration-none fw-normal">
+                <span><?php echo $badgeLbl; ?></span>
+            </a>
+        </div>
+    <?php endif; ?>
+
     <?php if (isset($images->image_intro_caption) && $images->image_intro_caption !== '') : ?>
         <figcaption class="caption"><?php echo $this->escape($images->image_intro_caption); ?></figcaption>
     <?php endif; ?>
