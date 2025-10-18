@@ -15,7 +15,8 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Plugin\PluginHelper;
-
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Session\Session;
 
 /** @var Joomla\CMS\Document\HtmlDocument $this */
 
@@ -211,6 +212,99 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
                 <jdoc:include type="modules" name="search" style="none" />
             </div>
         <?php endif; ?>
+
+        <?php
+        // -------- Auth link (separate from offcanvas) --------
+        static $authLinkPrinted = false;
+        if (!$authLinkPrinted) {
+            $menus = $app->getMenu();     // menu object (do not shadow $menu active item)
+            $user  = $app->getIdentity();
+
+            // ===== Configure your preferred lookup =====
+            // 1) (Recommended) Hard-wire Item IDs if you know them:
+            $LOGIN_ITEMID  = 0;   // e.g. 218
+            $LOGOUT_ITEMID = 0;   // e.g. 219
+
+            // 2) Or use a dedicated hidden menutype + alias pair:
+            $AUTH_MENUTYPE     = 'auth';
+            $AUTH_LOGIN_ALIAS  = 'login';
+            $AUTH_LOGOUT_ALIAS = 'logout';
+
+            // Helpers
+            $findById = function($id) use ($menus) {
+                return $id ? $menus->getItem((int)$id) : null;
+            };
+            $findByTypeAlias = function($menutype, $alias) use ($menus) {
+                return ($menutype && $alias) ? $menus->getItems(['menutype','alias'], [$menutype,$alias], true) : null;
+            };
+            $findByLinkPattern = function($pattern) use ($menus) {
+                $items = $menus->getItems('component', 'com_users');
+                if (!$items) return null;
+                foreach ($items as $it) {
+                    if (!empty($it->link) && stripos($it->link, $pattern) !== false) {
+                        return $it;
+                    }
+                }
+                return null;
+            };
+
+            // Resolve Login menu item (ID > menutype/alias > link pattern)
+            $loginItem = $findById($LOGIN_ITEMID)
+                ?: $findByTypeAlias($AUTH_MENUTYPE, $AUTH_LOGIN_ALIAS)
+                    ?: $findByLinkPattern('view=login');
+
+            // Resolve Logout menu item (ID > menutype/alias > link pattern 'layout=logout')
+            $logoutItem = $findById($LOGOUT_ITEMID)
+                ?: $findByTypeAlias($AUTH_MENUTYPE, $AUTH_LOGOUT_ALIAS)
+                    ?: $findByLinkPattern('layout=logout');
+
+            // Build Login URL/label/icon from menu (SEF + correct title)
+            if ($loginItem) {
+                $loginUrl   = Route::_('index.php?Itemid=' . (int)$loginItem->id);
+                $loginLabel = htmlspecialchars($loginItem->title, ENT_QUOTES, 'UTF-8');
+                $loginIcon  = $loginItem->getParams()->get('menu-anchor_css') ?: 'fa-solid fa-right-to-bracket';
+            } else {
+                // Fallback
+                $loginUrl   = Route::_('index.php?option=com_users&view=login');
+                $loginLabel = 'Login';
+                $loginIcon  = 'fa-solid fa-right-to-bracket';
+            }
+
+            // Build Logout URL/label/icon
+            if ($logoutItem) {
+                // Prefer the menu-managed logout item (SEF URL with menulogout task)
+                $logoutUrl   = Route::_('index.php?Itemid=' . (int)$logoutItem->id);
+                $logoutLabel = htmlspecialchars($logoutItem->title, ENT_QUOTES, 'UTF-8');
+                $logoutIcon  = $logoutItem->getParams()->get('menu-anchor_css') ?: 'fa-solid fa-right-from-bracket';
+            } else {
+                // Safe fallback to logout task with token + return
+                $contextItemid = $loginItem ? (int)$loginItem->id : 0;
+                $logoutUrl   = Route::_('index.php?option=com_users&task=user.logout'
+                    . ($contextItemid ? '&Itemid=' . $contextItemid : '')
+                    . '&' . Session::getFormToken() . '=1'
+                    . '&return=' . base64_encode(Uri::current()));
+                $logoutLabel = 'Logout';
+                $logoutIcon  = 'fa-solid fa-right-from-bracket';
+            }
+
+            // Render link (white + subtle gray hover)
+            if ($user && !$user->guest) {
+                echo '<a href="' . $logoutUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1 ms-3">'
+                    .      '<i class="' . htmlspecialchars($logoutIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
+                    .      '<span class="d-none d-md-inline">' . $logoutLabel . '</span>'
+                    .  '</a>';
+            } else {
+                echo '<a href="' . $loginUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1 ms-3">'
+                    .      '<i class="' . htmlspecialchars($loginIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
+                    .      '<span class="d-none d-md-inline">' . $loginLabel . '</span>'
+                    .  '</a>';
+            }
+
+            $authLinkPrinted = true;
+        }
+        ?>
+
+
 
         <?php
             static $ocPrintedBtn = false;
