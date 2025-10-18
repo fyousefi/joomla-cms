@@ -44,8 +44,8 @@ $badgeLbl = htmlspecialchars($removePrefix ? preg_replace('/^اخبار\s*/u', '
     <?php endif; ?>
 
     <?php if ($badgeLbl !== '') : ?>
-        <div class="position-absolute top-0 end-0 m-2 z-2">
-            <a href="<?php echo $catLink; ?>" class="badge text-bg-danger text-decoration-none fw-normal">
+        <div class="position-absolute top-0 end-0 m-3 z-2">
+            <a href="<?php echo $catLink; ?>" class="badge text-bg-danger text-decoration-none fw-normal fs-13">
                 <span><?php echo $badgeLbl; ?></span>
             </a>
         </div>
