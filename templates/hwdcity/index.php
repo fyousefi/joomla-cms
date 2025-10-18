@@ -213,6 +213,7 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             </div>
         <?php endif; ?>
 
+        <div class="d-flex align-items-center ms-auto gap-3">
         <?php
         // -------- Auth link (separate from offcanvas) --------
         static $authLinkPrinted = false;
@@ -280,14 +281,14 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
 
             // Render (white link with subtle gray hover)
             if ($user && !$user->guest) {
-                echo '<a href="' . $logoutUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1 ms-3">'
+                echo '<a href="' . $logoutUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($logoutIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
-                    .      '<span class="d-none d-md-inline">' . $logoutLabel . '</span>'
+                    .      '<span class="d-none d-md-inline fs-8 fw-bold">' . $logoutLabel . '</span>'
                     .  '</a>';
             } else {
-                echo '<a href="' . $loginUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1 ms-3">'
+                echo '<a href="' . $loginUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($loginIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
-                    .      '<span class="d-none d-md-inline">' . $loginLabel . '</span>'
+                    .      '<span class="d-none d-md-inline fs-8 fw-bold">' . $loginLabel . '</span>'
                     .  '</a>';
             }
 
@@ -312,6 +313,7 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
                 //$app->setUserState('plg.offcanvasbreak.data', null);
             }
         ?>
+        </div>
     </div>
 <?php endif; ?>
 
