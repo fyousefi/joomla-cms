@@ -48,7 +48,11 @@ $assetColorName  = 'theme.' . $paramsColorName;
 $paramsFontScheme = $this->params->get('useFontScheme', false);
 $fontStyles       = '';
 $isUserLayout     = ($option == 'com_users') ? 'd-none' : '';
-$isFullLayout     = (($option == 'com_content' & $layout == 'blog') & ($view == 'category' || $view == 'article')) ? 'full-width' : 'grid-child container-component';
+
+// If the active menu's Page Class contains "full-width", use full-width; else default container
+$isFullLayout = (strpos(' ' . (string)$pageclass . ' ', ' full-width ') !== false)
+    ? 'full-width'
+    : 'grid-child container-component';
 
 if ($paramsFontScheme) {
     if (stripos($paramsFontScheme, 'https://') === 0) {
@@ -295,7 +299,6 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             $authLinkPrinted = true;
         }
         ?>
-
 
         <?php
             static $ocPrintedBtn = false;
