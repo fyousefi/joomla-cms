@@ -32,8 +32,16 @@ $catLink  = !empty($displayData->catid) ? Route::_(RouteHelper::getCategoryRoute
 $catTitle = isset($displayData->category_title) ? (string) $displayData->category_title : '';
 $removePrefix = false; // ← set to false if you don't want to strip "اخبار"
 $badgeLbl = htmlspecialchars($removePrefix ? preg_replace('/^اخبار\s*/u', '', $catTitle) : $catTitle, ENT_QUOTES, 'UTF-8');
+
+// Recognize the page
+$pageClass = (string) ($params['pageclass_sfx'] ?? '');
+$isFullLayout = (bool) preg_match('/(?:^|\s)full-width(?:\s|$)/', $pageClass);
+
+// Figure height
+$heightClass  = $isFullLayout ? 'h-60' : 'h-65';
+
 ?>
-<figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative mb-3 h-65">
+<figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative mb-3 <?php echo $heightClass; ?>">
     <?php if ($params->get('link_intro_image') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
         <a href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>" title="<?php echo $this->escape($displayData->title); ?>">
             <span class="triangle-up position-absolute bottom-0 mx-5"></span>
