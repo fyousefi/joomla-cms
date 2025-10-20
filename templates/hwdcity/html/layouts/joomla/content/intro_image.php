@@ -65,7 +65,10 @@ $score = ($isFullLayout && $total_score !== null && $total_score > 10)
 $percent = ($score !== null) ? ($score * 10.0) : null;
 
 // Figure height
-$heightClass  = $isFullLayout ? 'h-60' : 'h-65';
+$heightClass  = $isFullLayout ? 'h-md-40 h-lg-60 zoom-container zoom-dark overflow-hidden' : 'h-65';
+
+// Category badge font-size
+$badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
 
 // Category badge font-size
 $badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
@@ -88,7 +91,7 @@ $badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
         </div>
     <?php endif; ?>
     <?php if ($score !== null): ?>
-        <div class="score-circle score-circle-sm position-absolute mt-3 ms-3 top-0 start-0 " style="--score-percent: <?php echo htmlspecialchars(number_format($percent, 2, '.', ''), ENT_QUOTES, 'UTF-8'); ?>%">
+        <div class="score-circle score-circle-sm position-absolute mt-3 ms-3 top-0 start-0 z-2" style="--score-percent: <?php echo htmlspecialchars(number_format($percent, 2, '.', ''), ENT_QUOTES, 'UTF-8'); ?>%">
             <div class="score-bg"></div>
             <div class="score-progress"></div>
             <div class="score-center">

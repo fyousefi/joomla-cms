@@ -362,15 +362,6 @@ $font-sizes: (
   15: 1.063rem, // 17 px
 );
 
-// Custom widths
-.w-30 { width: 30% !important; }
-.w-35 { width: 35% !important; }
-.w-40 { width: 40% !important; }
-
-// Custom height
-.h-60 { height: 59% !important; } // 604.983px
-.h-65 { height: 260px !important; } // 260px in 400px
-
 // Custom Link color
 .link-danger {
   color: var(--danger) !important;
@@ -381,4 +372,37 @@ $font-sizes: (
     color: var(--black) !important;
   }
 }
+
+$utilities: (
+  // Custom widths
+  "width": (
+    property: width,
+    class: w,
+    values: (
+      25: 25%,
+      30: 30%,
+      35: 35%,
+      40: 40%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto
+    )
+  ),
+  // Custom height
+  "height": (
+    property: height,
+    class: h,
+    responsive: true,
+    values: (
+      25: 25%,
+      50: 50%,
+      60: 600px,   // 604.983px or 51%
+      65: 260px, // 260px in 400px
+      75: 75%,
+      100: 100%,
+      auto: auto
+    )
+  ),
+);
 
