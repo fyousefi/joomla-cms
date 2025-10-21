@@ -34,8 +34,17 @@ $afterDisplayContent = trim(implode("\n", $results));
 
 $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
 
+// Add a full-width flag once and reuse it for both lead and intro items.
+$pageClass     = (string) ($this->params->get('pageclass_sfx') ?? '');
+$isFullLayout  = (bool) preg_match('/(?:^|\s)full-width(?:\s|$)/', $pageClass);
+
+// Root wrapper: kill horizontal padding on full-width pages
+$rootClass = 'com-content-category-blog blog' . ($isFullLayout ? ' container-fluid px-0' : '');
+
+// Blog item wrapper: make it a positioning context and remove bottom gap
+$blogItemClass = 'com-content-category-blog__item blog-item' . ($isFullLayout ? ' position-relative overflow-hidden mb-0' : '');
 ?>
-<div class="com-content-category-blog blog">
+<div class="<?php echo $rootClass; ?>">
     <?php if ($this->params->get('show_page_heading')) : ?>
         <div class="page-header">
             <h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
@@ -85,7 +94,8 @@ $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
     <?php if (!empty($this->lead_items)) : ?>
         <div class="com-content-category-blog__items blog-items items-leading <?php echo $this->params->get('blog_class_leading'); ?>">
             <?php foreach ($this->lead_items as &$item) : ?>
-                <div class="com-content-category-blog__item blog-item">
+                <?php if ($isFullLayout) { $item->params->set('fullwidth', 1); } ?>
+                <div class="<?php echo $blogItemClass; ?>">
                     <?php
                     $this->item = &$item;
                     echo $this->loadTemplate('item');
@@ -101,9 +111,10 @@ $htag    = $this->params->get('show_page_heading') ? 'h2' : 'h1';
             <?php $blogClass .= (int) $this->params->get('multi_column_order', 0) === 0 ? ' masonry-' : ' columns-'; ?>
             <?php $blogClass .= (int) $this->params->get('num_columns'); ?>
         <?php endif; ?>
-        <div class="com-content-category-blog__items blog-items <?php echo $blogClass; ?>">
+        <div class="com-content-category-blog__items blog-items <?php echo $blogClass . ($isFullLayout ? ' gx-0' : ''); ?>">
         <?php foreach ($this->intro_items as $key => &$item) : ?>
-            <div class="com-content-category-blog__item blog-item">
+            <?php if ($isFullLayout) { $item->params->set('fullwidth', 1); } ?>
+            <div class="<?php echo $blogItemClass; ?>">
                     <?php
                     $this->item = & $item;
                     echo $this->loadTemplate('item');

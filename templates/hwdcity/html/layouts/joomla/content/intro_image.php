@@ -34,8 +34,7 @@ $removePrefix = false; // ← set to false if you don't want to strip "اخبا�
 $badgeLbl = htmlspecialchars($removePrefix ? preg_replace('/^اخبار\s*/u', '', $catTitle) : $catTitle, ENT_QUOTES, 'UTF-8');
 
 // Recognize the page
-$pageClass = (string) ($params['pageclass_sfx'] ?? '');
-$isFullLayout = (bool) preg_match('/(?:^|\s)full-width(?:\s|$)/', $pageClass);
+$isFullLayout = (bool) $params->get('fullwidth', 0);
 
 // --- compute $total_score safely ---
 $field_count = count($displayData->jcfields);
@@ -70,10 +69,10 @@ $heightClass  = $isFullLayout ? 'h-md-40 h-lg-60 zoom-container zoom-dark overfl
 // Category badge font-size
 $badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
 
-// Category badge font-size
-$badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
+// When full-width, drop the default bottom margin on the <figure>
+$figureMargin = $isFullLayout ? 'mb-0' : 'mb-3';
 ?>
-<figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative mb-3 <?php echo $heightClass; ?>">
+<figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative <?php echo $figureMargin; ?> <?php echo $heightClass; ?>">
     <?php if ($params->get('link_intro_image') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
         <a href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>" title="<?php echo $this->escape($displayData->title); ?>">
             <span class="triangle-up position-absolute bottom-0 mx-5"></span>
