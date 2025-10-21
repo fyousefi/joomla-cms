@@ -46,7 +46,12 @@ $isFullLayout = (bool) $params->get('fullwidth', 0);
         <div class="system-unpublished">
     <?php endif; ?>
 
-    <?php echo LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item); ?>
+    <?php
+        if ($isFullLayout) {
+            $this->item->params->set('title_class', 'link-light text-decoration-none d-flex justify-content-center text-center fw-bold fs-lg-16 fs-md-5 fs-15');
+        }
+        echo LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item);
+    ?>
 
     <?php if ($canEdit) : ?>
         <?php echo LayoutHelper::render('joomla.content.icons', ['params' => $params, 'item' => $this->item]); ?>
