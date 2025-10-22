@@ -23,7 +23,6 @@ if (!$item) { return; }
 $currentUrl   = Route::_(RouteHelper::getArticleRoute($item->slug, $item->catid, $item->language));
 $articleTitle = $item->title;
 
-// Output exactly the same markup you used before (no extra CSS/JS)
 ?>
 <span class="social-icons float-end ps-1">
   <a href="https://telegram.me/share/url?url=<?php echo $currentUrl; ?>&text=<?php echo $articleTitle; ?>"

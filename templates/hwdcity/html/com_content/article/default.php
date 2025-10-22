@@ -53,7 +53,7 @@ $rootClass = 'com-content-article item-page' . ($isFullLayout ? ' container-flui
 <div class="<?= $rootClass ?> <?php echo !$isFullLayout ? $this->pageclass_sfx : ''; ?>">
     <div class="blog-items">
         <div class="blog-item bg-body position-relative mb-3">
-            
+
         <?php // The hero image ?>
         <?php echo LayoutHelper::render('joomla.content.intro_image_article', $this->item); ?>
 
@@ -73,7 +73,7 @@ $rootClass = 'com-content-article item-page' . ($isFullLayout ? ' container-flui
         || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $assocParam; ?>
 
         <?php if ($params->get('show_title')) : ?>
-            <<?php echo $htag; ?> class="fs-2 fw-medium pb-1 lh-base text-justify">
+            <<?php echo $htag; ?> class="pb-1 lh-base <?php echo $isFullLayout ? 'fw-bold fs-16 text-center' : 'fw-medium fs-2 text-justify'?>">
                 <a class="text-decoration-none" href="<?php echo Route::_(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language)); ?>">
                     <?php echo $this->escape($this->item->title); ?>
                 </a>
