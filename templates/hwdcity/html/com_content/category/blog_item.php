@@ -37,7 +37,7 @@ $isFullLayout = (bool) $params->get('fullwidth', 0);
 
 <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
 
-<div class="item-content <?php echo $isFullLayout ? ' position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center z-2' : ''; ?>">
+<div class="item-content <?php echo $isFullLayout ? ' position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center z-2' : ''; ?>" <?php echo $isFullLayout ? 'style="pointer-events:none;"' : '';?>>
     <?php if ($isFullLayout): ?>
         <div class="w-100 p-3 p-md-4">
     <?php endif; ?>

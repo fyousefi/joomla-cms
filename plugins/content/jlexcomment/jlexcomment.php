@@ -376,7 +376,7 @@ class plgContentJLexComment extends JPlugin
 
         $icon = '<i class="fa-solid fa-comments"></i>';
         $prefix = $data->cm_count > 0 ? ($data->cm_count>1?Text::sprintf("PLG_CONTENT_JCM_COMMENTS",'('.$data->cm_count.')'):JText::_("PLG_CONTENT_JCM_COMMENT")) : JText::_("PLG_CONTENT_JCM_WRITE_COMMENT");
-        $html = '<a class="jcm-count-cm text-decoration-none py-2 px-27 fs-9 position-absolute bottom-0 end-0 link-danger" href="'.$url.'#comment">'. $prefix .' '. $icon .'</a>';
+        $html = '<a class="jcm-count-cm text-decoration-none py-2 px-27 fs-9 position-absolute bottom-0 end-0 link-danger" style="pointer-events:auto;" href="'.$url.'#comment">'. $prefix .' '. $icon .'</a>';
 
         return $html;
     }
