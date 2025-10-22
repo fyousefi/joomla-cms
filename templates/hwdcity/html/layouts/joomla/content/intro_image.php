@@ -64,7 +64,7 @@ $score = ($isFullLayout && $total_score !== null && $total_score > 10)
 $percent = ($score !== null) ? ($score * 10.0) : null;
 
 // Figure height
-$heightClass  = $isFullLayout ? 'h-md-40 h-lg-60 zoom-container zoom-dark overflow-hidden' : 'h-65';
+$heightClass  = $isFullLayout ? 'h-65 h-md-65 h-lg-60 zoom-container zoom-dark overflow-hidden' : 'h-65';
 
 // Category badge font-size
 $badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';

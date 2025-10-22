@@ -39,6 +39,12 @@ $assocParam        = (Associations::isEnabled() && $params->get('show_associatio
 $currentDate       = Factory::getDate()->format('Y-m-d H:i:s');
 $isNotPublishedYet = $this->item->publish_up > $currentDate;
 $isExpired         = !is_null($this->item->publish_down) && $this->item->publish_down < $currentDate;
+
+// Add a full-width flag once and reuse it for both lead and intro items.
+$pageClass     = (string) ($this->params->get('pageclass_sfx') ?? '');
+$isFullLayout  = (bool) preg_match('/(?:^|\s)full-width(?:\s|$)/', $pageClass);
+if ($isFullLayout) { $params->set('fullwidth', 1); }
+
 ?>
 
 <div class="com-content-article ss02 item-page<?php echo $this->pageclass_sfx; ?>">
