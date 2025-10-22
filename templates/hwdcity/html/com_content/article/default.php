@@ -53,7 +53,10 @@ $rootClass = 'com-content-article item-page' . ($isFullLayout ? ' container-flui
 <div class="<?= $rootClass ?> <?php echo !$isFullLayout ? $this->pageclass_sfx : ''; ?>">
     <div class="blog-items">
         <div class="blog-item bg-body position-relative mb-3">
+            
+        <?php // The hero image ?>
         <?php echo LayoutHelper::render('joomla.content.intro_image_article', $this->item); ?>
+
             <div class="item-content pb-3 px-27 lh-lg">
         <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">
         <?php if ($this->params->get('show_page_heading')) : ?>
