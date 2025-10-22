@@ -46,12 +46,7 @@ $isFullLayout = (bool) $params->get('fullwidth', 0);
         <div class="system-unpublished">
     <?php endif; ?>
 
-    <?php
-        if ($isFullLayout) {
-            $this->item->params->set('title_class', 'link-light text-decoration-none d-flex justify-content-center text-center fw-bold fs-lg-16 fs-md-5 fs-15');
-        }
-        echo LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item);
-    ?>
+    <?php echo !$isFullLayout ? LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item) : ''; ?>
 
     <?php if ($canEdit) : ?>
         <?php echo LayoutHelper::render('joomla.content.icons', ['params' => $params, 'item' => $this->item]); ?>
@@ -64,6 +59,14 @@ $isFullLayout = (bool) $params->get('fullwidth', 0);
     <?php if ($useDefList && ($info == 0 || $info == 2)) : ?>
         <?php echo LayoutHelper::render('joomla.content.info_block', ['item' => $this->item, 'params' => $params, 'position' => 'above']); ?>
     <?php endif; ?>
+
+    <?php
+        if ($isFullLayout) {
+            $this->item->params->set('title_class', 'link-light text-decoration-none d-flex justify-content-center text-center lh-lg fw-bold fs-lg-16 fs-md-5 fs-15 py-25');
+        }
+        echo $isFullLayout ? LayoutHelper::render('joomla.content.blog_style_default_item_title', $this->item) : '';
+    ?>
+
     <?php if ($info == 0 && $params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
         <?php echo LayoutHelper::render('joomla.content.tags', $this->item->tags->itemTags); ?>
     <?php endif; ?>

@@ -17,7 +17,7 @@ use Joomla\CMS\Language\Text;
 <span class="createdby">
     <i class="icon-user icon-fw text-danger" aria-hidden="true"></i>
     <?php $author = ($displayData['item']->created_by_alias ?: $displayData['item']->author); ?>
-    <?php $author = '<span class="text-secondary pe-lg-3 pe-md-3 pe-2">' . $author . '</span>'; ?>
+    <?php $author = '<span class="pe-lg-3 pe-md-3 pe-2">' . $author . '</span>'; ?>
     <?php if (!empty($displayData['item']->contact_link) && $displayData['params']->get('link_author') == true) : ?>
         <?php echo Text::sprintf(HTMLHelper::_('link', $displayData['item']->contact_link, $author)); ?>
     <?php else : ?>

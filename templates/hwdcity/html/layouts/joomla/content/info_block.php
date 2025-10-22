@@ -25,8 +25,17 @@ $articleView = ($option === 'com_content' && $view === 'article');
 $currentUrl = Route::_(RouteHelper::getArticleRoute($displayData['item']->slug, $displayData['item']->catid, $displayData['item']->language));
 $articleTitle = $displayData['item']->title;
 
+// Use our runtime flag passed via params
+$isFullLayout = (bool) ($displayData['params']->get('fullwidth', 0));
+
+// When full-width: force "above", center, and make text white
+if ($isFullLayout) {
+    $infoClass = 'article-info fs-14 text-center text-white ' . ($articleView ? 'py-3' : 'py-2');
+} else {
+    $infoClass = 'article-info text-secondary fs-14 ' . ($articleView ? 'py-3' : 'py-2');
+}
 ?>
-<div class="article-info text-muted fs-14 <?= $articleView ? 'py-3' : 'py-2' ?>">
+<div class="<?= $infoClass ?>">
 
     <?php
     if (
