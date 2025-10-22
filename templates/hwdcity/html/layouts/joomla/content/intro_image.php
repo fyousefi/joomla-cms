@@ -75,7 +75,7 @@ $figureMargin = $isFullLayout ? 'mb-0' : 'mb-3';
 <figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative <?php echo $figureMargin; ?> <?php echo $heightClass; ?>">
     <?php if ($params->get('link_intro_image') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
         <a href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>" title="<?php echo $this->escape($displayData->title); ?>">
-            <span class="triangle-up position-absolute bottom-0 mx-5"></span>
+            <?php echo !$isFullLayout ? '<span class="triangle-up position-absolute bottom-0 mx-5"></span>' : '' ?>
             <?php echo LayoutHelper::render('joomla.html.image', $layoutAttr); ?>
         </a>
     <?php else : ?>

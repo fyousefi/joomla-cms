@@ -1010,6 +1010,12 @@ fieldset {
 
 /* Full-width pages comments */
 .full-width {
+  .blog-items {
+    grid-gap: 0;
+    .blog-item {
+      border-bottom: 1.6px solid rgb(17, 17, 17);
+    }
+  }
   .item-content {
     pointer-events: none;
     .jcm-count-cm {
