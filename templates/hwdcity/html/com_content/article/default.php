@@ -45,9 +45,12 @@ $pageClass     = (string) ($this->params->get('pageclass_sfx') ?? '');
 $isFullLayout  = (bool) preg_match('/(?:^|\s)full-width(?:\s|$)/', $pageClass);
 if ($isFullLayout) { $params->set('fullwidth', 1); }
 
+// Root wrapper: kill horizontal padding on full-width pages
+$rootClass = 'com-content-article item-page' . ($isFullLayout ? ' container-fluid px-0' : '');
+
 ?>
 
-<div class="com-content-article ss02 item-page<?php echo $this->pageclass_sfx; ?>">
+<div class="<?= $rootClass ?> <?php echo !$isFullLayout ? $this->pageclass_sfx : ''; ?>">
     <div class="blog-items">
         <div class="blog-item bg-body position-relative mb-3">
         <?php echo LayoutHelper::render('joomla.content.intro_image_article', $this->item); ?>
