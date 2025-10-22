@@ -35,8 +35,14 @@ if ($isFullLayout) {
     $infoClass = 'article-info text-secondary fs-14 ' . ($articleView ? 'py-3' : 'py-2');
 }
 ?>
-<div class="<?= $infoClass ?>">
 
+<?php if ($isFullLayout) : ?>
+    <div class="d-flex justify-content-center">
+        <?php echo $this->sublayout('social_share', $displayData); ?>
+    </div>
+<?php endif; ?>
+
+<div class="<?= $infoClass ?>">
     <?php
     if (
         $displayData['position'] === 'above' && ($blockPosition == 0 || $blockPosition == 2)
@@ -92,35 +98,8 @@ if ($isFullLayout) {
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ($articleView) : ?>
-        <!-- Social media sharing block -->
-                <span class="social-icons float-end ps-1">
-                    <a href="https://telegram.me/share/url?url=<?php echo $currentUrl; ?>&text=<?php echo $articleTitle; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در تلگرام">
-                        <span class="fab fa-telegram" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end ps-1">
-                    <a href="https://x.com/intent/post?text=<?php echo $articleTitle; ?>. <?php echo $currentUrl; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در توییتر">
-                        <span class="fab fa-x-twitter" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end ps-1">
-                    <a href="whatsapp://send?text=<?php echo $articleTitle; ?>. <?php echo $currentUrl; ?>"
-                       target="_blank"
-                       aria-label="اشتراک در این واتس اپ">
-                        <span class="fab fa-whatsapp" aria-hidden="true"></span>
-                    </a>
-                </span>
-                <span class="social-icons float-end">
-                    <a href="mailto:?subject=<?php echo $articleTitle; ?>&body=<?php echo $currentUrl; ?>"
-                       aria-label="اشتراک با ایمیل">
-                        <span class="fa fa-envelope" aria-hidden="true"></span>
-                    </a>
-                </span>
+    <?php if ($articleView && !$isFullLayout) : ?>
+        <?php echo $this->sublayout('social_share', $displayData); ?>
     <?php endif; ?>
 </div>
 
