@@ -229,6 +229,7 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             $AUTH_MENUTYPE     = 'auth';
             $AUTH_LOGIN_ALIAS  = 'login';
             $AUTH_LOGOUT_ALIAS = 'logout';
+            $AUTH_PROFILE_ALIAS = 'profile';
 
             // Helper: find by menutype + alias
             $findByTypeAlias = function($menutype, $alias) use ($menus) {
@@ -256,8 +257,13 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             $logoutItem = $findByTypeAlias($AUTH_MENUTYPE, $AUTH_LOGOUT_ALIAS)
                 ?: $findByLinkPattern('layout=logout');
 
+            $profileItem = $findByTypeAlias($AUTH_MENUTYPE, $AUTH_PROFILE_ALIAS)
+                ?: $findByLinkPattern('view=profile');
+
+            // Respect "Display Menu Item Title"
             $loginShowTitle  = $loginItem  ? (bool) $loginItem->getParams()->get('menu_text', 1)  : true;
             $logoutShowTitle = $logoutItem ? (bool) $logoutItem->getParams()->get('menu_text', 1) : true;
+            $profileShowTitle = $profileItem ? (bool) $profileItem->getParams()->get('menu_text', 1) : true;
 
             // Build login link + label/icon
             if ($loginItem) {
@@ -286,13 +292,32 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
                 $logoutIcon  = 'fa-solid fa-right-from-bracket';
             }
 
+            // Build profile link + label/icon
+            if ($profileItem) {
+                $profileUrl   = Route::_('index.php?Itemid=' . (int)$profileItem->id);
+                $profileLabel = htmlspecialchars($profileItem->title, ENT_QUOTES, 'UTF-8');
+                $profileIcon  = $profileItem->getParams()->get('menu-anchor_css') ?: 'fa-solid fa-user';
+            } else {
+                $profileUrl   = Route::_('index.php?option=com_users&view=profile');
+                $profileLabel = 'Profile';
+                $profileIcon  = 'fa-solid fa-user';
+            }
+
             // Render (white link with subtle gray hover)
             if ($user && !$user->guest) {
+                // Logout
                 echo '<a href="' . $logoutUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($logoutIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
                     .      ($logoutShowTitle ? '<span class="d-none d-md-inline fs-8 fw-bold">' . $logoutLabel . '</span>' : '')
                     .  '</a>';
+
+                // Profile (left of Logout), me-3 add spacing between Profile and Logout.
+                echo '<a href="' . $profileUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
+                    .      '<i class="' . htmlspecialchars($profileIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
+                    .      ($profileShowTitle ? '<span class="d-none d-md-inline fs-8 fw-bold">' . $profileLabel . '</span>' : '')
+                    .  '</a>';
             } else {
+                // Login (only when guest)
                 echo '<a href="' . $loginUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($loginIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
                     .      ($loginShowTitle ? '<span class="d-none d-md-inline fs-8 fw-bold">' . $loginLabel . '</span>' : '')
