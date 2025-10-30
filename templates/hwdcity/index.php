@@ -256,6 +256,9 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             $logoutItem = $findByTypeAlias($AUTH_MENUTYPE, $AUTH_LOGOUT_ALIAS)
                 ?: $findByLinkPattern('layout=logout');
 
+            $loginShowTitle  = $loginItem  ? (bool) $loginItem->getParams()->get('menu_text', 1)  : true;
+            $logoutShowTitle = $logoutItem ? (bool) $logoutItem->getParams()->get('menu_text', 1) : true;
+
             // Build login link + label/icon
             if ($loginItem) {
                 $loginUrl   = Route::_('index.php?Itemid=' . (int)$loginItem->id);
@@ -287,12 +290,12 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
             if ($user && !$user->guest) {
                 echo '<a href="' . $logoutUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($logoutIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
-                    .      '<span class="d-none d-md-inline fs-8 fw-bold">' . $logoutLabel . '</span>'
+                    .      ($logoutShowTitle ? '<span class="d-none d-md-inline fs-8 fw-bold">' . $logoutLabel . '</span>' : '')
                     .  '</a>';
             } else {
                 echo '<a href="' . $loginUrl . '" class="link-light link-opacity-75-hover text-decoration-none d-flex align-items-center gap-1">'
                     .      '<i class="' . htmlspecialchars($loginIcon, ENT_QUOTES, 'UTF-8') . '"></i>'
-                    .      '<span class="d-none d-md-inline fs-8 fw-bold">' . $loginLabel . '</span>'
+                    .      ($loginShowTitle ? '<span class="d-none d-md-inline fs-8 fw-bold">' . $loginLabel . '</span>' : '')
                     .  '</a>';
             }
 
