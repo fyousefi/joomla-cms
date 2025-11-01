@@ -1,4 +1,11 @@
 /* STYLES FOR JOOMLA! EDITOR */
+
+// Fonts
+$iransansx-font-path: "../fonts" !default;
+
+@use 'vendor/iransansx/iransansx-static';
+@use 'vendor/iransansx/iransansx-variable';
+
 body {
   margin: 1rem;
   font-size: 1rem;
@@ -6,6 +13,10 @@ body {
   line-height: 1.5;
   color: #22262a;
   background-color: #fff;
+  font-family: 'iransansx', Tahoma, Roboto, sans-serif;
+  font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss02";
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,6 +24,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
   font-weight: 700;
   line-height: 1.2;
+  font-family: 'iransansx', Tahoma, Roboto, sans-serif;
+  font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss02";
 }
 
 h1 {
@@ -52,6 +67,10 @@ a {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-family: 'iransansx', Tahoma, Roboto, sans-serif;
+  font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss02";
 }
 
 /* STYLES FOR JOOMLA! EDITOR */
