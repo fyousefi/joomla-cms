@@ -17,7 +17,7 @@ use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 ?>
-<div class="mod-banners bannergroup d-flex flex-lg-column flex-column justify-content-center gap-1">
+<div class="mod-banners bannergroup d-flex flex-lg-column flex-column justify-content-center gap-1 align-items-center">
 <?php if ($headerText) : ?>
     <div class="bannerheader">
         <?php echo $headerText; ?>
