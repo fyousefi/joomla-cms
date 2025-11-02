@@ -808,6 +808,24 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+/* Force white social icons on full-width hero */
+.full-width .social-icons a {
+  color: #fff;
+}
+.full-width .social-icons a:hover {
+  color: $danger;
+}
+
+/* Title hover (only on full-width hero) */
+.full-width .link-light {
+  transition: color .2s ease-in-out, text-decoration-color .2s ease-in-out;
+}
+.full-width .link-light:hover {
+  color: $danger !important;          /* clear, visible hover */
+  text-decoration: underline;         /* optional: show underline on hover */
+  text-underline-offset: .2rem;       /* nicer underline */
+}
+
 /*
   Forms: Login, Registration, Reminder, Reset
 */

@@ -94,6 +94,15 @@ if ($isFullLayout) {
             <div class="w-100 p-3 p-md-4" style="pointer-events:auto;">
                 <div class="d-flex justify-content-center"></div>
 
+                <?php if ($params->get('show_title')): ?>
+                    <h1 class="lh-base fw-bold fs-16 text-center" style="pointer-events:auto;">
+                        <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25"
+                           href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
+                            <?php echo $this->escape($displayData->title); ?>
+                        </a>
+                    </h1>
+                <?php endif; ?>
+
                 <?php
                 // Info block "above" (meta + social share), now styled white in your info_block when fullwidth=1
                 $assocParam  = (Joomla\CMS\Language\Associations::isEnabled() && $params->get('show_associations'));
@@ -106,15 +115,6 @@ if ($isFullLayout) {
                     echo LayoutHelper::render('joomla.content.info_block', ['item' => $displayData, 'params' => $params, 'position' => 'above']);
                 }
                 ?>
-
-                <?php if ($params->get('show_title')): ?>
-                    <h1 class="lh-base fw-bold fs-16 text-center" style="pointer-events:auto;">
-                        <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25"
-                           href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
-                            <?php echo $this->escape($displayData->title); ?>
-                        </a>
-                    </h1>
-                <?php endif; ?>
             </div>
         </div>
     <?php endif; ?>
