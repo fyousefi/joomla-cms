@@ -72,6 +72,14 @@ $badgeLblFs  = $isFullLayout ? 'fs-6' : 'fs-13';
 // When full-width, drop the default bottom margin on the <figure>
 $figureMargin = $isFullLayout ? 'mb-0' : 'mb-3';
 
+// $layoutAttr
+if ($isFullLayout) {
+    // Make full-width article image fill and center inside its figure
+    $layoutAttr['class'] = trim(($layoutAttr['class'] ?? '') . ' w-100 h-100 object-fit-cover');
+    // Bootstrap lacks object-position utility → inline style for center
+    $layoutAttr['style'] = trim(($layoutAttr['style'] ?? '') . ' object-position:center;');
+}
+
 ?>
 <figure class="<?php echo $this->escape($imgclass); ?> item-image position-relative <?php echo $figureMargin; ?> <?php echo $heightClass; ?>">
     <?php if ($params->get('link_intro_image') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
