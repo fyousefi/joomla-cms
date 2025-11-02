@@ -89,6 +89,36 @@ if ($isFullLayout) {
         <?php echo LayoutHelper::render('joomla.html.image', $layoutAttr); ?>
     <?php endif; ?>
 
+    <?php if ($isFullLayout): ?>
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center z-2" style="pointer-events:none;">
+            <div class="w-100 p-3 p-md-4" style="pointer-events:auto;">
+                <div class="d-flex justify-content-center"></div>
+
+                <?php
+                // Info block "above" (meta + social share), now styled white in your info_block when fullwidth=1
+                $assocParam  = (Joomla\CMS\Language\Associations::isEnabled() && $params->get('show_associations'));
+                $useDefList  = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
+                    || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category')
+                    || $params->get('show_author') || $assocParam;
+                $infoPos     = (int) $params->get('info_block_position', 0);
+
+                if ($useDefList && ($infoPos === 0 || $infoPos === 2)) {
+                    echo LayoutHelper::render('joomla.content.info_block', ['item' => $displayData, 'params' => $params, 'position' => 'above']);
+                }
+                ?>
+
+                <?php if ($params->get('show_title')): ?>
+                    <h1 class="lh-base fw-bold fs-16 text-center" style="pointer-events:auto;">
+                        <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25"
+                           href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
+                            <?php echo $this->escape($displayData->title); ?>
+                        </a>
+                    </h1>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?php if ($badgeLbl !== '') : ?>
         <div class="position-absolute top-0 end-0 m-3 z-2">
             <a href="<?php echo $catLink; ?>" class="badge text-bg-danger text-decoration-none fw-normal <?php echo $badgeLblFs; ?>">
@@ -96,6 +126,7 @@ if ($isFullLayout) {
             </a>
         </div>
     <?php endif; ?>
+
     <?php if ($score !== null): ?>
         <div class="score-circle score-circle-sm position-absolute mt-3 ms-3 top-0 start-0 z-2 " style="--score-percent: <?php echo htmlspecialchars(number_format($percent, 2, '.', ''), ENT_QUOTES, 'UTF-8'); ?>%">
             <div class="score-bg"></div>
