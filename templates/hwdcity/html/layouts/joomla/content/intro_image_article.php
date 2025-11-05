@@ -91,12 +91,12 @@ if ($isFullLayout) {
 
     <?php if ($isFullLayout): ?>
         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center z-2" style="pointer-events:none;">
-            <div class="w-100 p-3 p-md-4" style="pointer-events:auto;">
+            <div class="w-100 p-3 p-md-4 mt-5" style="pointer-events:auto;">
                 <div class="d-flex justify-content-center"></div>
 
                 <?php if ($params->get('show_title')): ?>
                     <h1 class="lh-base fw-bold fs-16 text-center" style="pointer-events:auto;">
-                        <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25 link-title"
+                        <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25 link-title fs-lg-16 fs-md-5 fs-15"
                            href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
                             <?php echo $this->escape($displayData->title); ?>
                         </a>
