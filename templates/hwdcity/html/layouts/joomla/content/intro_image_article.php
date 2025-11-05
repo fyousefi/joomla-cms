@@ -95,7 +95,7 @@ if ($isFullLayout) {
                 <div class="d-flex justify-content-center"></div>
 
                 <?php if ($params->get('show_title')): ?>
-                    <h1 class="lh-base fw-bold fs-16 text-center" style="pointer-events:auto;">
+                    <h1 class="lh-base fw-bold fs-16 text-center page-start" style="pointer-events:auto;">
                         <a class="link-light text-decoration-none d-flex justify-content-center text-center py-25 link-title fs-lg-16 fs-md-5 fs-15"
                            href="<?php echo Route::_(RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)); ?>">
                             <?php echo $this->escape($displayData->title); ?>

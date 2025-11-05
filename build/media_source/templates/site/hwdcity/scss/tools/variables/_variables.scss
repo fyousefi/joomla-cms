@@ -396,13 +396,17 @@ $utilities: (
     class: h,
     responsive: true,
     values: (
+      10: 10%,
+      15: 15%,
+      20: 20%,
       25: 25%,
       50: 50%,
       60: 600px,   // 604.983px or 51%
       65: 260px, // 260px in 400px
       75: 75%,
       100: 100%,
-      auto: auto
+      auto: auto,
+      b50: 50px
     )
   ),
   // Custome fonts

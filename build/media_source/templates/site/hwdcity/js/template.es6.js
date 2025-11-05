@@ -123,7 +123,7 @@ Joomla = window.Joomla || {};
     const nav = document.querySelector('.container-nav');
     if (!nav) return;
 
-    const triggerEl = document.querySelector('.container-top-b');
+    const triggerEl = document.querySelector('.container-top-b,.page-start');
     const mq = window.matchMedia('(min-width: 992px)'); // desktop only
 
     let triggerY = 0;
