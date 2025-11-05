@@ -720,6 +720,22 @@ $iransansx-font-path: "../fonts" !default;
   }
 }
 
+// Responsive adjustment: make .score-circle-sm act as .score-circle-xs on XS viewports
+@include media-breakpoint-down(sm) {
+  .score-circle-sm {
+    width: 64px;
+    height: 64px;
+
+    .score-value {
+      font-size: 0.813rem;
+    }
+
+    .score-label {
+      font-size: 0.813rem;
+    }
+  }
+}
+
 /* Spotlight: Media */
 // Hero ratio: 21:9 by default
 .ratio-hero { --aspect-ratio: 42.8571428571%; } /* 9/21 * 100 */
