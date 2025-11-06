@@ -1082,7 +1082,27 @@ fieldset {
   transition: transform .08s linear;
 }
 
+/* Centered title in Bar B */
+#compactBar {
+  /* already fixed + full width */
+  .barb-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* true center */
+    max-width: min(60vw, 900px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25;
+    pointer-events: none; /* keep right-side links clickable */
+  }
+}
 
+/* Optional: smaller on very small screens (it’s hidden by d-md-none anyway) */
+@media (max-width: 991.98px) {
+  #compactBar .barb-title { display: none; }
+}
 
 
 /* Left/Right Sidebar */

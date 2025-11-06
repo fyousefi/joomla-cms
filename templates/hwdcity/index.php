@@ -336,6 +336,16 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
                 <a href="<?php echo $this->baseurl; ?>/"><?php echo $logo; ?></a>
             </div>
 
+            <?php
+            // Centered title only on single article pages
+            if ($option === 'com_content' && $view === 'article') {
+                $barTitle = htmlspecialchars($this->getTitle(), ENT_QUOTES, 'UTF-8');
+                echo '<div class="barb-title d-none d-md-block text-white fw-semibold text-center" title="' . $barTitle . '" role="heading" aria-level="2">'
+                    .      $barTitle
+                    .  '</div>';
+            }
+            ?>
+
             <div class="ms-auto pt-3">
                 <?php
                 // TOC offcanvas
