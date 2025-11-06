@@ -221,6 +221,75 @@ Joomla = window.Joomla || {};
     link.classList.add('bg-danger', 'text-white');
   });
 
+  // Read Progress Bar (outside Bar B)
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('readProgressTrack');
+    const bar = document.getElementById('readProgressBar');
+    const compact = document.getElementById('compactBar'); // Bar B (fixed under main)
+    if (!track || !bar) return;
+
+    // Find the end-of-article marker
+    const endEl = document.querySelector('#comment, #comments'); // try either id
+    let endY = 0;
+
+    function getDocY(el) {
+      if (!el) return 0;
+      const r = el.getBoundingClientRect();
+      return (window.pageYOffset || document.documentElement.scrollTop || 0) + r.top;
+    }
+
+    function computeEnd() {
+      // If comments exist, stop at their top; else use full page height
+      endY = endEl
+        ? getDocY(endEl)
+        : Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight
+        );
+    }
+
+    // Place the track right below the compact bar
+    function placeTrack() {
+      const h = compact ? compact.offsetHeight : 0;
+      track.style.top = `${h}px`;
+    }
+
+    function computeProgress() {
+      const doc = document.documentElement;
+      const scrollTop = window.pageYOffset || doc.scrollTop || 0;
+      const viewport = doc.clientHeight;
+
+      // Max scrollable distance until the comments (or full page)
+      const max = Math.max(endY - viewport, 0);
+      const pct = max ? Math.min(scrollTop / max, 1) : 0;
+      bar.style.transform = `scaleX(${pct})`;
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        computeProgress();
+        ticking = false;
+      });
+    }
+
+    // Init + listeners
+    placeTrack();
+    computeEnd();
+    computeProgress();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { placeTrack(); computeEnd(); onScroll(); }, { passive: true });
+    window.addEventListener('load', () => { placeTrack(); computeEnd(); onScroll(); });
+
+    // Observe dynamic layout changes
+    if ('ResizeObserver' in window) {
+      if (compact) new ResizeObserver(() => placeTrack()).observe(compact);
+      if (endEl) new ResizeObserver(() => { computeEnd(); onScroll(); }).observe(endEl);
+    }
+  });
 
   /**
    * Initialize when a part of the page was updated

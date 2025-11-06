@@ -356,6 +356,10 @@ $bodyOverflowFix = !empty($ocData) ? ' overflow-x-hidden' : '';
                 ?>
             </div>
         </div>
+
+        <div id="readProgressTrack" class="position-fixed start-0 end-0 z-1">
+            <div class="read-progress__bar" id="readProgressBar" role="presentation"></div>
+        </div>
     <?php endif; ?>
 <?php endif; ?>
 

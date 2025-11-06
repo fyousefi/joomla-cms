@@ -1065,6 +1065,25 @@ fieldset {
   }
 }
 
+/* Reading progress bar outside Bar B */
+#readProgressTrack {
+  height: 3px;            /* thin line */
+  top: 0;                 /* JS sets actual top to compactBar height */
+  pointer-events: none;   /* no interaction */
+}
+
+.read-progress__bar {
+  width: 100%;
+  height: 100%;
+  background: #c70101;    /* red line */
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform .08s linear;
+}
+
+
+
 
 /* Left/Right Sidebar */
 
